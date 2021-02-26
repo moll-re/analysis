@@ -14,4 +14,4 @@ texlive ... # do it again
 ```
 
 ## Errata, suggestions, wishes
-Use github: create an issue, fix it youself (and please create a pull request!).
+Use github: create an issue, fix it youself (and please create a pull request!). I'd love to cooperate and improve this document further.
