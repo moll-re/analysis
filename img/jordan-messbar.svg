@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg4543"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="jordan-messbar.svg">
+  <defs
+     id="defs4537" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="166.41354"
+     inkscape:cy="1016.0202"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1914"
+     inkscape:window-height="2019"
+     inkscape:window-x="1906"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4540">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffd42a;fill-opacity:0.25813952;stroke:#eebd0c;stroke-width:0.16500001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5091"
+       width="75.500748"
+       height="31.372023"
+       x="28.631697"
+       y="15.974702" />
+    <rect
+       style="opacity:1;fill:#00ccff;fill-opacity:0.25813952;stroke:#0030ff;stroke-width:0.16500001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5093"
+       width="30.899553"
+       height="44.412205"
+       x="33.545387"
+       y="18.715029" />
+    <ellipse
+       style="opacity:1;fill:#00d400;fill-opacity:0.25813952;stroke:#00820c;stroke-width:0.16500001;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path5095"
+       cx="48.947918"
+       cy="31.329985"
+       rx="11.150297"
+       ry="6.6618304" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="54.570312"
+       y="30.763018"
+       id="text5099"><tspan
+         sodipodi:role="line"
+         id="tspan5097"
+         x="54.570312"
+         y="30.763018"
+         style="stroke-width:0.26458332;font-size:1.5875px">$B$</tspan></text>
+    <text
+       id="text5103"
+       y="46.118301"
+       x="35.671501"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:1.58749998px;stroke-width:0.26458332"
+         y="46.118301"
+         x="35.671501"
+         id="tspan5101"
+         sodipodi:role="line">$Q \cap Q'$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="99.329453"
+       y="18.840555"
+       id="text5107"><tspan
+         sodipodi:role="line"
+         id="tspan5105"
+         x="99.329453"
+         y="18.840555"
+         style="font-size:1.58749998px;stroke-width:0.26458332">$Q$</tspan></text>
+    <text
+       id="text5111"
+       y="61.851562"
+       x="59.672989"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:1.58749998px;stroke-width:0.26458332"
+         y="61.851562"
+         x="59.672989"
+         id="tspan5109"
+         sodipodi:role="line">$Q'$</tspan></text>
+  </g>
+</svg>

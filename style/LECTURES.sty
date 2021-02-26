@@ -1,0 +1,435 @@
+\ProvidesPackage{./style/LECTURES}
+
+%\usepackage{helvet} % or         %Schriftart
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tabu}
+\usepackage{tikz,pgf,pgfplots}
+\usepackage[ngerman]{babel}
+\usepackage[mathletters]{ucs}
+\usepackage[utf8x]{inputenc}
+\PrerenderUnicode{ä}
+\usepackage{fontawesome}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{fancyhdr}
+\usepackage[margin=2cm]{geometry}
+\usepackage{listings}                             %Für Pseudocode/Code...
+
+\usepackage{epigraph}
+\usepackage{tocloft,titletoc,titlesec}
+% Für inkscape grafiken
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\pgfplotsset{compat=1.16}
+
+\usepackage{lmodern}
+
+\usepackage{makeidx}
+\makeindex
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=false,
+    frenchlinks=true,
+}
+
+\usepackage{emptypage}
+
+\linespread{1.1}
+\setlength{\parindent}{0pt}
+\definecolor{ETHBlue}{RGB}{32,64,123}   %Blau
+\definecolor{lemmagreen}{rgb}{0.09, 0.45, 0.27}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Für Kopf- und Fußzeilen:
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO]{\nouppercase{\leftmark}}
+\fancyhead[RE]{\nouppercase{\rightmark}}
+\fancyfoot[C]{\thepage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Zähler für die nachfolgenden Environments
+\newcounter{theorem_counter}[section]
+\newcommand{\thetheorem}{\arabic{chapter}.\arabic{section}.\arabic{theorem_counter}}
+\newcounter{Korollar_counter}
+
+\newcounter{definition_counter}[section]%\setcounter{definition_counter}{0}
+\newcommand{\thedefinition}{\arabic{chapter}.\arabic{section}.\arabic{definition_counter}}
+
+\newcounter{lemma_counter}[section]%\setcounter{lemma_counter}{0}
+\newcommand{\thelemma}{\arabic{chapter}.\arabic{section}.\arabic{lemma_counter}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Eigene Environments:
+\mdfdefinestyle{envstyle}{
+  skipabove=.4\baselineskip,
+  hidealllines = true,
+  nobreak=false,
+  shadow = true,
+  shadowsize = 1pt,
+  shadowcolor = black!10
+  }
+
+
+
+
+
+
+\newenvironment{Theorem}[1][]{
+  %if no title:
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={\textcolor{white}{Theorem \thetheorem}}}
+  }{%else
+    \mdfsetup{frametitle={\textcolor{white}{Theorem \thetheorem: ~#1}}}
+    \index{~#1}
+  }
+  \stepcounter{theorem_counter}
+  \setcounter{Korollar_counter}{0}
+  \mdfsetup{
+    style = envstyle,
+    backgroundcolor=ETHBlue!5!white,
+    frametitlebackgroundcolor = ETHBlue,
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \end{mdframed}
+}
+
+
+\newenvironment{Korollar}[1][]{
+  %if no title:
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={\textcolor{white}{Korollar \thetheorem \, (\arabic{Korollar_counter})}}}
+  }{%else
+    \mdfsetup{frametitle={\textcolor{white}{Korollar \thetheorem \, (\arabic{Korollar_counter}): ~#1}}}
+    \index{~#1}
+  }
+  \stepcounter{Korollar_counter}
+  \mdfsetup{
+    style = envstyle,
+    backgroundcolor=ETHBlue!5!white,
+    frametitlebackgroundcolor = ETHBlue,
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \end{mdframed}
+}
+
+
+\newenvironment{Lemma}[1][]{
+  %if no title:
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={\textcolor{white}{Lemma \thelemma}}}
+  }{%else
+    \mdfsetup{frametitle={\textcolor{white}{Lemma \thelemma: ~#1}}}
+    \index{~#1}
+  }
+  \stepcounter{lemma_counter}
+  \mdfsetup{
+    style = envstyle,
+    backgroundcolor=lemmagreen!5!white,
+    frametitlebackgroundcolor = lemmagreen,
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \end{mdframed}
+}
+
+
+\newenvironment{Definition}[1][]{
+  %if no title:
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={\textcolor{white}{Definition \thedefinition}}}
+  }{%else
+    \mdfsetup{frametitle={\textcolor{white}{Definition \thedefinition: ~#1}}}
+    \index{~#1}
+  }
+  \stepcounter{definition_counter}
+  \mdfsetup{
+    style = envstyle,
+    backgroundcolor=red!5!white,
+    frametitlebackgroundcolor = red,
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \end{mdframed}
+}
+
+
+\newenvironment{Beweis}[1][]{
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={Beweis:}}
+  }{%else
+    \mdfsetup{frametitle={Beweis - ~#1:}}
+  }
+  \mdfsetup{
+    style = envstyle,
+    linewidth = 14 pt,
+    linecolor = ETHBlue,
+    frametitlebackgroundcolor = ETHBlue!5!white,
+    backgroundcolor = ETHBlue!5!white,
+    leftline = true,
+    innerleftmargin = 1 em,% Distanz zwischen vertikaler Strich & Inhalt
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \qed
+  \end{mdframed}
+}
+
+
+\newenvironment{Beispiel}[1][]{
+  %if no title:
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={Beispiel:}}
+  }{%else
+    \mdfsetup{frametitle={Beispiel - ~#1:}}
+  }
+  \mdfsetup{
+  style = envstyle,
+  linewidth = 14 pt,
+  linecolor = gray,
+  frametitlebackgroundcolor = gray!5!white,
+  backgroundcolor = gray!5!white,
+  leftline = true,
+  innerleftmargin = 1 em,% Distanz zwischen vertikaler Strich & Inhalt
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \end{mdframed}
+}
+
+
+\newenvironment{Bemerkung}[1][]{
+  %if no title:
+  \ifstrempty{#1}{
+    \mdfsetup{frametitle={Bemerkung:}}
+  }{%else
+    \mdfsetup{frametitle={Bemerkung - ~#1:}}
+  }
+  \mdfsetup{
+  style = envstyle,
+  linewidth = 14 pt,
+  linecolor = gray!50!white,
+  frametitlebackgroundcolor = gray!5!white,
+  backgroundcolor = gray!5!white,
+  leftline = true,
+  innerleftmargin = 1 em,% Distanz zwischen vertikaler Strich & Inhalt
+  }
+  \begin{mdframed}[]\relax
+}%content
+{
+  \end{mdframed}
+}
+
+
+%Codebox, aufrufbar mit \begin{lstlisting}[Name_der_Sprache]
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+  backgroundcolor = \color{lightgray},
+  frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  %numbers=false,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Eigene Shortcuts
+%Zahlenmengen-darstellung:
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\incfig}[1]{%
+    %\def\svgwidth{\columnwidth}
+    \begin{center}
+      \import{./img/}{#1.pdf_tex}
+    \end{center}
+}
+\newcommand{\adabs}{A\hspace{-1em}A}
+\newcommand{\A}{\;\forall}
+\newcommand{\E}{\;\exists}
+\def\checkmark{\tikz\fill[scale=0.4,color=olive](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+\def\lightning{\,\text{\faBolt}}
+\newcommand{\limn}{\lim \limits_{n \to \infty}}
+\newcommand{\limx}{\lim \limits_{x \to x_0}}
+\newcommand{\limh}{\lim \limits_{h \to 0}}
+
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Kapitel-Titel
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1.2ex \hfill \kern \z@}
+\def\@makechapterhead#1{
+  \vspace*{9\p@}%
+  {
+    \parindent \z@ \centering \reset@font
+    \thickhrulefill\quad
+    \huge\bfseries{\@chapapp{}  \thechapter}\normalsize
+    \quad \thickhrulefill
+    \par\nobreak
+    \vspace*{10\p@}%
+    \interlinepenalty\@M
+    \hrule
+    \vspace*{10\p@}%
+    \huge \bfseries #1 \par\nobreak
+    \par
+    \vspace*{10\p@}%
+    \hrule
+  }
+  \vskip 50\p@}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Für den Titel:
+\renewcommand\epigraphflush{flushright}
+\renewcommand\epigraphsize{\normalsize}
+\setlength\epigraphwidth{0.7\textwidth}
+\DeclareFixedFont{\titlefont}{T1}{ppl}{b}{it}{0.5in}
+\makeatletter
+\def\printauthor{%
+    {\large \@author}}
+\makeatother
+\author{%
+    Rémy Moll \\
+    [0,3cm]
+    \textbf{Physics Bachelor ETH}
+    }
+
+\newcommand\titlepagedecoration{%
+\begin{tikzpicture}[remember picture,overlay,shorten >= -10pt]
+\coordinate (aux1) at ([yshift=-15pt]current page.north east);
+\coordinate (aux2) at ([yshift=-410pt]current page.north east);
+\coordinate (aux3) at ([xshift=-4.5cm]current page.north east);
+\coordinate (aux4) at ([yshift=-150pt]current page.north east);
+\begin{scope}[ETHBlue!50,line width=12pt,rounded corners=12pt]
+\draw
+  (aux1) -- coordinate (a)
+  ++(225:5) --
+  ++(-45:5.1) coordinate (b);
+\draw[shorten <= -10pt]
+  (aux3) --
+  (a) --
+  (aux1);
+\draw[opacity=0.6,ETHBlue,shorten <= -10pt]
+  (b) --
+  ++(225:2.2) --
+  ++(-45:2.2);
+\end{scope}
+\draw[ETHBlue,line width=8pt,rounded corners=8pt,shorten <= -10pt]
+  (aux4) --
+  ++(225:0.8) --
+  ++(-45:0.8);
+\begin{scope}[ETHBlue!70,line width=6pt,rounded corners=8pt]
+\draw[shorten <= -10pt]
+  (aux2) --
+  ++(225:3) coordinate[pos=0.45] (c) --
+  ++(-45:3.1);
+\draw
+  (aux2) --
+  (c) --
+  ++(135:2.5) --
+  ++(45:2.5) --
+  ++(-45:2.5) coordinate[pos=0.3] (d);
+\draw
+  (d) -- +(45:1);
+\end{scope}
+\end{tikzpicture}%
+}
+
+\newenvironment{Titelseite}
+{
+  \begin{titlepage}
+  	\begin{center}
+  		\hfill  \\
+  		[3,5cm]
+}
+{
+  \end{center}
+  \epigraph{Mach' dir keine Sorgen wegen deiner Schwierigkeiten mit der Mathematik. Ich kann dir versichern, daß meine noch größer sind.}
+  {\textit{Brief an ein Schulmädchen, 1943}\\ \textsc{Albert Einstein}}
+  \null\vfill
+  \vspace*{1cm}
+  \noindent
+  \hfill
+  \begin{minipage}{0.35\linewidth}
+      \begin{flushright}
+          \printauthor
+      \end{flushright}
+  \end{minipage}
+  %
+  \begin{minipage}{0.02\linewidth}
+      \rule{1pt}{50pt}
+  \end{minipage}
+  \titlepagedecoration
+  \begin{center}
+    \small{\today}
+
+    \textcolor{ETHBlue}{\includegraphics{./style/ETHL}}
+
+  \end{center}
+  \end{titlepage}
+}
+
+
+%%===========================================================================%%%
+%Fürs Inhaltsverzeichnis:
+%\contentsmargin{0cm}
+\titlecontents{chapter}[0pc]
+{\addvspace{40pt}
+\begin{tikzpicture}[remember picture, overlay]%
+\draw[fill=ETHBlue,draw=ETHBlue, rounded corners] (-4,-.1) rectangle (.8,.5);
+\pgftext[left,x=-1.8cm,y=0.2cm]{\color{white}\Large \chaptertitlename \,\thecontentslabel};
+\end{tikzpicture}\hspace{1cm}\color{ETHBlue}\large\bfseries}
+{}
+{}
+{\hspace*{20pt}\hrulefill\hspace*{20pt}\large\bfseries \thecontentspage}%\hspace*{20pt}\rule{1cm}{0.3pt}}%
+[\addvspace{5pt}]
+
+
+%%============================================================================%%
+% Begriffsverzeichnis
+\newcommand{\begriffsverzeichnis}{
+  \cleardoublepage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{Begriffsverzeichnis}
+  \renewcommand{\indexname}{Begriffsverzeichnis}
+  \begin{small}
+    \printindex
+  \end{small}
+}

@@ -1,0 +1,191 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+
+\chapter{Integration}
+
+
+\section{Grundidee}
+
+Wir möchten Flächeninhalte im $\R^2$ definieren. Hierzu verwenden wir folgende Funktion:
+
+\begin{Definition}
+  $$I: \mathcal{F}([a,b]) \to \R$$
+  $$f \mapsto I(f) = \int_a^b f(x) dx$$
+  Um die intuitiven Eigenschaften der Flächen zu erhalten, müssen wir folgende Bedingungen stellen:
+  \begin{itemize}
+    \item $I(f+g) = I(f)+I(g) \qquad f,g \in \mathcal{F}([a,b])$
+    \item $I(c * f) = c * I(f) \qquad c \in \R$
+    \item $I(g) \leq I(f)$ falls $g \leq f$
+    \item $I(1\!\!1_{[a,b]}) = b-a$
+  \end{itemize}
+\end{Definition}
+
+Das geht leider nicht für alle Funktionen auf $[a,b]$. Wir schränken daher unsere Auswahl auf $\mathcal{I}([a,b])$, die bestmögliche Klasse von Funktionen, die alle Eigenschaften widerspruchsfrei erfüllen.\\
+Für dieses Kapitel gilt die Annahme:
+$$a,b \in \R; a < b \Rightarrow [a,b] \neq \emptyset$$
+
+
+\section{Treppenfunktionen}
+
+\begin{Definition}[Zerlegung]
+  Eine \textbf{Zerlegung} von $[a,b]$ sind endlich viele Elemente
+  $$a = x_0 < x_1 < x_2 < ... < x_n = b$$
+  \begin{Theorem}
+    $$[a,b] = \{x_0\} \cup (x_0,x_1) \{x_1\} \cup ... (x_{n-1},x_n) \cup \{x_n\}$$
+  \end{Theorem}
+  Wir nennen $x_0 , ...$ Trennungspunkte.\\
+  Eine Zerlegung $y_0,..,y_n$ von $[a,b]$ heißt \textbf{Verfeinerung} von $x_0,...,x_n$, falls
+  $$\A i \in \{0,...,n\} \E j \in \{0,...,m\} \text{ mit } y_j = x_i$$
+\end{Definition}
+
+\begin{Definition}[Treppenfunktion]
+  Eine Funktion $f:[a,b]\to \R$ heißt \textbf{Treppenfunktion}, falls eine Zerlegung $x_0,...,x_n$ von $[a,b]$ existiert, so dass
+  $$f|_{(x_i,x_{i+1})}$$
+  konstant ist, für alle $i = 0,...,n-1$.\\
+  $f$ ist Treppenfunktion bezüglich dieser Zerlegung.\\
+  Ist $f$ eine Treppenfunktion bezüglich $x_0,...,x_n$, so ist sie ebenfalls eine Treppenfunktion bezüglich jeder Verfeinerung von $x_0,...,x_n$. Wir nennen den konstanten Wert von $f$ auf $(x_i,x_{i+1})$ \textbf{Konstanzwert} von $f$
+\end{Definition}
+
+\begin{Definition}
+  Sei $f:[a,b] \to \R$ eine Treppenfunktion bezüglich der Zerlegung von $x_0,...,x_n$ mit Konstanzwerten $c_i = f((x_i,x_{i+1}))$ für $i=1,2,...,n$.\\
+  Wir schreiben
+  $$\int_a^b f(x)dx = \sum \limits_{i=1}^n (x_i - x_{i-1})*c_i$$
+\end{Definition}
+\begin{Bemerkung}
+  \begin{itemize}
+    \item Diese Notation ist willkürlich und beliebig tauschbar.
+    \item Ist $f$ Treppenfunktion bezüglich einer anderen Zerlegung $z_0,...,z_k$ mit Konstanzwerten  $b_0,...,b_k$, so gilt:
+    $$\sum \limits_{i=1}^n (x_i - x_{i-1})*c_i = \sum \limits_{j=1}^k (z_j - x_{j-1})*b_j$$
+    Man kann beide Zerlegungen nochmal zerlegen und einfach eine neue Zerlegung nehmen, die beide Trennungspunkte enthält.
+    \item Der Wert von $f$ an Trennungspunkten ist irrelevant.
+    \item Treppenfunktionen sind beschränkt.
+    \item Summen von Treppenfunktionen und $c*f$ mit $c \in \R$ und $f$ einer Treppenfunktion sind wiederum Treppenfunktionen. Das bedeutet:
+
+
+    Die Menge aller Treppenfunktionen $\mathcal{T}([a,b]) \subseteq \mathcal{F}([a,b])$ ist ein Vektorraum.
+  \end{itemize}
+\end{Bemerkung}
+
+\begin{Theorem}
+  Die Abbildung $I: \mathcal{T}([a,b]) \to \R$ mit $f \mapsto I(f)$ (Integral von $a$ nach $b$ von $f$) erfüllt:
+  \begin{itemize}
+    \item $I(f+g) = I(f)+I(g) \qquad f,g \in \mathcal{T}([a,b])$
+    \item $I(c * f) = c * I(f) \qquad c \in \R$
+    \item $I(g) \leq I(f)$ falls $g \leq f$
+    \item $I(1\!\!1_{[a,b]}) = b-a$
+  \end{itemize}
+\end{Theorem}
+
+
+\section{Definition des Riemann-Integrals}
+
+\begin{Bemerkung}
+  Wir behandeln genau genommen das \textbf{Darboux-Integration}, die aber unter das Riemann-Integral fällt. Letzteres ist ausführlicher aber zur Nachlese wird das Darboux-Integral empfohlen.
+\end{Bemerkung}
+
+\begin{Definition}[Riemann-Integrierbarkeit]
+  Sei $f:[a,b] \to \R$ eine beschränkte Funktion. Setze
+  $$\mathcal{U}(f) = \left\{\int_a^b u dx \,\middle|\, u \text{ Treppenfunktion, } u \leq f \right\}$$
+  $$\mathcal{O}(f) = \left\{\int_a^b o dx \,\middle|\,   o \text{ Treppenfunktion, } o \leq f \right\}$$
+  \begin{Bemerkung}
+    $f$ muss beschränkt sein, weil wir sonst keine Treppenfunktionen definieren können, die größer oder kleiner als $f$ sind.
+  \end{Bemerkung}
+  \begin{itemize}
+    \item Wir nennen eine Funktion $f:[a,b] \to \R$ \textbf{Riemann-integrierbar}, falls $\sup(\mathcal{U}(f)) = \inf(\mathcal{O}(f))$
+    \item Wir definieren:
+      $$\begin{aligned}
+        \int_a^b f(x) dx &= \sup(\mathcal{U}(f))\\
+        &= \inf(\mathcal{O}(f))
+      \end{aligned}$$
+      für Riemann-integrierbare Funktionen auf dem Intervall $[a,b]$.
+    \item $\mathcal{R}([a,b) = $ Menge aller Riemann-integrierbarer Funktionen auf $[a,b]$.
+  \end{itemize}
+\end{Definition}
+
+\begin{Bemerkung}
+  \begin{itemize}
+    \item Sei $f:[a,b] \to \R$ beschränkt und $o,u$ Treppenfunktion mit $u \leq f \leq o$. Es gilt:
+      $$\int_a^b u dx \leq \int_a^b o dx \text{ also auch } \sup(\mathcal{U}(f)) \leq \inf(\mathcal{O}(f))$$
+      \begin{Bemerkung}
+        Ist $f$ Riemann-integrierbar, so wird diese Ungleichung zur Gleichheit.
+      \end{Bemerkung}
+    \item Falls $f:[a,b] \to \R$ eine Treppenfunktion ist, so gilt: $u \leq f \leq o$ für $u = f = o$ also
+      $$sup(\mathcal{U}(f)) = \int_a^b f(x) dx = \inf(\mathcal{O}(f)$$
+      (mit dem Integral für Treppenfunktionen definiert.)\\
+      Folgt: $f$ ist integrierbar: $f\in \mathcal{R}([a,b)$ und es gilt:
+      $$\int_a^b f(x)dx =\int_a^b f(x)dx$$
+      (mit jeweils der Definition für Treppenfunktionen und der Definition für allgemeine Funktionen)\\
+      Das bedeutet, dass das Riemann-Integral ebenfalls für Treppenfunktionen definiert ist.
+    \item Es gibt beschränkte Funktionen, die nicht Riemann-integrierbar sind:
+      $\mathcal{R}([a,b) \subsetneq \mathcal{F}([a,b])$
+      \begin{Beispiel}
+        $$f:[0,1] \to \R \text{ mit }f(x) = \left\{\begin{aligned}
+          1 & & x \in \Q \\
+          0 & & \text{sonst}
+        \end{aligned}\right.$$
+        Es gilt: $u \leq f \leq o$ und $\int_0^1 u d(x) \leq 0$ und $\int_0^1 o d(x) \geq 1$ (weil $Q$ kompakt ist, aber $\R \backslash \Q$ ebenfalls). Es gilt also $sup(\mathcal{U}(f)) < \inf(\mathcal{O}(f))$.
+      \end{Beispiel}
+    \item Nützliche Umformulierung der Definition:
+      \begin{Definition}
+        Eine beschränkte Funktion $f:[a,b] \to \R$ ist Riemann-integrierbar, falls $\A \varepsilon > 0 \E $ Treppenfunktionen mit $u \leq f \leq o$ und $\int_a^b o - u < \varepsilon$.
+      \end{Definition}
+      $$\begin{aligned}
+        f \text{ ist Riemann-integrierbar } &\Leftrightarrow \sup(\mathcal{U}(f)) =inf(\mathcal{O}(f)) \\
+        &\Leftrightarrow \A \varepsilon > 0 \E \alpha \in \mathcal{U}(f) \text{ und }\beta \in \mathcal{U}(f) \text{ mit } \beta - \alpha < \varepsilon \\
+        &\Leftrightarrow \A \varepsilon > 0 \E \text{ Treppenfunktionen } u \leq f \leq o \text{ mit} \\
+        & \quad \alpha = \int_a^b u dx \quad \beta = \int_a^b o dx
+      \end{aligned}$$
+    \item Betrachte $f:[a,b] \to \R$ mit $f(x) = \left\{ \begin{array}{c}
+      1 \qquad x = \dfrac{1}{2} \\
+      0 \qquad \text{sonst}
+    \end{array}\right.$
+
+    $f$ ist integrierbar, $\int_0^1 f(x) dx$
+  \end{itemize}
+\end{Bemerkung}
+
+
+\section{Integrationsgesetze}
+
+\begin{Theorem}[Linearität des Riemann-Integrals]
+  Seien $f,g:[a,b] \to \R$ Riemann-integrierbar, $\alpha,\beta \in \R$. Dann ist $\alpha f + \beta g$ Riemann-integrierbar und
+  $$\int_a^b \alpha f + \beta g dx =  \alpha \int_a^b f dx + \beta \int_a^b g dx$$
+\end{Theorem}
+
+\begin{Bemerkung}
+  Das bedeutet in anderen Worten, dass $\mathcal{R}([a,b)$ ein Vektorraum ist und, dass die Abbildung
+  $$\mathcal{R}([a,b) \to \R$$
+  $$f \mapsto \int_a^b fdx$$
+  linear ist.
+\end{Bemerkung}
+
+\begin{Beweis}
+  $f,g$ beschränkt $\Rightarrow \alpha f + \beta g$ beschränkt...\\
+  lang und monoton, möglicherweise nicht relevant. Siehe Skript
+\end{Beweis}
+
+\begin{Theorem}
+  Sind $f \leq g$ Riemann-integrierbar, so gilt:
+  $$\int_a^b f dx \leq \int_a^b gdx$$
+\end{Theorem}
+
+\begin{Beweis}
+  Ist $u$ eine Treppenfunktion, $u \leq f$, so gilt: $u \leq g$ also $\int_a^b u dx \in \mathcal{U}(f)$. Folgt $\mathcal{U}(f) \subseteq \mathcal{U}(g)$. Also auch
+  $$\sup(\mathcal{U}(f)) \leq \sup(\mathcal{U}(g)) \text{ folgt } \int_a^b f dx \leq \int_a^b gdx$$
+\end{Beweis}
+
+\begin{Theorem}[Dreiecksungleichung (Integrale)]
+  Sei $f:[a,b] \to \R$ Riemann-integrierbar. Dann ist $|f|:x \mapsto |f(x)|$ ebenfalls Riemann-integrierbar und es gilt die Dreiecksungleichung:
+  $$\left | \int_a^b f(x)dx \right| \leq \int_a^b |f(x)|dx$$
+\end{Theorem}
+
+
+\section{Integration monotoner Funktionen}
+
+Mmmh, I might have slept in here...
+
+
+\section{Integration stetiger Funktionen}
+
+\end{document}

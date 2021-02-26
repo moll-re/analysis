@@ -1,0 +1,675 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+\chapter{Mengenlehre}
+
+\section{Naive Mengenlehre}
+Eingeführt $\sim 1895$ von Georg Cantor, um Widersprüche in der Mathematik zu beseitigen.
+\subsection{Cantor's Postulate}
+\begin{Definition}[Mengenpostulate (Cantor)]
+  \begin{enumerate}
+    \item Eine Menge besteht aus voneinander unterscheidbaren Elementen:
+    "$x \in X$"" bedeutet: $x$ ist ein Element der Menge $X$
+    \item Eine Menge ist unverwechselbar durch ihre Elemente bestimmt.
+    \item Eine Menge ist nicht Element von sich selbst.
+    \begin{Bemerkung}
+      Elemente von Mengen können durchaus wieder Mengen sein, aber eine Menge kann sich nicht selbst beinhalten. Das ist das Well-founded-Axiom.
+    \end{Bemerkung}
+    \item Ist $A$ eine Aussage über Elemente einer Menge $X$, so ist
+    $$\{x\mid A \text{ ist wahr für } x \}$$
+    auch eine Menge. (Bemerkung: $\mid$ bedeutet: 'so, dass')
+  \end{enumerate}
+\end{Definition}
+
+\begin{Bemerkung}
+  In der modernen Mengenlehre gibt es bis zu 8 Postulate, die wir nicht benötigen.
+\end{Bemerkung}
+\begin{Bemerkung}
+  Auf diese Postulate bauen alle Ergebnisse und Beweise des folgenden Kurses auf.
+\end{Bemerkung}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item $\N =\{ 0,1,2,3,..\} $
+    \item $\Z = \{ ...,-3,-2,-1,0,1,2,3,...\} $
+    \item $ \{ \} = \emptyset \text{ Die leere Menge}$
+    \item $\{ x\in \N \mid \E a \in \Z : 3a+1=x \}$ (Ergibt: $\{ 1,4,7,10,13,16,...\} $)
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Mengenoperationen]
+  Seien $X,Y$ Mengen. Wir definieren:
+  \begin{itemize}
+    \item $ X \cup Y = \{ z \mid z \in X \text{ oder } z \in Y \} $
+    \item $ X \cap Y = \{ z \mid z \in X \text{ und } z \in Y \} $
+    \item $ X \backslash Y = \{ z \mid z \in X \text{ und } z \notin Y \} $
+    \item $ X \triangle Y = (X \cup Y) \backslash (X \cap Y) $
+    Das ist die symmetrische Differenz. $ X \triangle Y = Y \triangle X $
+  \end{itemize}
+\end{Definition}
+
+\begin{Definition}[Disjunkte Mengen]
+  Es seien $X$ und $Y$ Mengen.  $X$ und $Y$ sind \textbf{disjunkt}, falls gilt: $x\cap Y = \emptyset$.
+\end{Definition}
+
+\begin{Definition}[Kollektionen von Mengen]
+  Wir bezeichnen Mengen von Mengen als Familien, Kollektionen von Mengen.
+\end{Definition}
+
+\begin{Definition}[Potenzmenge]
+  Sei $X$ eine Menge. Wir schreiben $\mathcal{P}(X) = \{ Y \mid Y \subseteq X\} $. Wir nennen $\mathcal{P}(X)$ die \textbf{Potenzmenge von $X$}.
+\end{Definition}
+
+\begin{Beispiel}
+  $X = \{ a,3 \} \Rightarrow \mathcal{P}(X)= \{ \emptyset, \{a\},\{3\},X\} $
+\end{Beispiel}
+
+Kollektionen von Mengen schreiben wir oft in der Form $\{ X_0 , X_1 , X_2 , ... \} = (X_i)_{i\in \N }$.\\
+Allgemeiner betrachten wir Familien $(X_i)_{i\in I }$ für eine (beliebige) Indexmenge $I$.
+
+\begin{Beispiel}
+  Für $n\in \Z : X_n = \{ m \in \Z \mid m^2 < n \}$
+\end{Beispiel}
+
+\begin{Definition}[Vereinigung und Durchschnitt von Familien]
+  Ist $(X_i)_{i\in I} = \mathcal{X}$ eine Familie von Mengen, so sind
+  $$\bigcup_{i \in I}^\infty = \bigcup_{X \in \mathcal{X}} =  \{ x \mid \E A : x\in A \} $$
+  $$\bigcap_{i \in I}^\infty = \bigcap_{X \in \mathcal{X}} =  \{ x \mid \A A : x\in A \} $$
+  respektiv die Vereinigung und der Durchschnitt der Mengen in $\mathcal{X}$.
+\end{Definition}
+
+\begin{Beispiel}
+  Sei $ \A n \in \Z : X_n = \{ m \in \Z \mid m^2 < n \}$ und sei $\mathcal{X} = (X_n)_{n\in\Z}$. Dann gilt:
+  $$ \bigcup_{X \in \mathcal{X}} =  \emptyset $$
+  $$ \bigcap_{X \in \mathcal{X}} =  \Z $$
+
+\end{Beispiel}
+
+\begin{Definition}[Kartesisches Produkt]
+  Seien $X,Y$ beliebige Mengen. Das Kartesische Produkt von $X$ mit $Y$ ist
+  $$ X \times Y = \{(x,y) \mid x \in X \text{ und } y \in Y \} $$
+  \begin{Bemerkung}
+    $(x,y)$ ist ein geoordnetes Tupel von 2 Elementen. Das bedeutet $(x,y) = (y,x) \Rightarrow x=y$
+  \end{Bemerkung}
+  Diese Definition ist auch allgemeiner für 3 und $n \in \N$ Mengen gültig.
+  $$ X \times Y \times Z = \{(x,y) \mid x \in X \text{ und } y \in Y  \text{ und } z \in Z \} $$
+  Allgemeiner: Ist $ (X_i)_{i \in I} $ eine Familie von Mengen, dann gilt:
+  $$\prod_{i \in I} X_i = \{ (x_i)_{i \in I} \mid x_i \in X_i \A i \in I \}$$
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item $X = \{ 0,1 \}$
+    \item $X \times X = \{ (0,0),(0,1),(1,1) \}$
+    \item $X \times X \times X = \{ (0,0,0),(0,0,1),(0,1,0),(0,1,1),(1,0,0),(1,0,1),(1,1,0),(1,1,1) \}$
+    \item $A= \{ a, b\} $
+    \item $X \times A = \{ (0,a),(0,b),(1,a),(1,b) \} $
+      \begin{Bemerkung}
+        $X \times A \neq A \times X$, aber sie sind ähnlich, verbunden
+      \end{Bemerkung}
+    \item $X \times \emptyset = \emptyset$
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Bemerkung}
+  Ein geoordnetes Tupel kann formell als Menge $(x,y) = \{ x, \{ y \} \}$ dargestellt werden. Hierfür wird Postulat 3 verwendet. (Siehe Aufgabe Skript)
+\end{Bemerkung}
+
+
+\section{Funktionen}
+
+\begin{Bemerkung}
+  Für uns ist das Wort 'Abbildung' ein Synonym für eine Funktion.
+\end{Bemerkung}
+
+\begin{Definition}
+  Seien $X,Y$ Mengen. Eine Funktion $f$ von $X$ nach $Y$ ist eine Vorschrift/Regel, die jedem Element von $X$ ein Element von $Y$ zuordnet.
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item $X$ = Alle ETH-Mitarbeiter
+    \item $Y = \N $
+    \item $f: X \mapsto Y$ ist gegeben durch $f(x)$= Alter von $x$ in Tagen, $x \in X$
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Funktion]
+  Seien $X,Y$ Menge. Eine \textbf{Funktion} von $X$ nach $Y$ ist eine Teilmenge $F$ von $X \times Y$ (d.h. Tupel) mit folgender Eigenschaft:
+  $$\A x\in X \E ! y \in Y : (x,y) \in F$$
+\end{Definition}
+
+\begin{Bemerkung}
+  Eine Funktion als Teilmenge von $X \times Y$ nennt man in der Praxis Funktionsgraphen der Abbildungsvorschrift $f: X \mapsto Y$. Graph von $f$ ist $\{ (x,f(X)) \mid x \in X \} \leq X \times Y $
+  Entspricht dem Funktionsgraphen aus der Schule, wobei der Graph hier der eigentliche Bestandteil der Funktion ist, und nicht anders herum.
+\end{Bemerkung}
+
+\begin{Definition}
+  Ist $f : X \mapsto Y $ eine Funktion ($f \leq X \times Y$), so nennen wir $X$ den \textbf{Definitionsbereich} und $Y$ den \textbf{Wertebereich} von $f$.
+\end{Definition}
+\begin{Bemerkung}
+  Funktionen sind keine Formeln. Sie hängen von den Mengen, die sie definieren ab. $f: \Z \mapsto \N $ mit $f(x)=x^2$ \textbf{ist nicht gleich} $f: \R \mapsto \R $ mit $f(x)=x^2$ \textbf{ist nicht gleich} $f: \R \mapsto \R^+ $ mit $f(x)=x^2$.
+\end{Bemerkung}
+
+\begin{Beispiel}
+  \begin{enumerate}
+    \item Sei $X$ eine Menge und $A \subseteq X$ eine Teilmenge. Die \textbf{charakteristische Funktion} von $A \subseteq X$ ist die Funktion $\chi_A : X \mapsto \{0,1\} = Y$ gegeben durch:
+    $$f(x) =
+    \left\{
+    \begin{aligned}
+      1 &\text{ falls } x \in A\\
+      0 &\text{ falls } x \notin A
+    \end{aligned}\right.$$
+
+    \item Sei $X$ eine Menge und $A \subseteq X$ eine Teilmenge. Die \textbf{Inklusionsabbildung} $z_a : A \mapsto X$ ist gegeben durch: $z_A (x) = x (\A x\in A)$.\\
+    Für $X=A$ heisst $z_X = z_A$ die \textbf{Identitätsabbildung}.
+    \item Seien $X,Y$ Mengen. Die \textbf{Projektionsabbildungen}
+    $$π_X : X \times Y \mapsto X$$
+    $$π_Y : X \times Y \mapsto Y$$
+    sind gegeben durch:
+    $$π_X (x,y) =x$$
+    $$π_Y (x,y) =y$$
+    \underline{Notation:} Sind $X,Y$ Mengen, so schreiben wir $Y^X = map(X,Y)$ für die Menge aller Funktionen von $X$ nach $Y$.
+    \begin{Bemerkung}
+      Sind $X$ und $Y$ endliche Mengen mit je $m$ und $n$ Elemente. Dann gibt es $n^m$ Funktionen $f\in Y^X$
+    \end{Bemerkung}
+  \end{enumerate}
+\end{Beispiel}
+
+
+\begin{Definition}[Verknüpfung]
+  Seien $X,Y,Z$ Mengen, seien $f:X\mapsto Y$ und $g: Y \mapsto Z$ Funktionen. Wir schreiben $g \circ f$ für die Funktion $X \mapsto Z$ gegeben durch
+  $$(g\circ f)(x) = g(f(x)) \A x \in X$$
+  Spezialfall: Ist $A \subseteq X$ eine Teilmenge und $f:X\mapsto Y$ eine Funktion, so nennen wir $f \circ z_A : A \mapsto Y$ die \textbf{Einschränkung} von $f$ auf $A$. Notation: $f|_A = f \circ z_A$
+\end{Definition}
+
+
+\begin{Definition}
+  Seien $X,Y$ Mengen. Eine Funktion $f: X \mapsto Y$ heißt ...
+  \begin{itemize}
+    \item \textbf{surjektiv}, wenn sie jedes Element der Zielmenge mindestens einmal als Funktionswert annimmt. Das heißt, jedes Element der Zielmenge hat mindestens ein Urbild.
+    $$\A y \in Y \E x \in X:\quad f(x)=y $$
+    ($|X| \geq |Y|$. \quad Beispiel: $\qquad f(x)=\sin{x}$ mit $Y = (0,1)$)\\
+
+    \item \textbf{injektiv}, wenn zu jedem Element der Wertemenge höchstens ein (oder auch gar kein) Element der Definitionsmenge existiert. Zwei verschiedene Elemente $x_{1}$ und $x_{2}$ der Definitionsmenge bilden also nie auf den gleichen Term $y$ der Wertmenge ab.
+    $$\A x_{1}, x_{2} \in X :\qquad f(x_{1}) = f(x_{2}) \quad \Rightarrow \quad x_{1}=x_{2} $$
+    \begin{Bemerkung}
+      Dies bedeutet \textbf{nicht}:\quad $\A x_{1}, x_{2} \in X :\qquad x_{1} = x_{2} \quad\Rightarrow\quad f(x_{1}) = f(x_{2}) $
+    \end{Bemerkung}
+    ($|X| \leq |Y|$.\quad Beispiel: $\quad f(x)=2x$ \quad mit \quad $X=\Z$)\\
+
+    \item \textbf{bijektiv}, wenn eine vollständige Paarbildung existiert. Jedes Element der Wertmenge besitzt genau ein Element der Definitionsmenge und jedes Element der Definitionsmenge besitzt genau ein Element der Wertmenge. Eine Funktion ist genau dann bijektiv, wenn sie sowohl surjektiv, als auch injektiv ist.\\
+    ($|X| = |Y|$. \quad Beispiel: $\qquad f(x)=x^3 $)\\
+  \end{itemize}
+\end{Definition}
+
+\begin{Beispiel}
+  $f : \N \mapsto \N$ mit $f(x) = x + 2$ ist injektiv aber nicht surjektiv.
+\end{Beispiel}
+
+\begin{Definition}[Umkehrfunktion]
+  Wir nennen $g: Y \mapsto X$ gegeben durch $g(y) = $ (das eindeutige $x \in X$ mit $f(x)=y$) die \textbf{Umkehrfunktion} zu $f$. $g=f^{-1}.$
+\end{Definition}
+
+\begin{Lemma}
+  Seien $f:X\mapsto Y$ und $g: Y \mapsto Z$ Funktionen.
+  \begin{enumerate}
+    \item Sind $f,g$ injektiv, so ist auch $g \circ f$ injektiv.
+    \item Ist $f \circ g$ injektiv, so ist auch $f$ injektiv.
+    \item Sind $f,g$ surjektiv, so ist auch $g \circ f$ surjektiv.
+    \item Ist $f \circ g$ surjektiv, so ist auch $g$ surjektiv.
+    \item Sind $f,g$ bijektiv, so ist auch $g \circ f$ bijektiv.
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Beweis}
+  \begin{enumerate}
+    \item Zeige: $\A x_1,x_2 \in X : g \circ f (x_1) = g \circ f (x_2) \Rightarrow x_1 = x_2 $.\\
+    $g(f(x_1)) = g(f(x_2)) \Rightarrow f(x_1) = f(x_1)$ weil $g$ injektiv ist.\\
+    $f(x_1) = f(x_2) \Rightarrow x_1 = x_1$ weil $f$ injektiv ist.
+    \item Analog
+    \item TODO
+  \end{enumerate}
+\end{Beweis}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item $f: \R \mapsto \R; x\mapsto x^2$ - Nicht injektiv und nicht surjektiv.
+    \item $f: \R^+ \mapsto \R^+; x\mapsto x^2$ - Injektiv und surjektiv also auch bijektiv.
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Bemerkung}[Notation]
+  Seien $f:X\mapsto Y$ eine Funktion un $A\subseteq X,B\subseteq Y$ Teilmengen. Dann ist
+  $$f(A) = \{y\in Y \mid \E x\in A : f(x)=y\} \leq Y $$
+  das Bild von $A$ unter $f$.\\
+  $$f^{-1}(B)= \{x\in X \mid \E f(x)\in B\}$$
+  ist das Urbild von B.
+  \begin{Bemerkung}
+    $f:X\mapsto Y$ ist surjektiv falls $f(X)=Y$.\\
+    $f^{-1}(Y)=X$ gilt immer, und lässt nicht auf Bijektivität zurückschließen.
+  \end{Bemerkung}
+\end{Bemerkung}
+
+\begin{Beispiel}[Exkurs - Algebraische Strukturen]
+  Sei $X$ eine Menge. Eine binäre Operation auf $X$ ist eine Funktion $\alpha: X \times X \mapsto X$ (ordnet einem Tupel aus $X$ ein neues Element aus $X$ zu): $(x_1,x_2)\mapsto \alpha(x_1,x_2) = x_1 * x_2$.\\
+  Wir nennen $\alpha$ assoziativ falls
+  \begin{itemize}
+    \item $\alpha(x_1,\alpha(x_2,x_3)) = \alpha(\alpha(x_1,x_2),x_3) \A x_1,x_2,x_3 \in X$
+    \item KG
+    \item NE
+  \end{itemize}
+  $(X,\alpha,e)$ mit $\alpha$ assoziativ und kommutativ nennt man \textbf{Monoid}.
+  \begin{Bemerkung}
+    Alle anderen Strukturen (Dioide, Ringe, Körper, Vektorräume,...) werden ebenfalls so aufgebaut.
+  \end{Bemerkung}
+\end{Beispiel}
+
+\begin{Definition}[Funktion]
+  Sei eine Funktion $\mathcal{F} \subseteq X \times Y$. Dann kann man folgende Tests durchführen:
+  \begin{itemize}
+    \item $\A x\in X \E! y\in Y :(x,y)\in \mathcal{F}$ (ist es eine Funktion?)
+    \item $\A y\in Y : \A x_1,x_2 \in X :(x_1,y)\in \mathcal{F} \land (x_2,y)\in \mathcal{F}$ (ist die Funktion injektiv?)
+    \item $\A y \in Y : \E x\in X : (x,y)\in \mathcal{F}$ (ist die Funktionen surjektiv?)
+    \item Aus Injektivität und surjektivität folgt Bijektivität: $\A y y \in Y \E ! x\in X : (x,y) \in \mathcal{F}$
+  \end{itemize}
+
+  In der üblichen Darstellung ist die Darstellung einfacher: $f:X\to Y; x\mapsto f(x)$.
+
+  \begin{itemize}
+    \item $f$ ist injektiv $\Leftrightarrow \A x_1,x_2 \in X : f(x_1)  = f(x_2) \Rightarrow x_1 = x_2$
+    \item $f$ ist surjektiv $\Leftrightarrow \A y \in Y \E x\in X : y=f(x)$
+  \end{itemize}
+\end{Definition}
+
+
+
+\section{Relationen und Quotienten}
+
+
+\begin{Definition}[Relation]
+  Eine \textbf{Relation} $\mathcal{R}$ auf einer Menge $X$ ist eine Teilmenge von $X\times X$.
+
+  Wir schreiben oft $\widehat{=},\approx,\sim,\cong,\leq,\preccurlyeq,...$ für $\mathcal{R}$ und statt $(x_1,x_2)\in \mathcal{R}$ auch $x_1 \mathcal{R} x_2$.
+
+  Diese Relation kann folgende Eigenschaften haben:
+  \begin{itemize}
+    \item Reflexiv, falls $x \mathcal{R} x \A x \in X$ gilt.
+    \item Symmetrisch, falls $x_1 \mathcal{R} x_2 \Leftrightarrow x_2 \mathcal{R} x_1 \A x_1,x_2 \in \mathcal{R}$ gilt.
+    \item Transitiv, falls $x_1 \mathcal{R} x_2 \mathcal{R} x_3 \Leftrightarrow x_1 \mathcal{R} x_3$
+    \item Antisymmetrisch, falls $x_1 \mathcal{R} x_2 \land x_2 \mathcal{R} x_1 \Rightarrow x_1 = x_2 \A x_1,x_2 \in \mathcal{R}$
+  \end{itemize}
+  Eine Relation heißt \textbf{Äquivalenzrelation} falls sie reflexiv, symmetrisch und transitiv ist.
+
+  Eine Relation heißt \textbf{Ordnungsrelation} falls sie reflexiv, antisymmetrisch und transitiv ist.
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item Die Identitätsabbildung ist die einzige reflexive Abbildung.
+    \item Was bedeutet `symmetrisch` für eine Funktion $f:X \to X$?
+
+      Eine Funktion heißt idempotent falls $f^{\circ Z}:X\to X$ die Identität ist.
+    \begin{Beispiel}
+      $$x\in \R \mapsto -x \in \R$$
+      $$ x\in \R\backslash \{ 0\} \mapsto \dfrac{1}{x}\in \R\backslash \{ 0\}$$
+    \end{Beispiel}
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Beispiel}[Äquivalenzrelationen]
+  Eine Äquivalenzrelation drückt meistens eine Gleichheit in gewissen Aspekten aus. Dies sollte in folgenden Beispielen ersichtlich werden:
+  \begin{itemize}
+    \item Die Gleichheit: $x_1 = x_2$
+    \item $\equiv$ : $X \times X$, das heißt zwei Elemente $x_1,x_2 \in X$ eine beliebige Relation zueinander haben (also einfach in der selben Menge sind)
+    \item Seien zwei Mengen $X,Y$ und eine Funktion $f: X \to Y$.
+
+     $\sim : x_1 \sim x_2 \Leftrightarrow f(x_1) = f(x_2)$ ist eine Äquivalenzrelation auf $X$.
+    \begin{Beispiel}
+      $f(x)=x^2$ für $x \in \R$. Dann ist $x \sim -x$ (besser: $x_1 \sim x_2 \Leftrightarrow x_1 = - x_2 \lor x_1 = x_2 $)
+    \end{Beispiel}
+    \item $X=\R^2$; $(x_1,y_1)\sim (x_2,y_2) \Leftrightarrow (x_1,y_1)$ und $(x_2,y_2)$ sind im selben Quadranten in $\R^2$ ist ebenfalls äquivalent.
+    \item $\mathcal{X} = \{ g \mid $ Geraden in der euklidischen Ebene $\R^2 \}$.\\
+    $g_1 \parallel g_2 \Leftrightarrow g_1$ und $g_2$ sind parallel.
+    \begin{itemize}
+      \item Reflexivität: $g \parallel g$
+      \item Symmetrie: $g \parallel h \Leftrightarrow h \parallel g$
+      \item Transitivität: $g \parallel h, h\parallel i \Rightarrow g \parallel i$
+    \end{itemize}
+    \item Sei $d\geq 1$ eine natürliche Zahl. Wir schreiben $m \equiv n (d)$ falls $m-n$ durch d teilbar ist mit $m,n \in \Z$.
+    \begin{itemize}
+      \item Reflexivität: $m \equiv m$ (obvious)
+      \item Symmetrie: $m \equiv n \Leftrightarrow n \equiv m$. Stimmt, da $m \equiv n \Leftrightarrow \dfrac{m-n}{d} \in \Z$. Daraus folgt $-\dfrac{m-n}{d} \in \Z \Rightarrow \dfrac{n-m}{d} \in \Z \Rightarrow n \equiv m$
+      \item Transitivität: $m\equiv n, n \equiv k$ Bedeutet, dass $\dfrac{m-n}{d} \in \Z, \dfrac{n-k}{d} \in \Z$, was bedeutet, dass $\dfrac{m-n}{d} + \dfrac{n-k}{d} = \dfrac{m-k}{d} \in \Z$. Daraus folgt, dass auch $m \equiv k$.
+    \end{itemize}
+    \item Sei $\approx$: `ist ungefähr gleich' eine Relation auf $r$. $x \approx y \Leftrightarrow |x-y| < 10^{-80}$.
+    \begin{itemize}
+      \item Reflexivität: Ja
+      \item Symmetrie: Ja
+      \item Transitivität: Nein, für sehr kleine Zahlen nicht.
+    \end{itemize}
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Beispiel}[Ordnungsrelationen]
+  \begin{itemize}
+    \item $\leq$ auf $\Q$ oder $\R$
+    \begin{itemize}
+      \item Reflexivität: Ja
+      \item Transitivität: $x\leq y, y\leq z \Rightarrow x\leq z$ (Axiom)
+      \item Antisymmetrie: $x\leq y, y\leq x \Rightarrow x = y$
+    \end{itemize}
+    \item $\subseteq$ für Mengen.
+    \begin{itemize}
+      \item Reflexivität: $A \subseteq{A}$
+      \item Transitivität: $A \subseteq B, B \subseteq C \Rightarrow A \subseteq C$
+      \item Antisymmetrie: $A \subseteq B, B \subseteq A \Rightarrow A = B$
+    \end{itemize}
+    \item $\prec$, lexikographische Ordnung. Untersuchung wird dem Leser zur Übung gelassen.
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Partition]
+  Sei $X$ eine Menge. Eine Partition $\mathcal{P}$ auf $X$ ist eine Menge von Teilmengen von $X$, so dass:
+  \begin{itemize}
+    \item $\bigcup_{Q\in \mathcal{P}} Q = x$ und
+    \item $\A Q_1,Q_2 \in P: Q_1 \cap Q_2 \neq \emptyset \Rightarrow Q_1 = Q_2$ und
+    \item $\emptyset \notin \mathcal{P}$
+  \end{itemize}
+  \incfig{partition}
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item Quadranten im $\R^2$
+    \item $\mathcal{P} = \{ \{ ..., -4,-2,0,2,4,...\} , \{ ...,-3,-1,1,3,... \} \}$ ist eine Partition auf $\Z$.
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Äquivalenzrelation]
+  Eine Teilmenge $\sim \subseteq X \times X$ heisst Äquivalenzrelation auf der Menge $X$ falls sie...
+  \begin{itemize}
+    \item Reflexiv: $\A x \in X : x \sim x $ (d.h. $(x,x)\in \sim$)
+    \item Symetrisch: $\A x,y\in X: x \sim y \Rightarrow y \sim x$
+    \item Transitiv: $\A x,y \in X: x\sim y \land y\sim z \Rightarrow x\sim z$
+    \\... ist.
+  \end{itemize}
+\end{Definition}
+
+\begin{Theorem}
+  Eine Äquivalenzrelation definiert eine Partition.
+  \begin{Definition}[Äquivalenzklasse]
+    Sei $\sim$ eine Äquivalenzrelation auf $X$. Wir definieren zu jedem $x_0 \in X$ die Äquivalenzklasse:
+    $$[x_0]_\sim = \{ x \in X \mid x \sim x_0 \}$$
+  \end{Definition}
+  Damit ist
+  $$\mathcal{P} = \{ [x]_\sim \mid x \in X \}$$
+  Eine Partition auf $X$.
+\end{Theorem}
+
+\begin{Beweis}
+  Da $\sim$ reflexiv ist, gilt $x_0 \in [x_0]_\sim$. Daher gilt $[x_0]_\sim \neq \emptyset$.
+  Da $[x_0]_\sim \subseteq X$ gilt auf jeden Fall
+  $$\bigcup_{[x]_\sim \in \mathcal{P}} \subseteq X $$
+  Des Weiteren gilt wegen $[x_0]_\sim$ auch Gleichheit?
+
+  Für die letzte Eigenschaft der Partition müssen wir zeigen, dass:
+  $$[x_0]_\sim \cap [x_1]_\sim \neq \emptyset \Rightarrow [x_0]_\sim = [x_1]_\sim$$
+  für alle $x_0,x_1 \in X$.
+
+  Angenommen:
+  \begin{center}
+    \begin{gather*}
+      y \in [x_0]_\sim \cap [x_1]_\sim \text{ und } z \in [x_0]_\sim \\
+      y \sim x_0 \Leftrightarrow x_0 \sim y \qquad \quad \\
+      y \sim x_1 \qquad z \sim x_0 \\
+      \Rightarrow z \sim y
+    \end{gather*}
+  \end{center}
+  Wegen Symmetrie und Transitivität erhalten wir $x_0 \sim y $ und $z\sim y$. Wegen $y\sim x_1$ und Transitivität erhalten wir $z \sim x_1$ (oder auch: $z \in [x_1]_\sim$). Da $z \in [x_1]_\sim$ beliebig war, gilt also $[x_0]_\sim \subseteq [x_1]_\sim$. Auf Grund der Symmetrie zwischen $x_0$ und $x_1$ folgt ebenso $[x_1]_\sim \subseteq [x_0]_\sim$, also $[x_1]_\sim = [x_0]_\sim$.
+\end{Beweis}
+
+\begin{Theorem}
+  Angenommen $\mathcal{P}$ ist eine Partition auf $X$. Dann können wir eine Äquivalenzrelation $\sim$ auf $X$ definieren, so dass die Äquivalenzklassen genau die Elemente der Partition sind. Und zwar gilt: $x \sim y :\Leftrightarrow \E Q: x,y \in Q \in \mathcal{P}$
+\end{Theorem}
+
+\begin{Bemerkung}
+  Das heisst, dass man das jeweils Eine durch das jeweils Andere definieren.
+\end{Bemerkung}
+
+\begin{Definition}[Quotientenraum]
+  Für eine Äquivalenzrelation $\sim$ auf $X$ nennen wir $$X/_\sim = \{[x]_\sim : x \in X \}$$
+  den \textbf{Quotientenraum} von $X$ modulo $\sim$.
+\end{Definition}
+
+\begin{Bemerkung}
+  Entspricht genau der Partition, mit dem Unterschied, dass der Quotientenraum dann verwendet wird, wenn uns die Anfangsmenge nicht mehr interessiert.
+\end{Bemerkung}
+
+\begin{Beispiel}
+  Wir betrachten $X = \N_{\geq 1}$ und definieren die Äquivalenzrelation $(m,n) \sim :\Leftrightarrow mb = an$.
+  \begin{itemize}
+    \item[$R$)] $(m,n) \sim (m,n) \Leftrightarrow mn = mn$ \checkmark
+    \item[$S$)] $(m,n) \sim (a,b) \Leftrightarrow (a,b) \sim (m,n)$ \checkmark
+    \item[$T$)] Angenommen
+      $$\begin{array}{c c c c}
+        & (m,n) \sim (a,b) & \text{ und } & (a,b) \sim (k,l) \\
+        \Leftrightarrow & mb = an & & al = kb  \\
+        \Leftrightarrow & mbl = anl & = & aln = kbn \\
+        \Rightarrow & mbl & = & kbn \mid b \geq 1 \\
+        \Leftrightarrow & ml & = & kn \\
+        \Leftrightarrow & (m,n) & \sim & (k,l) \\
+        & & \checkmark &
+        \end{array}$$
+  \end{itemize}
+
+  Dieser Quotientenraum $X/_\sim = \Q$ entspricht der Menge der rationalen Zahlen: $[(m,n)]_\sim = \dfrac{m}{n}$.\\
+  Denn $\dfrac{m}{n} = \dfrac{a}{b} \Leftrightarrow mb = an$.
+\end{Beispiel}
+
+\begin{Definition}[Wohldefiniertheit]
+  Eine Funktion(svorschrift) heisst \textbf{wohldefiniert}, falls das Ergebnis von keiner Wahl abhängt.
+\end{Definition}
+
+
+\incfig{aequivalenz_rel_dreieck}
+
+
+\begin{Beispiel}
+  Von einer surjektiven Abbildung zu Partitionen:\\
+  Angenommen $f: X \to Y$ ist surjektiv. Dann definiert $\mathcal{P}=\{f^{-1} : y \in Y \}$ eine Partition.
+\end{Beispiel}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item Nicht wohldefiniert: $f\left(\dfrac{m}{n}\right) = m$ der Zähler der rationalen Zahl $\dfrac{m}{n}$.\\
+    $\dfrac{m}{n} = [(m,n)]_\sim \mapsto (m,n) \text{(Ein Repräsentatn der Äquivalenzklasse (hier wird eine Wahl getroffen.))} \mapsto m$
+    \item Wohldefiniert: $\Q \times \Q \to \Q$, $\left(\dfrac{m}{n},\dfrac{a}{b}\right) \mapsto \dfrac{ma}{nb}$\\
+    Entspricht einer Aussage mit Umwegen, die nicht unbedingt wohldefiniert sind, aber das Endergebnis ist wohldefiniert.
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Kanonische Projektion]
+  $$x\mapsto [x]_\sim \in X/_\sim$$
+  wird auch \textbf{Quotientenabbildung} oder \textbf{kanonische Projektion} genannt. Dies ist die 'offensichtliche' Abbildung, bei der man keine (wirkliche) Wahl trifft.
+\end{Definition}
+
+\begin{Beispiel}
+  $$\begin{aligned}
+    \Z/_{(d)}  &= \text{ Quotientenraum von $\Z$ modulo der Äquivalenzrelation } a \equiv b (d) \text{ falls } d|(a-b)\\
+    &= \{[0]_\sim, [1]_\sim, ...[d-1]_\sim\}
+  \end{aligned}$$
+  $$f([a])=(-1)^{a} \in \{1,-1\}$$
+  Wohldefiniert?\\
+  \begin{itemize}
+    \item Ja, wenn $d$ gerade ist: $a \sim a+kd \Rightarrow (-1)^a=(-1)^{a+kd}$
+    \item Nein, wenn nicht: $a \sim d$ aber $(-1)^0 = 1 \land (-1)^a = -1$
+  \end{itemize}
+  \begin{Beispiel}
+    $d=3$ definiert $\Z/_{(3)} = \{[0]_{mod 3},[1]_{mod 3},[2]_{mod 3}\}$ (Restklassen Modulo 3).\\
+    Nicht wohldefiniert, denn $0 \sim 3$ aber $(-1)^0 = 1 \neq -1 = -(1)^3$ also $f([0]) \neq f([3])$ (verschiedene Outputs) obwohl $[0] = [3]$ (gleiche Inputs).
+  \end{Beispiel}
+\end{Beispiel}
+
+
+
+\section{Kardinalität (Mächtigkeit)}
+
+\begin{Definition}
+  Seien $X,Y$ zwei Mengen.
+
+  Wir sagen $X$ ist \textbf{gleichmächtig} zu $Y$, schreiben $X\sim Y$ oder $|X|=|Y|$ falls es eine Bijektion $f:X\to Y$ gibt.\\
+  Wir sagen $X$ ist \textbf{schmächtiger} als $Y$ (oder $Y$ ist \textbf{mächtiger}), schreiben $X\preccurlyeq Y$, falls es eine Injektion $g:X\to Y$ gibt.\\
+  Des Weiter ist $X$ \textbf{echt schmächtiger} als $Y$, $X \prec Y$, falls $X \preccurlyeq Y$ aber $X \not\sim Y$
+\end{Definition}
+\begin{Theorem}
+  Gleichmächtig erfüllt alle Eigenschaften einer Äquivalenzrelation auf der Klasse aller Mengen. (Äquivalenzrelationen sind nur für Mengen definiert, aber es gibt keine Menge aller Mengen!)
+\end{Theorem}
+
+\begin{Beweis}
+  \begin{itemize}
+    \item[$R$)] $X\sim X$ wegen $id: X\to X$,$x\mapsto x$
+    \item[$S$)] $X \sim Y \Rightarrow Y \sim X$, denn wenn $f:X \to Y$ bijektiv ist, so ist auch $f^{-1}: Y \to X$ bijektiv.
+    \item[$T$)] $Y \sim Y \land Y \sim Z \Rightarrow X \sim Z$, denn falls $f: X\to Y$ bijektiv ist, so ist auch $g\circ f : X \to Z$ es.
+  \end{itemize}
+\end{Beweis}
+
+\begin{Theorem}
+  $\preccurlyeq$ definiert eine Ordnungsrelation auf den Mächtigkeiten.
+\end{Theorem}
+
+\begin{Beweis}
+  \begin{itemize}
+    \item[$R$)] $X \preccurlyeq X$ da $id: X \to X$ injektiv ist. ?
+    \item[$T$)] $X \preccurlyeq Y $und$ Y \preccurlyeq Z \Rightarrow x \preccurlyeq Z$\\
+    $\E f: X \to Y$ injektiv   $\E g: Y\to Z$ injektiv $\Rightarrow g\circ f : X\to Z$
+    \item[$AS$)] $X \preccurlyeq Y$ und $Y \preccurlyeq X \not\Rightarrow X = Y$\\
+    Vielleicht stimmt stattdessen: $|X| = |Y|$
+  \end{itemize}
+\end{Beweis}
+
+\begin{Theorem}[Cantor-Schröder-Bernstein]
+  Seien $X,Y$ zwei Mengen mit $X \preccurlyeq Y$ und $Y \preccurlyeq X$. Dann gilt $X \sim Y$.
+\end{Theorem}
+
+\begin{Beweis}
+  Seien $f:X\to Y$ injektiv, $g:Y\to X$ injektiv.\\
+  Wir müssen aus diesen Beiden eine Bijektion $H:X\to Y$ konstruieren.\\
+  Wir führen folgende eigenartige Biologie ein:\\
+  \begin{itemize}
+    \item Wir sagen $f(x)\in Y$ ist das Kind von $x\in X$
+    \item Wir sagen $f(y)\in X$ ist das Kind von $y\in Y$
+    (Injetkiv bedeutet, dass jeder nur einen Elternteil haben kann)\\
+    \begin{Bemerkung}
+      Also hat $x\in X$ ein Kind $f(x) \in Y$, welches das Kind $g(f(x))\in X$ hat, welches das Kind $f(g(f(x))) \in Y$ hat....
+    \end{Bemerkung}
+    \incfig{x_y_bij_1}
+    \item Wir sagen, $x\in X$ ist ein $X$-Waise falls $x$ nicht das Kind eines $y\in Y $ ist: $x\in X \backslash g(Y)$.
+    \item Wir sagen, $y\in Y$ ist ein $Y$-Waise falls $y$ nicht das Kind eines $x \in X $ ist: $y\in Y \backslash f(X)$.
+    \item Wir definieren
+    \begin{itemize}
+      \item $X_\infty = \{ x\in X \mid x $ hat Vorfahren jeder Generation, stammt nicht von einem Waisen ab $\}$\\
+      (Das schließt nicht die Fälle aus, bei denen $f(x_0)=y_0$ und $g(y_0)=x_0$)
+      \item $X_X = \{ x\in X \mid x$ ist ein $X$-Waise oder stammt von einem $X$-Waisen ab $\}$
+      \item $X_Y = \{ x\in X \mid x$ stammt von einem $Y$-Waisen ab $\}$\\
+    \end{itemize}
+    \item Analog definieren wir:
+    \begin{itemize}
+      \item $Y_\infty = \{ y\in Y \mid y $ hat Vorfahren jeder Generation, stammt nicht von einem Waisen ab $\}$\\
+      (Das schließt nicht die Fälle aus, bei denen $f(x_0)=y_0$ und $g(y_0)=x_0$)
+      \item $Y_Y = \{ y \in Y \mid y$ ist ein $Y$-Waise oder stammt von einem $Y$-Waisen ab $\}$
+      \item $Y_X = \{ y \in Y \mid y$ stammt von einem $X$-Waisen ab $\}$\\
+        (Nicht in beide Richtungen unendlich)
+    \end{itemize}
+    \item $f(X_\infty) = Y_\infty$\\
+    Wenn $x\in Y_\infty$ dann hat $f(x)$ ebenso eine unendlich lange Stammline $\Rightarrow f(X_\infty) \leq Y_\infty$\\
+    Wenn $y\in Y\infty$ dann ist $y$ kein $Y$-Waise, also ist $y=f(x)$ für ein eindeutig bestimmtes $x\in X_\infty$
+    \item $f(X_X)=Y_X$ (analog)
+    \item $g(Y_Y) = X_Y$ (analog)
+  \end{itemize}
+  
+  \incfig{x_y_bij_2}
+  Daraus ergibt sich, dass:
+  $$ H : \left \{ \begin{aligned}
+      x\in X_\infty &\mapsto& f(x)\in Y_x \subseteq Y\\
+      x\in X_X &\mapsto& f(x)\in Y_\infty \subseteq Y\\
+      x\in X_y &\mapsto& g^{-1}(x)\in Y_y \subseteq Y\\
+  \end{aligned}\right .$$
+  eine Bijektion $H: X\to Y $ definiert. (Weil $f$ $g$ jeweils bijektiv sind für die verschiedenen Partionen von $X$ und $Y$) (Wären es keine Partitionen in $X$, wären die Funktionen nicht wohldefiniert, wären es keine Partionen in $Y$, wären die Funktionen keine Bijektionen mehr, sie wären nicht injektiv)
+\end{Beweis}
+
+\begin{Bemerkung}[formaler]
+  \begin{itemize}
+    \item $x$-Waisen = $X \backslash g(Y)$
+    \item $X_X = X \backslash g(Y) \cup \bigcup_{n \geq 1} (g \circ f)^n (X \backslash f(Y))$
+    \item $X_Y = \bigcup_{n\geq 0 } (g\circ f)^n \circ g (Y \backslash f(X))$
+    \item $X_\infty = X \backslash (X_X \cup X_Y)$
+  \end{itemize}
+\end{Bemerkung}
+
+\begin{Beispiel}[Hilbert Hotel (*2) in CSB]
+  \begin{itemize}
+    \item $X=Y=\N$, $f(n)=n+1:x\to Y$, $g(m)=m+1:Y\to X$
+    \item $X$-Waisen $= \{ 0 \}$, $Y$-Waisen $= \{ 0 \}$
+    \item $X_X = 2 \N$, $X_Y = 2\N +1$
+    \item $Y_Y = 2 \N$, $Y_X = 2\N +1$
+    \item Von $X_X$ nach $Y_X$: $f(n)=n+1$
+    \item Von $X_Y$ nach $Y_Y$: $g^{-1}(n)=n-1$
+    \item $X_\infty = Y_\infty = \emptyset$
+  \end{itemize}
+\end{Beispiel}
+
+
+\begin{Definition}
+  Wir bezeichnen die Äquivalenzklasse einer Menge $X$ bezüglich Gleichmächtigkeit als die \textbf{Kardinalität} von $X$, die \textbf{Mächtigkeit} von $X$, und schreiben auch $|X|$. Falls $X= \{x_1,...,x_n\}$ eine endliche Menge ist, so schreiben wir $|X|=n$.
+
+  Ebenso schreiben wir $|\emptyset| = 0$.
+\end{Definition}
+
+\begin{Definition}[Unendlichkeit]
+  Wir sagen $X$ ist \textbf{abzählbar unendlich} falls $|X| = |\N|$ (eine Bijektion existiert, das heißt jedem Element aus $X$ ein Index zugeordnet werden kann).
+
+  Wir sagen, dass $X$ \textbf{unendlich} ist, falls $\N \preccurlyeq X$.
+
+  Wir sagen, dass $X$ \textbf{überabzählbar unendlich} ist, falls $\N \prec X$.
+\end{Definition}
+
+\begin{Bemerkung}
+  Eine injektive Funktion $f: X \to X$ muss nicht surjektiv sein.
+
+  Hilbert Hotel: $f:\N \to \N$, $n \mapsto n+1$
+\end{Bemerkung}
+
+\begin{Theorem}[Cantor's Diagonalargument]
+  Sei $X$ eine Menge. Dann gilt $X \prec \mathcal{P}(X)$.
+\end{Theorem}
+
+\begin{Beweis}
+  Wir definieren die Funktion $f:X \to \mathcal{P}(X)$, $x\mapsto \{ x\}$.\\
+  Diese Funktion ist injektiv, also gilt: $X \preccurlyeq \mathcal{P}(X)$.\\
+  Außerdem darf die Funktion keine Bijektion sein, um echt schmächtiger zu zeigen. Ad Absurdum: Angenommen $f:X \to \mathcal{P}(X)$ ist eine Bijektion.\\
+  Wir definieren $A=\{ x \in X \mid x \notin f(x)\} \in \mathcal{P}(X)$. Da $f$ bijektiv ist, muss es ein $x_0 \in X$ mit $f(x_0)=A$ geben.\\
+  $$x_0 \in f(x_0) \Leftrightarrow x_0 \in A \Leftrightarrow x_0 \notin f(x_0)$$
+  Dieser Widerspruch zeigt, dass $f$ nicht surjektiv sein kann. Also gilt der Satz.\\
+  $$X \prec \mathcal{P}(X) \prec \mathcal{P}(\mathcal{P}(X)) \prec \mathcal{P}(\mathcal{P}(\mathcal{P}(X))) \prec ...$$
+\end{Beweis}
+
+
+
+\section{Das Auswahlaxiom (Zorn'sche Lemma)}
+
+\begin{Theorem}[Auswahlaxiom]
+  Angenommen $X,Y$ sind zwei Mengen und $f:X\to Y$ ist surjektiv. Dann existiert eine Funktion $g:Y\to X$, so dass $g(y) \in f^{-1}(\{ y\})$ für alle $y \in Y$.\\
+  $g$ wird auch ein Schnitt genannt.
+\end{Theorem}
+
+\begin{Korollar}[Auswahlaxiom]
+  Sei $Y$ eine Menge und $\mathcal{X} \subseteq \mathcal{P}(Y)$ eine Familie von nichtleeren Teilmengen von $Y$. Dann existiert eine Funktion $F: \mathcal{X} \to Y$, so dass $F(A)\in A$ für alle $A \in \mathcal{X}$.
+\end{Korollar}
+
+\begin{Korollar}[Auswahlaxiom]
+    Sei $I$ eine Menge und $x_i \A i \in I$ eine nichtleere Menge. Dann ist das kartesische Produkt
+    $$\prod_{i\in I} X_i = \left\{ f: I \to \bigcup_{i\in I} X_i \mid f(i)\in X_i \text{ für alle } i \in I \right\} \neq \emptyset$$
+\end{Korollar}
+
+\end{document}

@@ -1,0 +1,429 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+
+\chapter{Reellwertige Funktionen}
+
+Ab jetzt sind \textbf{die} Reellen Zahlen $\R$ der eindeutige oben definierte (und eigentlich schon bekannte) Körper.
+
+
+\section{Allgemeines}
+
+\begin{Definition}
+  Sei $X$ eine Menge. Eine reellwertige Funktion auf $X$ ist eine Funktion $X \to \R$.
+  $$\mathcal{F}(X) = \text{ die Menge aller reellwertigen Funktionen auf } X$$
+  (auch geschrieben als: $\mathcal{F}(X,\R)$ oder $\R^X$).\\
+\end{Definition}
+
+\begin{Definition}
+  Sind $f,g$ reellwertige Funktionen auf $X$, so definiere
+  \begin{itemize}
+    \item $f+g = $ die Funktion $(f+g)(x) = f(x)+g(x) \A x \in X$
+    \item $f*g = $ die Funktion $(f*g)(x) = f(x)*g(x) \A x \in X$
+    \item $c*g = $ die Funktion $(cf)(x) = c*f(x) \A x \in X$ mit $c\in\R$
+    \item $\dfrac{f}{g} = $ die Funktion $\dfrac{f}{g}(x) = \dfrac{f(x)}{g(x)} \A x \in X$ falls $g(x) \neq 0 \A x \in X$
+  \end{itemize}
+\end{Definition}
+
+\begin{Definition}
+  Wir schreiben außerdem:
+  \begin{itemize}
+    \item $f \leq g$ falls $f(x) \leq g(x) \A x \in X$
+    \item $f \geq 0$ falls $f(x) \geq 0 \A x \in X$
+  \end{itemize}
+\end{Definition}
+
+\begin{Definition}
+  Sei $c \in \R$. Die konstante Funktion mit Wert $c$ auf $X$ ist die Funktion $f: X \to \R$ gegeben durch:
+  $$f(x) = c \A x\in X$$
+\end{Definition}
+
+\begin{Definition}[Beschränktheit]
+  Wir sagen $f:X \to \R$ sei nach oben beschränkt, falls
+  $$\E M \in \R : f(x) \leq M \A x \in X \text{ (also $f \leq M$)}$$
+
+  Analog für nach unten beschränkt.
+
+  $f$ heißt \textbf{beschränkt}, falls $f$ nach oben und unten beschränkt ist. In diesem Fall nimmt $f$ Werte in einem Intervall $[-M,M]$ an, für $M \in \R$ genügend groß.
+\end{Definition}
+
+\begin{Definition}
+  Falls $X \subseteq \R$, dann sprechen wir von \textbf{reellwertigen Funktionen in `einer Variable'}.
+\end{Definition}
+
+\begin{Bemerkung}
+  Der Begriff der Variable stammt aus dem 19. Jahrhundert und wir wollen nicht weiter darauf eingehen.
+\end{Bemerkung}
+
+\begin{Beispiel}
+  \begin{Definition}[Polynomfunktion]
+    Sei $X \in \R$. Sei $\mathcal{P} \in \R[T] : \mathcal{P}(T) = a_0 + a_1 T + a_2 T^2 +...+ a_n T^n$.\\
+    Wir nennen die zu $\mathcal{P}$ assoziierte \textbf{Polynomfunktion} auf $X$ die Funktion:
+    $$f: X \to \R ; x \mapsto a_0 + a_1x + ... + a_n x^n$$
+    Wir erhalten eine Abbildung
+    $$\R[T] \to \mathcal{F}(X) ; \mathcal{P} \mapsto f$$
+    Diese Abbildung ist kompatibel mit $+,\cdot,$ Skalarmultiplikation. Im Allgemeinen ist diese Abbildung weder injektiv noch surjektiv.
+  \end{Definition}
+  \begin{Bemerkung}
+    Die Menge aller reellwertigen Funktionen auf einer Menge $X$ $\mathcal{F}(X)$ bildet einen Vektorraum.\\
+    Die beschränkten Funktionen bilden einen Unterraum. (Element eines Unterraumes + anderes Element) bleibt im Unterraum.\\
+    Die monotonen Funktionen dagegen nicht.
+  \end{Bemerkung}
+  \begin{Theorem}
+    Die Abbildung ist nur dann injektiv, wenn $X$ unendlich ist.\\
+    Vorüberlegung: Wenn $X$ nicht unendlich ist, dann ist die Abbildung nicht injektiv.
+  \end{Theorem}
+\end{Beispiel}
+
+\begin{Definition}[Monotonie]
+  Sei $X \subseteq \R$, $f: X \to \R$. Wir sagen $f$ sei...
+  \begin{itemize}
+    \item monoton steigend, falls $x \leq y \Rightarrow f(x) \leq f(y) \A x,y \in X$
+    \item streng monoton steigend, falls $x < y \Rightarrow f(x) < f(y) \A x,y \in X$
+  \end{itemize}
+  Analog für monoton oder streng monoton fallend.\\
+  Wir sagen, dass $f$ monoton ist, wenn $f$ monoton steigend oder monoton fallend ist.
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item $f: \R \to \R$, $f(x) = \lfloor x \rfloor$ ist monoton steigend, aber nicht streng
+    \item $f: \R_{\leq 0} \to \R$, $f(x) = x^2$ ist streng monoton fallend
+    \item $f: \R_{\geq 0} \to \R$, $f(x) = x^2$ ist streng monoton steigend
+    \item $f: \R \to \R$, $f(x) = x^2$ ist weder noch
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}
+  Sei $X$ eine Menge und $f: X \to \R$ eine Funktion. $x_0 \in X$ heißt
+  \begin{itemize}
+    \item Nullstelle von $f$ falls $f(x_0) = 0$
+    \item Maximum von $f$ falls $f(x_0) \geq f(x) \A x \in X$
+    \item Analog für Minimum.
+    \item Extremum von $f$ falls $x_0$ entweder ein Maximum oder Minimum von $f$ ist.
+  \end{itemize}
+\end{Definition}
+
+
+\section{Stetigkeit}
+
+\begin{Definition}[Stetigkeit]
+  Sei $X \subseteq \R$, $X \neq \emptyset$. Eine Funktion $f : X \to \R$ sei \textbf{stetig} an der Stelle $x_0$, falls:
+  $$\A \varepsilon > 0 : \E \delta > 0 : |x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon $$
+  Alternativ:
+  Siehe Skript Rave.
+
+  Wir nennen $f$ stetig auf $X$, falls $f$ in jedem Punkt $x_0 \in X$ stetig ist.
+\end{Definition}
+
+\begin{Bemerkung}[informell]
+  Wenn $x$ und $y$ einander nahe sind, sind auch $f(x)$ und $f(y)$ einander nahe.
+\end{Bemerkung}
+
+\begin{Bemerkung}
+  $\mathcal{C}(X) = $ Menge aller stetigen Funktionen auf $X$. (C steht für continuous)\\
+  Alternativ: $\mathcal{C}(X, \R), \mathcal{C}^0(X,\R)$ (mit der Potenz als Anzahl der stetigen Ableitungen).
+\end{Bemerkung}
+
+\begin{Beispiel}
+  Sei $X \subseteq \R$, $c \in \R$, $f: X \to \R$
+  \begin{itemize}
+    \item $f(x) = c \A x \in X$\\
+    Sei $x_0 \in X$, $\varepsilon > 0$. Wir wählen $\delta = 1$.\\
+    Falls $x,x_0 \in X$ mit $|x - x_0| < \delta$, dann gilt:
+    $$|f(x) - f(x_0)| = 0 < \varepsilon$$
+    \item $f(x) = x$\\
+    Sei $x_0 \in X$, $\varepsilon > 0$. Wir wählen $\delta = \varepsilon > 0$.\\
+    %Falls $x,x_0 \in X$ mit $|x - x_0| < \delta$, dann gilt:
+    $$|x - x_0| < \delta \Rightarrow |f(x) - f(x_0)| < \varepsilon$$
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Theorem}[Stetigkeit von zusammengesetzten Funktionen]
+    Sei $X \subseteq \R$, $x_0 \in \R$, $f,g : X \to \R$. Sind $f$ und $g$ stetig an der Stelle $x_0$, so sind auch
+    \begin{itemize}
+      \item $f+g$
+      \item $f*g$
+      \item $c*g$
+    \end{itemize}
+    stetig an der Stelle $x_0$.\\
+    Insbesondere sind Summen und Produkte stetige Funktionen wiederum stetig.
+\end{Theorem}
+
+\begin{Bemerkung}
+  Das bedeutet, dass stetige Funktionen einen Unterraum von $\mathcal{P}(X)$ bilden.
+\end{Bemerkung}
+
+\begin{Beweis}
+  Seien $f,g$ stetig bei $x_0$.
+  \begin{itemize}
+    \item $f+g$: Sei $\varepsilon > 0$\\
+    Es gilt: $\E \delta > 0$ mit $|x- x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \dfrac{\varepsilon}{2}$ (oder kleiner jeder anderen beliebigen Zahl.)\\
+    Und: $\E \eta > 0$ mit $|x- x_0| < \eta \Rightarrow |g(x)-g(x_0)| < \dfrac{\varepsilon}{2}$\\
+    Wir setzen $\mu = \min(\{\delta, \eta\})$
+
+    Jetzt gilt, da $|x_0 - x| < \mu$:
+    $$\begin{aligned}
+        |(f+g)(x) - (f+g)(x_0)| & = |f(x)-f(x_0)+g(x)-g(x_0)|\\
+      & \text{Dreiecksungleichung:}\\
+      & \leq |f(x)-f(x_0)|+|g(x)-g(x_0)| \\
+      & < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+    \end{aligned}$$
+    \item $f*g$:
+
+    Vorüberlegung:
+    $$\begin{array}{c c c}
+      |f(x)-f(x_0)+g(x)-g(x_0)| & = & |f(x_0)g(x_0) - f(x_0)g(x) + f(x_0)g(x) - f(x)g(x)|\\
+      & \leq & |f(x_0)||g(x_0)-g(x)| + |g(x)||f(x_0)-f(x)|
+    \end{array}$$
+
+    Sei $\varepsilon > 0$. Wähle $\delta_1,\delta_2 > 0$ mit
+    \begin{itemize}
+      \item $|x-x_0| < \delta_1 \Rightarrow |f(x) -f(x_0)| < \dfrac{\varepsilon}{{\color{olive}2*(1+|g(x_0)|)}}$
+      \item $|x-x_0| < \delta_2 \Rightarrow |g(x) -g(x_0)| < \dfrac{\varepsilon}{{\color{olive}2*(1+|f(x_0)|)}}$
+    \end{itemize}
+    Setze $\delta = \min (\{\delta_1,\delta_2\})$
+
+    Für $x \in X$ ... whoopsie!
+  \end{itemize}
+\end{Beweis}
+
+\begin{Korollar}
+  Polynomfunktionen $f: X \to \R$ sind stetig.
+\end{Korollar}
+
+\begin{Beweis}
+  Die Funktion $f: X \to \R$ gegeben durch $f(x) = x$ ist stetig.
+  $$\mathcal{P}(x) = c_n * f(x)^n + c_{n-1} * f(x)^{n-1}* ... * c_0$$
+  ist stetig da sie nur aus Produkten und Summen von stetigen Funktionen besteht.
+\end{Beweis}
+
+\begin{Beispiel}
+  Das Beispiel von $\sqrt[3]{7}$ verwendet die Stetigkeit von $x \mapsto x^3$.
+\end{Beispiel}
+
+\begin{Theorem}
+  Seien $X,Y  \subseteq \R$, $f: X \to Y$, $g: Y \to \R$ Funktionen. Sei $x_0 \in X$ und $y_0 = f(x_0)$.\\
+  Ist $f$ stetig bei $x_0$ und $g$ stetig bei $y_0$, so ist $g \circ f$ stetig bei $x_0$.
+\end{Theorem}
+
+\begin{Beweis}
+    Sei $\varepsilon > 0$. Die Funktion $g$ ist stetig bei $y_0$ also existiert ein $\eta > 0$ mit $|y - y_0| < \eta \Rightarrow |g(y) -g(y_0)| < \varepsilon$. Fixiere so ein $\eta > 0$. Die Funktion $f$ ist stetig bei $x_0$ also existiert $\delta > 0$ mit
+    $$|x -x_0| < \delta \Rightarrow |f(x)- f(x_0)| < \eta$$
+    Zusammenfassend:
+    $$|x -x_0| < \delta \Rightarrow |f(x)- f(x_0)| < \eta \Rightarrow |g(f(x)) - g(f(x_0))| < \varepsilon$$
+\end{Beweis}
+
+\begin{Bemerkung}
+  Sei $X = \R \backslash \{0\}$. Dann ist $f: X \mapsto \R$ mit $f= sgn(x)$ oder $\dfrac{1}{x}$ stetig.\\
+  Außerdem: Für $f:X \to \R \backslash \{0\}$ ist $x \mapsto \dfrac{1}{f(x)}$ ebenfalls stetig.
+\end{Bemerkung}
+
+\begin{Theorem}[Zwischenwertsatz]
+  Sei $D \subseteq \R$, sei $f: D \to \R$ stetig. Seien $a \leq b \in \R$ mit $[a,b] \subseteq D$.\\
+  $$\A y_0 \in \R : f(a) \leq y_0 \leq f(b) \E x_0 \in [a,b]: f(x_0) = y_0$$
+  \incfig{zwischenwertsatz}
+\end{Theorem}
+
+\begin{Bemerkung}
+  Die analoge Aussage mit $f(b)\leq y_0 \leq f(a)$ gilt ebenfalls.\\
+  Die Aussage mit $\E ! x_0 \in [a,b]$ ist falsch.
+\end{Bemerkung}
+
+\begin{Beweis}
+  Betrachte $\mathcal{X} = \{ x \in [a,b] \mid f(x)\leq y_0 \}$. Setze $x_0 = sup(X) \in [a,b] \subseteq D$.\\
+  Behauptung: $f(x_0) = y_0$\\
+  $A\!\!\!A$ : Angenommen...
+  \begin{itemize}
+    \item $f(x_0) < y_0$. Dann gilt $x_0 \neq b, x_0 < b$\\
+    Setze $\varepsilon = y_0 - f(x_0)$. Es existiert $\delta > 0$ mit
+    $$|x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < y_0 -f(x_0) = \varepsilon$$
+    Wähle $x \in [a,b]$ mit $x_0 < x < x_0 + \delta$:
+    $$f(x) = f(x_0) + f(x) - f(x_0)\leq f(x_0) + |f(x)-f(x_0)| < f(x_0) + y_0 - f(x_0) = y_0$$
+    Also $x \in X$, $x > x_0$, $x_0 = sup(X)$ \lightning\\
+    $\Rightarrow f(x_0) \geq y_0$
+    \item $f(x_0) > y_0$. Dann gilt $x_0 \notin X, x_0 > a$\\
+    Es existiert $\delta > 0$ mit
+    $$|x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < f(x_0) - y_0 (= \varepsilon)$$
+    Wähle $x \in [a,b]$ mit $x_0 - \delta< x < x_0$:
+    $$f(x) = f(x_0) + f(x) - f(x_0) \geq f(x_0) - |f(x)-f(x_0)| > f(x_0) - f(x_0) + y_0 = y_0$$
+    Also $x \notin X$Aber die Wahl von $x$ war beliebig:\\
+    $(x_0 -\delta, x_0) \cap X = \emptyset$ und $(x_0 -\delta, x_0] \cap X = \emptyset$\\
+    Also ist $x_0 - \delta$ obere Schranke für $X$. $\Rightarrow x_0 \leq x_0 - \delta$ \lightning\\
+    $\Rightarrow f(x_0) \leq y_0$
+  \end{itemize}
+  Also folgt: $f(x_0) = y_0$.
+\end{Beweis}
+
+\begin{Bemerkung}[(Übung)]
+  \begin{Theorem}
+    Eine Teilmenge $I \subseteq \R$ ist ein Intervall, wenn und nur wenn für alle $a,b \in I$ und alle $x \in \R$
+    $$a \leq x \leq b \Rightarrow x \in I$$
+     gilt.
+  \end{Theorem}
+  \begin{Korollar}
+    Sei $f: D \to \R$ stetig. Für jedes Intervall $I$ mit $I \subseteq D$ ist das Bild $f(I) = \{f(x) \mid x \in I \}$ auch wieder ein Intervall.
+  \end{Korollar}
+\end{Bemerkung}
+
+\begin{Theorem}[Umkehrabbildung]
+  Sei $I \subseteq \R$ ein Intervall, $f:I \to \R$ stetig und streng monoton, und setze $\mathcal{I} = f(I)$.
+
+  Dann ist $f: I \to \mathcal{I}$ bijektiv, und die zu $f$ inverse Funktion $f^{-1} = g: \mathcal{I} \to I$ ist streng monoton und stetig.
+\end{Theorem}
+
+\begin{Beweis}
+  Wir nehmen an:
+  \begin{itemize}
+    \item $f$ ist streng monoton steigend
+    \item $I$ ist hat mehr als nur 1 Element (also auch nicht leer)
+  \end{itemize}
+  Wir müssen Folgendes beweisen:
+  \begin{itemize}
+    \item $f: I \to \mathcal{I}$ bijektiv.\\
+      Surjektiv per Definition von $\mathcal{I}$\\
+      Injektiv weil streng monoton. ($x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$)
+    \item Die Umgehrfunktion $g$ ist streng monoton.\\
+      Es gilt für $y_1,y_2 \in \mathcal{I}$ mit $y_1 < y_2$. Wir setzen: $y_1 = f(x_1), y_2 = f(x_2)$.
+      $$\begin{array}{c c c c}
+        & x_1 < x_2 & \Leftrightarrow & f(x_1) < f(x_2) \\
+        \Leftrightarrow & g(y_1) < g(y_2) & \Leftrightarrow & y_1 < y_2
+      \end{array}$$
+    \item Stetigkeit: Sei $y_0 \in \mathcal{I}$, zeige $g$ stetig bei $y_0$.\\
+      Sei $\varepsilon > 0$. Setze $x_0 = g(y_0)$. Definiere Intervalle
+      $$U = I \cap (x_0 - \varepsilon, x_0 + \varepsilon) \subseteq I$$
+      $$V = f(U) \subseteq \mathcal{I}$$
+      Der Zwischenwertsatz erlaubt uns zu sagen, dass $V$ ein Intervall ist.\\
+      \underline{Behauptung}: (*) $\E \delta > 0 : (y_0-\delta , y_0 + \delta) \cap \mathcal{I} \subseteq V$.
+      \begin{itemize}
+        \item   Falls $x_0$ kein Randpunkt von $I$ ist, so existieren $x_-,x_+ \in I$ mit
+          $$x_0 - \varepsilon < x_- < x_0 < x_+ < x_0+\varepsilon$$
+          Es folgt:
+          $$ (y_- = )f(x_-)<y_0 < f(x_+) (= y_+) \in \mathcal{I}$$
+          Für $\delta = \min(\{y_0 - y_-,y_+ - y_0 \})$. $\Rightarrow$ (*) für $\delta$
+        \item Ähnlich für $x_0$ als Randpunkt
+      \end{itemize}
+    (*) $\Leftrightarrow \A y \in \mathcal{I}, y = f(x) : |y - y_0| < \delta \Rightarrow |x - x_0| < \varepsilon$
+    $$|y - y_0| < \varepsilon$$
+  \end{itemize}
+\end{Beweis}
+
+
+\section{Reellwertige Funktionen auf kompakten Intervallen}
+
+\begin{Definition}[Kompaktheit]
+  Ein Intervall $I\subseteq \R$ heißt \textbf{kompakt} falls $I$ abgeschlossen und beschränkt ist (: $[a,b]$)
+\end{Definition}
+\begin{Bemerkung}
+  Später werden wir die Aussage formulieren, dass ein Intervall genau dann kompakt ist, wenn es abgeschlossen und beschränkt ist.
+
+  Konkret gilt: $I = \emptyset$ oder $I = [a,b]$ mit $a \leq b$
+\end{Bemerkung}
+
+\begin{Theorem}
+  Seien $a,b\in \R$, $f:[a,b]\to \R$ stetig. Dann ist $f$ beschränkt. Das heißt:
+  $$\E M \in \R_{\geq 0}: |f(x)| \leq M \A x \in [a,b]$$
+\end{Theorem}
+
+\begin{Beweis}
+  Betrachte
+  $$X = \{x \in [a,b]\mid f|_{[a,x]} \text{ ist beschränkt}\}$$
+  Wir nennen: $a \in X, X\subseteq [a,b]$, und setzen $x_0 = \sup(X) \in [a,b]$. $f$ ist stetig bei $x_0$, also existiert ein $\delta > 0$ mit
+  $$|x-x_0| < \delta \Rightarrow |f(x)-f(x_0)| < 1 \A x \in [a,b]$$
+  Setze:
+  $$t_0 = \max(\{x_0 - \delta, a\}) \qquad t_1 = \min(\{x_0 + \delta, b\})$$
+  Also gilt:
+  $$(t_0,t_1) = (a,b) \cap B(x_0,\delta)$$
+  Da $x_0 - \delta$ nicht eine obere Schranke für $X$ ist, existiert $x_1 \in X$ mit
+  $$x_0 - \delta < x_1 < x_0$$
+  Also ist $f|_{[a,x_1]}$ beschränkt, das heißt $\E M \in \R_{\geq 0}$ mit
+  $$|f(x)| \leq M \A x\in [a,x_1]$$
+  Es gilt $x_1 \geq \max(\{a, x_0-\delta\}) = t_0$, also
+  $$[a,t_1] = [a,x_1] \cup (t_0,t_1)\cup \{t_1\}$$
+  Setze: $M_0 = \max(\{M,|f(x_0)+1,|f(t_1)|\})$. Dann gilt:
+  $$|f(x)| \leq M_0 \A x \in [a,t_1]$$
+  Also $t_1 \in X$. Aber $t_1 \geq x_0$ und per Definition $t_1 \leq x_0$ $\Rightarrow t_1 = x_0$.\\
+  Dies ist nur dann möglich, wenn $x_0 = t =b \Rightarrow b \in X$
+\end{Beweis}
+
+\begin{Theorem}
+  Seien  $a \leq b \in \R$, $f:[a,b] \to \R$ stetig. Dann nimmt $f$ ihr Maximum und Minimum auf $[a,b]$ an. Das heißt:
+  $$\E x_0 \in [a,b] : f(x_0) \geq f(x) \A x\in [a,b]$$
+\end{Theorem}
+
+\begin{Beispiel}[Gegenbeispiel]
+  $$f:(0,1)\to \R, f(x) = x$$
+  Ist zwar beschränkt aber besitzt kein Maximum.
+\end{Beispiel}
+
+\begin{Beweis}
+  siehe OneNote
+\end{Beweis}
+
+\begin{Bemerkung}[Vorausschau]
+  \begin{Definition}
+    Eine Teilmenge $X \subseteq \R$ (später sogar $\R^n$) heißt \textbf{kompakt}, falls jede stetige Funktion auf $X$ beschränkt ist.
+  \end{Definition}
+  \begin{Theorem}
+    Beschränkte und abgeschlossene Intervalle sind kompakt.\\
+    Die Umkehrung gilt auch.
+  \end{Theorem}
+  Allgemeiner:
+  \begin{Theorem}[Heine-Borel]
+    Eine Teilmenge $X \in \R$ ist kompakt $\Leftrightarrow X$ ist abgeschlossen und beschränkt.
+  \end{Theorem}
+\end{Bemerkung}
+
+\begin{Definition}[Gleichmäßige Stetigkeit]
+  Sei $X \subseteq \R$, $f: X \to \R$ eine Funktion. Wir nennen $f$ \textbf{gleichmäßig stetig} (uniformly continuous) falls
+  $$\A \varepsilon > 0 \E \delta > 0 : |x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon \A x,x_0 \in X$$
+\end{Definition}
+
+\begin{Bemerkung}
+  Achtung: stetig ist unterschiedlich von gleichmäßig stetig:
+  \begin{itemize}
+    \item Stetigkeit:
+      $$\A x_0 \in X \A \varepsilon > 0 \E \delta > 0 : |x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon \A x \in X$$
+    \item Regelmäßige Stetigkeit:
+      $$\A \varepsilon > 0 \E \delta > 0 : |x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < \varepsilon \A x,x_0 \in X$$
+  \end{itemize}
+\end{Bemerkung}
+
+\begin{Beispiel}
+  $f:\R \to \R, f(x)=x^2$ ist stetig.\\
+  Angenommen, $f$ ist gleichmäßig stetig, $\varepsilon > 1$. $\E \delta > 0$ mit
+  $$|x - x_0| < \delta \Rightarrow |f(x)-f(x_0)| < 1 \A x,x_0 \in \R$$
+  Insbesondere für $x_0 \geq 0$ und $x = x_0 \dfrac{1}{2}\delta$
+\end{Beispiel}
+
+\begin{Theorem}
+  Seien $a,b \in \R$, $f:[a,b]\to \R$ eine stetige Funktion. Dann ist $f$ gleichmäßig stetig.
+\end{Theorem}
+
+\begin{Bemerkung}
+  Alternive Definition der Kompaktheit.
+\end{Bemerkung}
+
+\begin{Beweis}
+  Siehe OneNote.
+\end{Beweis}
+
+\begin{Definition}[Lipischitz-Stetigkeit]
+  Die Funktion $f: X\to \R$ heißt \textbf{Lipschitz-stetig}, falls
+  $$\E L > 0 : |f(x_1)-f(x_2)| < L \cdot |x_1 - x_2|$$
+  $L$ heißt Lipschitz-Konstante für $f$.
+  \begin{Bemerkung}[alternative Schreibweise]
+    $$|x_1 - x_2| < \dfrac{\varepsilon}{L} \Rightarrow |f(x_1)-f(x_2)| < \varepsilon \A \varepsilon > 0$$
+  \end{Bemerkung}
+\end{Definition}
+
+\begin{Theorem}
+  Lipschitz-Stetigkeit $\Rightarrow$ gleichmäßige Stetigkeit $\Rightarrow$ Stetigkeit
+\end{Theorem}
+
+\begin{Beispiel}
+  Die Funktion $f:[0,1] \to \R$ mit $f(x) = \sqrt{x}$ ist nicht Lipschitz-stetig, dafür aber gleichmäßig stetig, da sie über einem kompakten Intervall definiert ist.\\
+  Als Übung nachrechnen.
+\end{Beispiel}
+
+\end{document}

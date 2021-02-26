@@ -1,0 +1,36 @@
+\documentclass[a4paper,fleqn,twoside,openright,12pt]{report}
+\nonstopmode
+\relax
+\usepackage{./style/LECTURES}                             %STYLESHEET
+\usepackage{subfiles}
+
+\begin{document}
+  \begin{Titelseite}
+    \titlefont Analysis I + II
+  \end{Titelseite}
+  %%%% empty page:
+  \clearpage
+  \thispagestyle{empty}
+  \null
+  \clearpage
+
+  {\small \tableofcontents}
+
+  \subfile{kap1}
+  \subfile{kap2}
+  \subfile{kap3}
+  \subfile{kap4}
+  \subfile{kap5}
+  \subfile{kap6}
+  \subfile{kap7}
+  \subfile{kap8}
+  \subfile{kap9}
+  \subfile{kap10}
+  \subfile{kap11}
+  \subfile{kap12}
+  \subfile{kap13}
+  \subfile{kap14}
+
+  \begriffsverzeichnis
+  \subfile{end}
+\end{document}

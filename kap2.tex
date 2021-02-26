@@ -1,0 +1,885 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+
+\chapter{Reelle Zahlen}
+
+
+Unser Ziel ist es, die Reellen Zahlen mit Elementen wie
+$$π = 3.14159265359..., \sqrt{2} \in \R$$
+und all den anderen bekannten Eigenschaften \textbf{eindeutig} und \textbf{kohärent} zu konstruieren.
+
+
+\section{Geordnete Körper}
+
+\begin{Definition}[Körper]
+  Ein Körper ist eine Menge $K$ zusammen mit speziellen Elementen $0_K$ und $1_K$ $\in K$ und 2 Operationen (d.h. Funktionen):
+  $$+ : K \times K \to K; (a,b) \mapsto a+b$$
+  $$* : K \times K \to K; (a,b) \mapsto a*b = ab$$
+  Man schreibt den Körper $K$ als das Tupel $(K,0,1,+,*)$.\\
+  Die Relationen müssen erfüllen:\\
+  \begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+      \item $0+a = a+0 =a$, $\A a \in K$
+      \item $a+b = b+a$, $\A a,b \in K$
+      \item $\A a \in K \E b \in K$ mit $a+b=0$ (das heißt $b=-a$)
+      \item $(a+b) + c = a + (b+c)$
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}{0.5\textwidth}
+    \begin{itemize}
+      \item $1*a = a*1 =a$, $\A a \in K$
+      \item $a*b = b*a$, $\A a,b \in K$
+      \item $(a*b) * c = a * (b*c)$
+      \item $a * (b + c) = a*b + b*c$
+      \item $\A a \in K\backslash\{0\} \E b \in K$ mit $a*b=1$ (das heißt $b=a^{-1}$)
+    \end{itemize}
+  \end{minipage}
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+    \item $ K =\Q, \R, \C$ mit den üblichen $1,0,*,1$ sind Körper
+    \item $K = \mathcal{F}_3=\Z/_{3\Z} = \{[0],[1],[2]\}$ ebenfalls
+    \item $K = \Q \times \Q = \{a+b\omega \mid a,b \in \R\}$\\
+    Wenn wir $* :\Leftrightarrow (a+b\omega)(c+d\omega) = (ac + 3 bd ) + (ad+bc) \omega$ mit $\omega^2 =3$ definieren, dann kann man alle Gesetze beweisen.\\
+    Man findet dann auch ein inverses Element: $(a+b\omega)(\dfrac{a}{a^2+3b^2}-\dfrac{b}{a^2+3b^2} \omega ) = 1+ 0$ also $\omega = 1$.
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Geordneter Körper]
+  Sei $K$ ein Körper, und sei $\leq$ eine Ordnungsrelation auf der Menge $K$. Wir nennen $(K,\leq)$ einen geordneten Körper, falls:\\
+  \begin{Theorem}[Körperaxiome]
+    \begin{enumerate}
+      \item $\A x,y \in K$ gilt $x \leq y$ oder $y\leq x$ (Die Ordnung ist total, alle Elemente können verglichen werden)
+      \item $\A x,y,z \in K$ gilt $x \leq y \Leftrightarrow x+z \leq y+z$
+      \item $\A x,y \in K \backslash \{0\}$ gilt $x\geq 0, y\geq 0 \Rightarrow xy \geq 0$
+    \end{enumerate}
+  \end{Theorem}
+  gelten.
+\end{Definition}
+
+\begin{Beispiel}
+  Sei $K$ ein Körper, so dass ein Element $\theta \in K$ existiert, mit $\theta^2 =-1$. Dann gibt es keine Ordnungsrelation auf $K$, die $K$ zu einem geordnetem Körper macht.
+
+  Wenn $\theta$ entweder größer oder kleiner als $0$ ist, dann lassen sich immer Widersprüche herleiten: $\theta \geq 0 \Rightarrow \theta* \theta = \theta^2 = -1 \geq 0 $\lightning
+\end{Beispiel}
+
+\subsection{Konsequenzen der Axiome für angeordnete Körper $(K,\leq)$}
+
+\begin{Definition}[Positivität]
+  Für $x,y \in K$ sagen wir $x$ ist positiv falls $x \geq 0, x\neq 0, x>0$, wobei allgemein $x > y$ bedeutet:
+  $$x \geq y \land x \neq y$$
+  \begin{itemize}
+    \item $x$ ist negativ falls $x<0$.
+    \item $x$ ist nicht negativ, falls $x \geq 0$.
+  \end{itemize}
+\end{Definition}
+
+\begin{Bemerkung}[Annahme]
+  Im Folgenden gilt für Körper $0 \neq 1$.
+\end{Bemerkung}
+
+\begin{Theorem}
+  \begin{itemize}
+    \item (Trichotomie) Für $x,y \in K$ gilt genau eine der Aussagen
+    $$ x < y \qquad x = y \qquad x < y$$
+    \item Für $x,y,z,w \in K$ gilt:
+    $$\left\{ \begin{array}{c}
+      x\leq z \\
+      y\leq w
+    \end{array} \Rightarrow x+y \leq z+w \right.$$
+    \begin{Beweis}
+      $x\leq z \Rightarrow x+y \leq z+y$ und $y \leq w \Rightarrow z+y \leq z+w$.
+
+      Daraus folgt $x+y \leq z+w$ (wegen der Transitivität)
+    \end{Beweis}
+    \item Es gilt $x\leq y \Leftrightarrow y-x$ nicht negativ, also: $0 \leq y-z$
+    \item Es gilt $x \leq 0 \Leftrightarrow 0 \leq -x$
+    \item Es gilt $x^2 \geq 0 \A x\in K$
+    \begin{Beweis}
+      Falls $x\geq 0$ dann folgt das aus Axiom (3) für angeordnete Körper.\\
+      Falls $x\leq 0$ dann gilt $-x \geq 0$ wegen obig. Dann gilt $x^2 = (-x)^2 \geq 0$ mit Axiom (3).
+    \end{Beweis}
+    \item Es gilt $0 < 1$ weil $1 = 1^2$ und jedes Quadrat ist größer als 0. Damit gilt auch $-1 < 0$.
+  \end{itemize}
+\end{Theorem}
+
+\begin{Bemerkung}
+  Sei $K$ ein angeordneter Körper. Wir identifizieren $\Z$ mit der Teilmenge
+  $$\{...,-3,-2,-1,0,1,2,...\}$$
+  von $K$. Daraus folgt: angeordnete Körper sind unendlich.\\
+  Wir schreiben $\dfrac{a}{b}\in K$ für das Element $a*b^{-1}, b\neq 0$ und $a,b \in \Z$.
+  $$ \Z \subseteq \Q \subseteq K$$
+\end{Bemerkung}
+
+\begin{Definition}[Signum]
+  Sei $(K,\leq)$ ein angeordneter Körper. Dann nennen wir die Funktion $sgn: K \to \{-1,0,1\}$ gegeben durch
+  $$sgn (x) = \left\{ \begin{aligned}
+    -1 & \text{ falls } x < 0\\
+    0 & \text{ falls } x = 0\\
+    +1 & \text{ falls } x > 0
+  \end{aligned}\right.$$
+  das Signum (zu deutsch Vorzeichen).
+\end{Definition}
+
+\begin{Bemerkung}
+  Diese Funktion ist wohldefiniert, denn es wird immer nur je ein Wert zugeordnet (Definition einer Funktion), dank der Trichotomie.
+\end{Bemerkung}
+
+\begin{Definition}[Absolutbetrag]
+  Sei $(K,\leq)$ ein angeordneter Körper. Der \textbf{Absolutbetrag} auf $K$ ist die Funktion $|.| : K \to K$ gegeben durch
+  $$|x| = \left\{ \begin{aligned}
+    -x & \text{ falls } x < 0\\
+    0 & \text{ falls } x = 0\\
+    x & \text{ falls } x > 0
+  \end{aligned}\right.$$
+\end{Definition}
+
+\subsection{Weitere Konsequenzen}
+
+\begin{Theorem}
+  $$|x| \geq 0 \A x\in K$$
+  und
+  $$|x| = 0 \Leftrightarrow x = 0$$
+\end{Theorem}
+\begin{Theorem}
+  $$\A x,y \in K : |xy| = |x|*|y| \text{ und }sgn(xy) = sgn(x)*sgn(y)$$
+\end{Theorem}
+\begin{Theorem}
+  Für $x,y \in K$ gilt:
+  $$|x|\leq y \Leftrightarrow -y \leq x \leq y$$
+\end{Theorem}
+
+\begin{Theorem}[Dreiecksungleichung ($\R$)]
+  $$\A x,y\in K : |x+y| \leq |x| + |y|$$
+\end{Theorem}
+
+\begin{Beweis}
+  Es gilt: $\left\{ \begin{array}{c c}
+    a \leq |a| \text{ und } b \leq |b| & \Rightarrow a + b \leq |a| + |b|\\
+    -a \leq |a| \text{ und } -b \leq |b| & \Rightarrow -(a + b) \leq |a| + |b|
+  \end{array}\right.$.
+
+  Folgt:
+  $$|a+b| \leq |a| + |b|$$
+\end{Beweis}
+
+
+
+\section{Vollständigkeit und ihre Konsequenzen}
+
+\begin{Definition}[Vollständiger Körper]
+  Es sei $K$ ein angeordneter Körper (Menge mit 0,1, Operationen $+$, $*$ und Ordnungsrelation, für die die 9 Axiome der Aritmetik und die 3 Axiome für die Kompabilität mit $\leq$ gelten). Das Vollständigkeitsaxiom für $K$ ist folgende Aussage:
+  \begin{Theorem}[Vollständigkeitsaxiom ($V$)]
+    Seien $X \subseteq K$ und $Y\subseteq K$ Teilmengen von K, so dass $x\leq y$ für alle $x\in X, y\in Y$. Dann existiert ein $c\in K$ mit $x\leq c \leq y$ $\A x \in X, y \in Y$
+  \end{Theorem}
+  Gilt dieses Axiom für einen Körper, so ist dieser Körper \textbf{vollständig}.
+\end{Definition}
+
+\begin{Bemerkung}
+  Wir können $(K, \leq)$ als Gerade zeichnen.
+  \incfig{vollstaendigkeit}
+\end{Bemerkung}
+
+Es werden nachfolgend die \textbf{Konsequenzen der Vollständigkeit} behandelt. Hierzu betrachten wir $\mathbb{K}$, einen angeordneten, vollständigen Körper.
+
+\begin{Bemerkung}[Spoiler]
+  Laut späterer Definition gilt: $\mathbb{K} = \R$. nachfolgende Eigenschaften sind also sehr wichtig.
+\end{Bemerkung}
+
+\subsection{Maximum und Minimum, Supremum und Infimum}
+
+Im folgenden Abschnitt behandeln wir nur Maxima und gehen analog für Minima vor.
+
+\begin{Definition}[Maximum]
+  Sei $X \subseteq \mathbb{K}$. Ein Element $x_0 \in X$ heißt \textbf{Maximum} von $X$ falls $x\leq x_0 \A x \in X$.\\
+  Falls es ein Maximum von $X$ gibt, dann ist es eindeutig bestimmbar: sind $x_0, x_1$ Maxima, dann gilt $x_1 \leq x_0$ und $x_0 \leq x_1$ also $x_0 = x_1$.
+\end{Definition}
+
+\begin{Bemerkung}
+  Laut der Definition muss das Maximum nicht notwendigerweise existieren.
+\end{Bemerkung}
+
+\begin{Beispiel}[$a < b$]
+  \begin{itemize}
+    \item $[a,b]$, Maximum = $b$
+    \item $(a,b)$, kein Maximum
+    \item $(a,\infty)$, kein Maximum
+    \item $\left\{\dfrac{1}{2},\dfrac{2}{3},\dfrac{4}{5},\dfrac{5}{6},...\right\}$, kein Maximum
+    \item  $\left\{1,\dfrac{1}{2},\dfrac{1}{3},\dfrac{1}{4},...\right\}$, Maximum $= 1$
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Definition}[Obere Schranke]
+  Sei $X\in \mathbb{K}$. Ein Element $a \in \R$ heißt \textbf{obere Schranke für $X$} falls $x\leq a \A x \in X$ gilt. Wir sagen $X$ ist nach oben beschränkt, falls es eine obere Schranke für $X$ gibt.
+\end{Definition}
+
+\begin{Theorem}
+  \begin{itemize}
+    \item Falls $X \subseteq \mathbb{K}$ ein Maximum $x_0 \in X$ besitzt, dann ist $x_0$ eine obere Schranke.
+    \item Ist $a \in \mathbb{K}$ eine obere Schranke für $X$ und $b \geq a$, dann ist auch $b$ eine obere Schranke für $X$.
+  \end{itemize}
+\end{Theorem}
+
+\begin{Theorem}
+  Sei $X \subseteq \mathbb{K}$ nicht leer und nach oben beschränkt. Dann besitzt die (nichtleere) Menge
+  $$A = \{ a\in \mathbb{K} \mid a \text{ ist obere Schranke für } X\}$$
+  ein Minimum $a_0 \in A$.
+  \begin{Definition}[Supremum]
+    $a_0$, die \textbf{kleinste obere Schranke} für $X$ wird ebenfalls \textbf{Supremum} von $X$ gennant.
+    $$a_0 = \min \{a \in \R \mid x \leq a \A x \in X\}$$
+  \end{Definition}
+\end{Theorem}
+
+\begin{Beweis}
+  Nach Hypothesen auf $X$ ist $A$ nicht leer, und es gilt $x \leq a$ für alle $x \in X$ und alle $a \in A$. Nach dem Vollständigkeitsaxiom existiert ein $a_0 \in \R$ mit $x \leq a_0 \leq a \A x \in X, a \in A$
+  \begin{itemize}
+    \item $x \leq a_0$ bedeutet, dass $a_0$ eine obere Schranke für $X$ ist, also $a_0 \in A$
+    \item $ a_0 \leq a$ bedeutet, das $a_0$ das Minimum von $A$ ist.
+  \end{itemize}
+\end{Beweis}
+
+\begin{Beispiel}
+  $X = (-\infty,2) A = [2,\infty)$
+\end{Beispiel}
+
+\begin{Theorem}
+  Seien $X,Y \subseteq \mathbb{K}$ nicht leer, nach oben beschränkt.
+  \begin{enumerate}
+    \item Sei $c \in \mathbb{K}$ und schreibe $X+c= \{x+c \mid x \in X\}$. Dann gilt $\sup(X+c)=\sup(X)+c$
+    \item Schreibe $X+Y = \{x+y \mid x \in X, y \in Y\}$. Dann gilt: $\sup(X+Y) = \sup(X)+\sup(Y)$
+    \item Sei $c \in \mathbb{K}_{\geq 0}$ und scheibe $XY = \{xy \mid x \in X, y \in Y\}$ und $X,Y \subseteq \mathbb{K}_{\geq 0}$. Dann gilt: $\sup(XY) = \sup(X)*\sup(Y)$
+  \end{enumerate}
+\end{Theorem}
+
+\begin{Beweis}
+  \begin{enumerate}
+    \item offensichtlich
+    \item Seien $x_0 = \sup(X),y_0 = \sup(Y)$. $\A z = x+y \in X+Y : z\leq x_0 + y_0$ also ist $x_0+y_0$ eine obere Schranke. Also gilt auf jeden Fall: $\sup(X+Y) \leq \sup(X)+\sup(Y)$.\\
+    Angenommen es handelt sich um $<$. Dann gibt es eine Zahl $\varepsilon > 0$ mit $x+y \leq x_0 +y_0 - \epsilon \A x \in X, y \in Y$ Folgt über Umwege $\lightning$
+    \item analog
+  \end{enumerate}
+\end{Beweis}
+
+Wir haben $\sup(X)$ definiert für Teilmengen $X \subseteq \mathbb{K}$, die nicht leer und nach oben beschränkt sind. Wir definieren:
+
+\begin{Definition}
+  \begin{itemize}
+    \item $\sup(\emptyset) = -\infty$
+    \item $\sup(X) = \infty$ falls $X$ nicht nach oben beschränkt ist.
+    \begin{Bemerkung}
+      Ist keine Gleichheit sondern ist eigentlich ein Makro für die Aussage: $X$ ist nicht nach oben beschränkt.
+    \end{Bemerkung}
+  \end{itemize}
+\end{Definition}
+
+\subsection{Archimedisches Prinzip}
+
+\begin{Theorem}[Archimedisches Prinzip ($A$)]
+  Sei $x\in \mathbb{K}$. Dann existiert eine eindeutige ganze Zahl $n$ mit $n \leq x < n+1$.
+\end{Theorem}
+
+\begin{Beweis}
+  Angenommen $x \geq 0$. Betrachte die Menge
+  $$0 \in E = \{n \in \Z \mid n \leq x\}\subseteq \mathbb{K}$$
+  die nicht leer ist, und per Definition nach oben beschränkt (durch $x$). Sei $s=\sup(E) \leq x$. Somit ist $s-1$ \textbf{nicht} obere Schranke für $E$. Also existiert $n_0 \in E$ mit $s-1 < n_0$, also $s < n_0+1$. Es gilt somit:
+  $$ m \leq s < n_0 + 1 \text{ also } m \leq n_0 \A m \in E$$
+  Also ist $n_0$ das Maximum von $E$ (und auch das Supremum). Also $n_0 + 1 \notin E \Rightarrow n_0+1 > x$.\\
+  Zusammenfassend: $$n_0 \leq x < n_0+1$$.
+  Wir gehen analog für $x \leq 0$ vor.
+
+  \underline{Eindeutigkeit}: Sei $m_0 \in \Z$ mit $m_0 \leq x < m_0+1$.
+  $$\begin{aligned}
+    n_0 \leq x < m_0+1 &\Rightarrow n_0 \leq m_0\\
+    m_0 \leq x < n_0+1 &\Rightarrow m_0 \leq n_0\\
+    & \Rightarrow m_0 = n_0
+  \end{aligned}$$
+\end{Beweis}
+
+\begin{Korollar}
+  Sei $x \in \mathbb{K}, x> 0$. Dann existiert $n\in \Z, n > 0$ mit $0 < \dfrac{1}{n} < x$.
+\end{Korollar}
+
+\begin{Beweis}
+  Nach dem archimedischen Prinzip existiert ein $n\in \Z$ mit $n >\dfrac{1}{x}$, also $0 < \dfrac{1}{n} < x$.
+\end{Beweis}
+
+\begin{Theorem}
+  $$\text{Vollständigkeit} \Rightarrow \text{Archimedisches Prinzip}$$
+  $$\text{Archimedisches Prinzip} \not\Rightarrow \text{Vollständigkeit}$$
+\end{Theorem}
+
+\begin{Beweis}[Gegenbeispiel]
+  $V$ ist falsch für $K=\Q$:
+  $$X=\{x \in \Q \mid 0 \leq x \text{ und } x^2 \leq 2 \}$$
+  $$Y=\{y \in \Q \mid 0 \leq y \text{ und } y^2 \geq 2 \}$$
+  Es gilt: $x \leq y \A x \in X y \in Y$ aber $\sqrt{2} \notin \Q$. $A$ ist dennoch wahr für $\Q$.
+\end{Beweis}
+
+\begin{Beispiel}
+  $A$: Es existiert ein \textbf{eindeutiges} $c \in \mathbb{K}$ mit $c^3 = 7$.
+
+  In jedem angeordneten Körper gilt: $x \leq y \Leftrightarrow x^3 \leq y^3$
+  \begin{itemize}
+    \item Eindeutigkeit:\\
+    Seien $c,d \in K$ mit $c^3 =7$ und $d^3 =7$.\\
+    Falls $c < d$ dann gilt $c^3 < d^3 \Rightarrow 7 < 7$ \lightning\\
+    Analog für $c > d$.\\
+    Es bleibt nur $c =d$
+    \item Existenz:\\
+    Betrachte: $X=\{x \in \mathbb{K} \mid x^3 \leq 7 \}, Y=\{y \in \mathbb{K} \mid y^3 \geq 7 \}$\\
+    Dann gilt: $x\leq y \A x \in X, y \in Y$ und es existiert nach $V$ ein $c \in \mathbb{K}$ mit $x\leq c \leq y \A x,y \in \mathbb{K}$.\\
+    \underline{Behauptung}: $c^3=7$
+    \begin{Beweis}[$\adabs$]
+      Angenommen $c^3 > 7$\\
+      Idee: $\E \delta > 0 : (c-\delta)^3> 7$. Dann gilt $(c-\delta) \in Y$ und $c-\delta < c$. Aber $c :\leq y$ \lightning\\
+      Wir nehmen $\varepsilon = c^3 -7 > 0$, $\delta = \min\left(1,\dfrac{\varepsilon}{2(c^3+1)}\right)$
+    \end{Beweis}
+  \end{itemize}
+\end{Beispiel}
+
+\subsection{Dezimalbruchentwicklung}
+
+Sei $a_0,a_1,a_2,...$ eine Folge ganzer Zahlen mit $a_0 \geq 0 , a_n \in \{0,1,...,9\}$ für alle $n\geq 1$. Setze
+$$x_n = \sum \limits_{k=0}^n * 10^{-k} a_k \qquad X = \{x_n \mid n\in \N\}$$
+Wir schreiben $c = a_0 , a_1a_2a_3...$ für $\sup(X)$.\\
+Dieses Element $c\in \mathbb{K}$ ist auch $\inf(Y)$ mit
+$$Y = \{ y_n \mid n \in \N \} \qquad y_n = \sum \limits_{k=0}^{n} a_k * 10^{-k} + 10^{-n}$$
+
+\begin{Definition}
+  Sei $x\in \mathbb{K}\backslash \{0\}$. Wir schreiben $\lfloor x \rfloor$ für die eindeutige ganze Zahl mit
+  $$\lfloor x \rfloor \leq x < \lfloor x \rfloor +1$$
+  \begin{itemize}
+    \item $\lfloor x \rfloor$ ist `$x$ abgerundet' oder der ganzzahlige Teil von $x$.
+    \item $\{x\} = x - \lfloor x \rfloor$ heißt der gebrochene Anteil von $x$.
+  \end{itemize}
+\end{Definition}
+
+\begin{Bemerkung}[Konstruktion]
+  Sei $x \in \mathbb{K}, x \geq 0$.\\
+  Definiere:
+  $$\begin{aligned}
+    a_0 &= \lfloor x \rfloor \\
+    a_1 &=  \lfloor 10* x \rfloor - 10*\lfloor x \rfloor \\
+    a_1 &=  \lfloor 100* x \rfloor - 10*\lfloor 10*x \rfloor \\
+    ... & \\
+    a_n &= \lfloor 10^n* x \rfloor - 10*\lfloor 10^{n-1}*x \rfloor \\
+  \end{aligned}$$
+\end{Bemerkung}
+
+\begin{Theorem}
+  Es gilt $a_n \in \{0,1,...,9\}$ für $n\geq 1$ und
+  $$x = a_0 , a_1a_2a_3... = \sup\left(\left\{\sum \limits_{k=0}^n 10^{-k}* a_k \mid n \in \N \right\} \right)$$
+\end{Theorem}
+
+\begin{Beweis}
+  Nachrechnen und abschätzen.
+\end{Beweis}
+
+\subsection{Dichte}
+
+\begin{Theorem}
+  $\mathbb{K}$ ist nicht abzählbar. (Es gibt keine Bijektion zwischen $\mathbb{K}$ und $\N$)
+\end{Theorem}
+
+\begin{Beweis}
+  Es genügt zu zeigen, dass eine injektive Abbildung $ \Gamma : \mathcal{P}(\N) \hookrightarrow \mathbb{K}$ existiert. (der Pfeil mit Haken symbollisiert eine injektive Abbildung.)
+  \begin{itemize}
+    \item Wir konstruieren $\Gamma$ wie folgt: zu $A \subseteq \N$ betrachte die Folge $a_0,a_1,a_2,...$ gegeben durch $$a_n = 1\!\!\!1_A (n) = \left\{ \begin{aligned} 1 &\text{ für } n\in A \\ 0 &\text{ für } n \notin A \end{aligned}\right.$$
+    Setze $\Gamma(A) = a_0,a_1a_2,...$, dessen Dezimalbruchentwicklung durch $a_n$ gegeben ist.
+    \item Diese Abbildung $ \Gamma : \mathcal{P}(\N) \to \mathbb{K}$ ist injektiv:\\
+    Seien $A,B \subseteq \N, A \neq B$. Gilt $A \neq B$, so ist $A \Delta B$ nicht leer. Sei $m \in A \Delta B$ das kleinste Element. Angenommen $m \in A, m \notin B$. Dann gilt $\Gamma(A) > \Gamma(B)$ oder $\Gamma(A) < \Gamma(B)$. Also gilt insbesondere: $\Gamma(A) \neq \Gamma(B)$
+  \end{itemize}
+\end{Beweis}
+
+\begin{Definition}[Dichtheit]
+  Eine Teilmenge $X \subseteq \mathbb{K}$ heißt \textbf{dicht} (dense) in $\mathbb{K}$ falls für jedes $x \in \mathbb{K}$ und jedes $\delta > 0$ gilt:
+  $$B(x,\delta) \cap X \neq \emptyset$$
+\end{Definition}
+
+\begin{Bemerkung}
+  Durch die Benutzung von $B(x,\delta)$ lässt sich diese Definition auch auf $\C$ erweitern.
+\end{Bemerkung}
+
+\begin{Theorem}
+  $\Q \subseteq \mathbb{K}$ ist dicht.
+\end{Theorem}
+
+\begin{Beweis}
+  Sei $x\in \mathbb{K}, \delta > 0$. Wir müssen zeigen $\Q \cap (x-\delta, x+\delta) \neq \emptyset$\\
+  Wir definieren $a = x- \delta, b = x+\delta$ also ist $a < b$.
+  Nach dem Korollar zum archimedischen Prinzip existiert $m \in \Z, m > 0$ mit
+  $$ 0 < \dfrac{1}{m}< b-a$$
+  Ebenso existiert nach dem archimedischen Prinzip ein $n\in \Z$ mit
+  $$\begin{array}{c c c c c c c}
+    & n-1 & \leq & ma & \leq & n &\\
+    \Rightarrow & \dfrac{n-1}{m} & \leq & a & \leq & \dfrac{n}{m} & \mid \dfrac{1}{m} < b-a \\
+    \Rightarrow & \dfrac{n}{m} & \leq & a + \dfrac{1}{m} & \leq & a+b-a & = b \\
+    & a & \leq & \dfrac{n}{m} & \leq & b &
+  \end{array}$$
+
+  Somit ist gezeigt, dass $\Q \cap [a,b] \neq \emptyset$.
+  \begin{Bemerkung}
+    Wir unterscheiden hier nicht zwischen strikten und normalen Ordnungsrelationen weil es das Endergebnis nicht beeinflusst. $[a,b] \in (a,b)$
+  \end{Bemerkung}
+\end{Beweis}
+
+\begin{Definition}[Häufungspunkt]
+  Sei $A \subseteq \mathbb{K}$. Eine reelle Zahl $x \in \mathbb{K}$ heißt \textbf{Häufungspunkt} von $A$, falls $\A \delta > 0$ ein $a\in A$ existiert, mit
+  $$0 < |x-a| < \delta$$
+  \begin{Bemerkung}[informell]
+    Es gibt Elemente $a \neq x$ beliebig nahe an $x$.
+  \end{Bemerkung}
+  Das Gegenteil eines Häufungspunktes ist ein \textbf{isolierter Punkt}
+\end{Definition}
+
+\begin{Bemerkung}
+  \begin{Theorem}
+    $$A \subseteq \mathbb{K} \text{ ist dicht } \Leftrightarrow \text{ jedes } x \in \mathbb{K} \text{ ist Häufungspunkt von } A$$
+  \end{Theorem}
+\end{Bemerkung}
+
+\begin{Theorem}
+  Sei $A \subseteq \mathbb{K}$ eine unendliche und beschränkte (nach oben und unten) Teilmenge. Dann existiert ein Häufungspunkt von A.
+\end{Theorem}
+
+\begin{Beweis}
+  Seien $a,b \in \mathbb{K}$ und $A = [a,b]$. Betrachte die Menge
+  $$X = \{ x \in \mathbb{K} | (-\infty,y)\cap A \text{ endlich}\}$$
+  Es gilt: $\left\{ \begin{array}{c c}
+    a \in X & \text{ weil } (-\infty,a)\cap A= \emptyset\\
+    b \notin X & \text{ weil }(-\infty,b)\cap A= A\backslash\{b\} \textbf{ unendlich}
+  \end{array}\right.$
+
+  $X\neq \emptyset$ ist also nach oben beschränkt. Setze $x_0 = \sup(X)$.\\
+  \underline{Behauptung}: $x_0$ ist Häufungspunkt von $A$.\\
+  Sei $\delta > 0$ beliebig. Nach Definition von $x_0$ gilt:
+  \begin{itemize}
+    \item $(-\infty,x_0 - \delta) \cap A$ ist endlich
+    \item $(-\infty,x_0 + \delta) \cap A$ ist unendlich
+    \item $[x_0-\delta,x_0+\delta) \cup A$ ist unendlich
+    \item $((x_0-\delta,x_0+\delta)\cup A) \backslash \{x_0\}$ ist nicht leer.
+  \end{itemize}
+  Sei $a \in ((x_0-\delta,x_0+\delta)\cup A) \backslash \{x_0\}$. Dann gilt:
+  $$0 < |a-x_0| < \delta$$
+  was zu beweisen war. (HP gesucht)
+\end{Beweis}
+
+\begin{Theorem}[Schachtelungsprinzip]
+  Sei $\mathcal{F}$ eine nichtleere Familie von abgeschlossenen beschränkten Teilmengen von $\mathbb{K}$ mit
+  \begin{enumerate}
+    \item $\emptyset \notin \mathcal{F}$
+    \item $F_1,F_2 \in \mathcal{F} \Rightarrow F_1 \cup F_2 \in \mathcal{F}$
+  \end{enumerate}
+  Dann gilt:
+  $$\bigcap_{F \in \mathcal{F}}F \neq \emptyset$$
+\end{Theorem}
+
+\begin{Beweis}
+  $$s := \sup( \{\inf(F) \mid F \in \mathcal{F}\})$$
+  \begin{enumerate}
+    \item \underline{Behauptung}: $s \in F \A F \in \mathcal{F}$\\
+    $s \in \mathbb{K}$: Sei $F_0 \in \mathcal{F}$. Da $F_0$ beschränkt ist, gilt $F_0 \subseteq[a,b]$.\\
+    Falls $\{\inf(F) \mid F \in \mathcal{F}\}$ nach oben unbeschränkt ist, dann existiert $F_1 \in \mathcal{F}$ mit $\inf(F_1)\geq b+1, F_1 \subseteq [b+1,\infty)$.\\
+    $\Rightarrow F_0 \cap F_1 = \emptyset \in \mathcal{F}$ falsch\\
+    $\Rightarrow s \in \mathbb{K}$
+    \item \underline{Behauptung}: Sei $F_0 \in \mathcal{F}$ dann gilt: $s\in F_0$\\
+    Annahme: $s \notin F_0$.\\
+    Da $F_0$ abgeschlossen ist $\E \delta > 0$ mit $(s-\delta, s+\delta) \cap F_0 \neq \emptyset$
+  \end{enumerate}
+\end{Beweis}
+
+\begin{Korollar}[Intervallschachtelungsprinzip]
+  Sei $\mathcal{I} = \{I_0,I_1,I_2,... \}$ eine Familie von beschränkten abgeschlossenen und nichtleeren Intervallen, mit:
+  $$ ... \subseteq I_2 \subseteq I_1 \subseteq I_0$$
+  Dann gilt:
+  $$\bigcap_{n \in \N} \mathcal{I}_n \neq \emptyset$$
+  \begin{Bemerkung}
+    Nur wahr, wenn alle drei Grundbedingungen erfüllt sind.
+  \end{Bemerkung}
+\end{Korollar}
+
+
+
+\section{Reelle Zahlen}
+
+\begin{Definition}[Reelle Zahlen]
+  Wir nennen \textbf{Körper von reellen Zahlen} jeden geordneten und vollständigen Körper.\\
+  \begin{Bemerkung}[Notation]
+    \begin{itemize}
+      \item $\mathbb{K} = \R$ und $(\R,0,1,+,*,\leq)$
+      \item $\R_{\geq 0} = \{x\in \R \mid x \geq 0\}$
+      \item $\R_{> 0} = \{x\in \R \mid x > 0\}$
+      \item $K^S (K^*) = \{x\in \R \mid x \neq 0\} $
+    \end{itemize}
+  \end{Bemerkung}
+\end{Definition}
+
+\begin{Bemerkung}
+  Alle bereits gezeigten Konsequenzen der Vollständigkeit sind also insbesondere für $\R$ gültig.
+\end{Bemerkung}
+
+\begin{Beispiel}[Überprüfung auf Dezimalbrüche in $\R$]
+  Betrachte $\sqrt{2} = 1,414213562373095...$
+
+  Mit $a(n)$ der $n$-ten Ziffer: $a: \N \to \{ 0,1,...,9\}$.
+
+  Für $n\in\N$ schreiben wir:
+  $$x_n = a(0) + 10^{-1}*a(1)+ 10^{-2}*a(2)+...+ 10^{-n}*a(n) = \sum \limits_{k=0}^n 10^{-k}a(k)\in K$$
+  Es gilt also : $x_0 \leq x_1 \leq x_2 \leq x_3 \leq ... x_n \in K$
+  $$y_n = a(0) + 10^{-1}*a(1)+ 10^{-2}*a(2)+...+ 10^{-n}*(a(n)+1) = \sum \limits_{k=0}^n 10^{-k}a(k)\in K$$
+  Es gilt also : $y_0 \geq y_1 \geq y_2 \geq y_3 \geq ... y_n \in K$
+  $$X = \{x_n \mid n \in \N\}\subseteq K \text{ und } y = \{y_n \mid n \in \N\}\subseteq K$$
+  Man kann zeigen: $x \leq y \A x \in X, y \in Y$
+  $$\Rightarrow \E c\in K \text{ mit } x_n \leq c \leq y_n \A n\in N$$
+  In diesem Fall mit $c = a(0), a(1)a(2)a(3)...$.
+
+  Die Eindeutigkeit von $c$ folgt aus dem archimedischen Prinzip: $x_n \leq c \leq y_n$
+  $$\begin{aligned}
+    0 &\leq c - x_n  &\leq& y_n - x_n      &= \dfrac{1}{10^n}  & \\
+    0 &\leq d - x_n  &\leq& y_n - x_n      &= \dfrac{1}{10^n}  & \mid \text{ Zahl $d \neq c$ die das auch erfüllt} \\
+    0 &\leq |c - d|  &\leq& \dfrac{2}{10^n}&                   & \mid \A n\in \N : |a+b| \leq |a|+|b| \text{(Dreiecksungleichung)}\\
+  \end{aligned}$$
+  Hier wirkt das archimedische Prinzip:
+  $$\Leftrightarrow |c-d| = 0 \Leftrightarrow c -d = 0 \Leftrightarrow c = d$$
+\end{Beispiel}
+
+\begin{Definition}[$\overline{\R}$]
+  $$\overline{\R} = \R \cup \{-\infty,\infty\}$$
+  nennen wir `erweiterte Zahlengerade'.
+  Wir deklarieren:
+  \begin{Theorem}[Ordnungsrelation]
+    $$-\infty < x < \infty \A x \in \R$$
+    Das bedeutet, dass $\overline{\R}$ ein Maximum ($+\infty$) und ein Minimum ($-\infty$) besitzt.
+  \end{Theorem}
+\end{Definition}
+
+\begin{Theorem}
+  Für $(\overline{\R},0,1,+,\cdot)$ können wir keinen Körper definieren.
+\end{Theorem}
+
+\begin{Beweis}
+  Inverse Elemente für $+\infty$ und $-\infty$?
+\end{Beweis}
+
+\begin{Theorem}
+  Für \textbf{jede} Teilmenge $X \subseteq \overline{\R}$ ist $\sup(X)$ definiert, als die kleinste obere Schranke von $X$.
+\end{Theorem}
+
+\subsection{Intervalle}
+
+\begin{Definition}[Intervalle]
+  Seien $\R$ ein Körper reeller Zahlen und $a,b\in \R$. Die folgenden Teilmengen von $\R$ heißen \textbf{Intervalle}:
+  \begin{itemize}
+    \item $[a,b] = \{x \in R \mid a \leq x \leq b \}$ (beschränkt, abgeschlossen)
+    \begin{Bemerkung}
+      \begin{itemize}
+        \item $a = b \Rightarrow [a,b] = \{a\} =\{b\}$
+        \item $b < a \Rightarrow [a,b] = \emptyset$
+      \end{itemize}
+    \end{Bemerkung}
+    \item $[a,b) = \{x \in R \mid a \leq x < b \}$ (beschränkt, halboffen)
+    \item analog: $(a,b]$
+    \item $(a,b) = \{x \in R \mid a < x < b \}$ (beschränkt, offen)
+    \item $[a, \infty) = \{x \in R \mid a \leq x \}$
+    \item $(a, \infty) = \{x \in R \mid a < x \}$
+    \item analog: $(-\infty, a]$ und $[-\infty, a]$
+    \item $(-\infty, \infty) = \R$
+  \end{itemize}
+\end{Definition}
+
+Es gibt eine eideutige Funktion $f$: $\R_{\geq 0} \to \R_{\geq 0}$ mit der Eigenschaft
+$$f(x)^2 = x$$
+Das heißt, $f(x)$ ist die Quadratwurzel von $x$. (Übliche Notation: $f(x) = \sqrt{x}$)
+
+\begin{Definition}[Umgebung]
+  Sei $x \in \R$ eine reelle Zahl und $\delta \in \R, \delta >0$. Wir nennen das offene Intervall
+  $$(x-\delta,x+\delta) = B(x,\delta)$$
+  die (offene) $\delta$-\textbf{Umgebung} von $x$.
+  \incfig{ball}
+  \textbf{B} steht für Ball.
+\end{Definition}
+
+\begin{Definition}
+  Sei $X$ eine Teilmenge von $\R$. $X$ ist:
+  \begin{itemize}
+    \item \textbf{offen} in $\R$, falls für jedes Element $x\in X$ ein $\delta \in \R_{\geq 0}$ existiert, mit $B(x,\delta) \subseteq X$
+    \item \textbf{abgeschlossen} in $\R$, falls das $\R \backslash X \subseteq \R$ offen ist.
+  \end{itemize}
+  \incfig{mengen_geschlossen_offen}
+\end{Definition}
+
+\begin{Beispiel}
+  \begin{itemize}
+  \item Offen:
+  \begin{itemize}
+    \item Offene Intervalle sind offen, insbesondere $\emptyset, \R$
+    \item Vereinigungen offener Teilmengen sind offen
+    \item Endliche Durchschnitte offener Mengen sind offen.
+  \end{itemize}
+  \item Abgeschlossen:
+  \begin{itemize}
+    \item Abgeschlossene Intervalle
+    \item $\R$
+    \item $\emptyset$
+    \item Durchschnitte abgeschlossener Teilmengen sind abgeschlossen
+    \item Endliche Vereinigungen abgeschlossener Teilmengen sind abgeschlossen
+  \end{itemize}
+  \begin{Bemerkung}
+    Auf dem Bild ist das Intervall $I = (a,b]$ abgeschlossen also kann man keinen Ball um $b$ bilden, weil $b+\delta \notin I \A \delta > 0$
+  \end{Bemerkung}
+  \end{itemize}
+\end{Beispiel}
+
+
+
+\section{Komplexe Zahlen}
+
+\begin{Definition}[Komplexe Zahlen]
+  Wir schreiben $\C = \R \times \R$
+  und
+  $$1_\C = (1,0) \in \C$$
+  $$0_\C = (0,0) \in \C$$
+  $$+: \C \times \C \to \C; (a,b),(c,d) \mapsto (a+c,c+d)$$
+  $$*: \C \times \C \to \C; (a,b),(c,d) \mapsto (ac-bd,ad +bc)$$
+\end{Definition}
+
+\begin{Theorem}
+  Die Menge $\C$ zusammen mit $0,1,+,*$ wie definiert, ist ein \textbf{Körper}.
+\end{Theorem}
+
+\begin{Beweis}[Körperaxiome überprüfen]
+  \begin{itemize}
+    \item Addition:
+      \begin{enumerate}
+        \item NE: $(a,b)+(0,0) = (0,0)+(a,b) = (a,b)$ $\checkmark$
+        \item AG: $((a,b)+(b,c))+(e,f) = (a+c+e,b+d+f) = (a,b)+((c,d)+(e,f))$ $\checkmark$
+        \item KG: $(a,b)+(c,d) = (c,d)+(a,b)$ $\checkmark$
+        \item IE: $(a,b)+(-a,-b) = (0,0)$ $\checkmark$
+      \end{enumerate}
+    \item Multiplikation:
+      \begin{enumerate}
+        \item NE: $(a,b)+(1,0) = (1,0)+(a,b) = (a,b)$ $\checkmark$
+        \item AG: $((a,b)(b,c))(e,f) = (a,b)(ce-df,cf+de) = (ace-adf - bcf -bde , acf+ade+bce-bdf) = ... = (a,b)((b,c)(e,f))$ $\checkmark$
+        \item KG: $(a,b)(c,d) = (ac-bd,ad+bc) = (c,d)(a,b)$ (gilt dank KG) $\checkmark$
+        \item IE: Sei $(a,b) \in \C, (a,b) \neq (0,0)$. Dann gilt $a^2+b^2 > 0$.\\
+        $(a,b)\left(\dfrac{a}{a^2+b^2},-\dfrac{b}{a^2+b^2}\right) = \left(\dfrac{a^2}{a^2+b^2} + \dfrac{b^2}{a^2+b^2},-\dfrac{ab}{a^2+b^2}+\dfrac{ab}{a^2+b^2}\right) = (1,0)$ $\checkmark$
+      \end{enumerate}
+    \item DG: $(a,b) ((c,d)+(e,f)) = (a,b)(c+e,d+f) = (ac+ae - bd -bf , ad +af +bc +be) = (ac-bd,ad+bc)+(ae-bf,af+be) = (a,b)(c,d)+(a,b)(e,f)$ $\checkmark$
+  \end{itemize}
+\end{Beweis}
+
+\begin{Bemerkung}[Notation]
+  Wir schreiben für eine reelle Zahl $x$ auch '$x$' für die komplexe Zahl $(x,0)$.\\
+  Wir schreiben $i = (0,1)$, also
+  \begin{Definition}
+    $$a+bi = (a,b)$$
+    ($= ((a,0)+(b,0)(0,1))$)\\
+    Damit die oben definierten Rechenregeln erfüllt sind, setzen wir:
+    $$i^2 = -1$$
+  \end{Definition}
+\end{Bemerkung}
+
+\begin{Beispiel}
+  $$\dfrac{1}{5+2i} = \dfrac{5-2i}{25+4} = \dfrac{5}{29} - \dfrac{2i}{29}$$
+  \begin{Beweis}
+    $$(5+2i)(5-2i)\dfrac{1}{29} = (25+4)\dfrac{1}{29} = 1$$
+  \end{Beweis}
+\end{Beispiel}
+
+\begin{Definition}[Komplexe Konjugation]
+  Die \textbf{Komplexe Konjugation} ist die Abbildung
+  $$\overline{\cdot} \,:  \C \to \C, a+bi \mapsto a-bi$$
+  Wir schreiben $\overline{a+bi} = a-bi$
+\end{Definition}
+
+\begin{Lemma}
+  Für alle $z,w \in \C$ gilt:
+  \begin{enumerate}
+    \item $z \overline{z} \in \R_{\geq 0}$ und $z \overline{z} = 0 \Leftrightarrow z = 0$
+    \item $\overline{zw} = \overline{z}\cdot \overline{w}$
+    \item $\overline{z+w} = \overline{z}+\overline{w}$
+    \item $z\in \R \Leftrightarrow z = \overline{z}$
+  \end{enumerate}
+\end{Lemma}
+
+\begin{Beweis}
+  \begin{enumerate}
+    \item $z \overline{z} = (a+bi)(a-bi)=a^2+b^2$ (Und das ist ungleich 0)
+    \item Ausmultiplizieren
+    \item analog
+    \item Das Konjugieren ist eine Spiegelung entlang der imaginären Achse, man erkennt also graphisch, dass nur $x\in \R$ nach $\R$ gespiegelt wird.
+  \end{enumerate}
+\end{Beweis}
+
+\begin{Definition}
+  Sei $z =a+bi \in \C$. Wir nennen
+  \begin{itemize}
+    \item $Re(z) = a = \dfrac{1}{2}(z+\overline{z})$ den Realteil von $z$
+    \item $Im(z) = b = \dfrac{1}{2}(z-\overline{z})$ den Imaginärteil von $z$
+    \item $|z| = \sqrt{z\cdot \overline{z}} = \sqrt{a^2 + b^2} \in \R_{\geq 0}$ den Betrag/Norm von $z$
+  \end{itemize}
+\end{Definition}
+
+\begin{Definition}[Abstand]
+  Für $z,w \in \C$ interpretieren wir $|z-w|$ als Abstand oder Distanz von $z$ nach $w$. Es gilt:
+  $$|z\cdot w| = |z|\cdot |w|$$
+\end{Definition}
+
+\begin{Theorem}[Dreiecksungleichung ($\C$)]
+  Seien $z,w \in \C$. Dann gilt:
+  $$|z-w| = |z+w| \leq |z|+|w|$$
+\end{Theorem}
+
+\begin{Bemerkung}
+  Die Verwendung von $|z+w|$ oder $|z-w|$ ist äquivalent, da man auch einfach $-w$ verwenden kann, und es gilt: $|-w| = |w|$
+\end{Bemerkung}
+
+\begin{Beweis}
+  It's gonna be Legen ... wait for it.. dary!\\
+  Für reelle Zahlen $0 \leq x$ und $0 \leq y$ gilt:
+  $$x \leq y \Leftrightarrow x^2 \leq y^2$$
+  Da die Beträge reelle Zahlen sind, genügt es, $|z+w|^2 \leq (|z|+|w|)^2$ zu zeigen.\\
+  Wir schreiben $$z = x_1 + i y_1 \qquad w = x_2 + iy_2$$
+  und zeigen vorbereitend:
+  \begin{Theorem}[Cauchy-Schwarz (CS)]
+    $$x_1x_2 + y_1 y_2 \leq |z||w|$$
+  \end{Theorem}
+  \begin{Beweis}
+    $$\begin{aligned}
+      (x_1 x_2 + y_1 y_2)^2 & \leq (x_1 x_2 + y_1 y_2)^2 + (x_1 x_2 - y_1 y_2)^2 \\
+      & \text{ man kann immer etwas postives addieren} \\
+      & = (x_1x_2)^2 + 2 x_1 x_2 y_1 y_2 + (y_1y_2)^2 + (x_1 x_2)^2 - 2 x_1 x_2 y_1 y_2 + (y_1 y_2)^2 \\
+      & = (x_1^2 + y_1^2)(x_2^2 + y_2^2) \\
+      & = |z|^2 |w|^2
+    \end{aligned}$$
+  \end{Beweis}
+  Eigentliche Rechnung:
+
+  $$\begin{aligned}
+    |z+w|^2 &= (x_1 + x_2)^2 + (y_1 +y_2)^2\\
+    &= x_1^2 + x_2^2 + y_1^2 + y_2^2 + 2(x_1x_2 + y_1 y_2)\\
+    &\leq |z|^2 + |w|^2 + 2 |z||w|\\
+    &= (|z|+|w|)^2
+  \end{aligned}$$
+\end{Beweis}
+
+\begin{Definition}[Kreisscheibe]
+  Sei $z\in \C, \delta \geq 0$.
+  $$B(z,\delta) = \{w\in \C \mid |z-w| < \delta \} \subseteq \C$$
+  bezeichne die \textbf{offene Kreisscheibe} mit Zentrum $z$, Radius $\delta$. (ohne Rand)
+  $$\overline{B}(z, \delta) = \{w\in \C \mid |z-w| \leq \delta \} \subseteq \C$$
+  bezeichne die \textbf{abgeschlossene Kreisscheibe} mit Zentrum $z$, Radius $\delta$.
+  \incfig{Kreisscheiben}
+\end{Definition}
+
+\begin{Definition}
+  \begin{itemize}
+    \item Eine Teilmenge $U \subseteq \C$ heißt \textbf{offen} falls $\A u \in U$ ein $\delta > 0$ existiert mit $B(u,\delta) \subseteq U$
+    \begin{Bemerkung}[informell]
+      Jeder Punkt von $U$ liegt im Inneren von $U$, das heißt kein Punkt ist ein Randpunkt.
+    \end{Bemerkung}
+    \incfig{offene_teilmenge}
+    \item Wir nennen $F \subseteq \C$ abgeschlossen, falls $\C \backslash F$ offen ist.
+    \begin{Bemerkung}[informell]
+      $F$ enthält alle Seine Randpunkte.
+    \end{Bemerkung}
+  \end{itemize}
+\end{Definition}
+
+\begin{Beispiel}
+  Offen in $\C$ sind:
+  \begin{itemize}
+    \item offene Kreisscheiben
+    \item beliebige Vereinigungen offener Teilmengen
+    \item Durchschnitte endlich vieler offener Teilmengen
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Bemerkung}
+  Offen und abgeschlossen schließen einander nicht aus. Eine Teilmenge kann gleichzeitig offen und abgeschlossen sein:
+  $$\{z\in \C \mid |z| < 1 \text{ oder } (Re(z)\geq 0 \text{ und } |z|\leq 1)\}$$
+\end{Bemerkung}
+
+
+
+\section{Modelle und Eindeutigkeit}
+
+\subsection{Existenz und Eindeutigkeit}
+
+\begin{Theorem}
+  Seien $\R$ und $\mathbb{S}$ vollständig angeordnete Körper. Es existiert eine eindeutige Abbildung $\Phi: \R \to \mathbb{S}$ mit folgenden Eigenschaften:
+  \begin{enumerate}
+    \item $\Phi(0) = 0$ und $\Phi (x+y) = \Phi(x) + \Phi(y)$ für alle $x,y \in \R$
+    \item $\Phi(1) = 1$ und $\Phi (x*y) = \Phi(x) * \Phi(y)$ für alle $x,y \in \R$
+    \item Für $x \leq y$ gilt $\Phi(x) \leq \Phi(y)$ für alle $x,y \in \R$
+  \end{enumerate}
+  Diese Abbildung ist \textbf{bijektiv}
+\end{Theorem}
+\begin{Bemerkung}
+  Das bedeutet, dass jede Aussage in $\R$ nach $\mathbb{S}$ analog reformuliert werden. Und auch anders herum. Die beiden Körper sind also im Grunde genommen \textbf{identisch}.
+
+  NB: es handelt sich hier um einen Körperisomorphismus.
+\end{Bemerkung}
+
+\begin{Beweis}
+  \begin{itemize}
+    \item $\Phi(0)=0,\Phi(1)=1,\Phi(2)=2,...,\Phi(n)=n \A n \in \Z$ folgt aus der Kompabilität mit der Addition.
+    \item $\Phi\left(\dfrac{a}{b}\right) = \dfrac{\Phi(a)}{\Phi(b)} \A a,b \in \Z, b\neq 0$\\
+    $\Rightarrow$ Falls $\Phi$ existiert, so gilt $\Phi\left(\dfrac{a}{b}\right) = \dfrac{a}{b}$ für alle $\dfrac{a}{b} \in \Q$
+    \item Aus (3) folgt: Für $X\subseteq \R ,X \neq \emptyset$ nach oben beschränkt folgt:
+    $$\Phi(\sup(X)) = \sup(\Phi(X))$$
+    Falls $\Phi$ mit $(1,2,3)$ existiert, dann ist $\Phi$ eindeutig. Nämlich gilt für $x\in \R$:
+    $$x = \sup\left(\left\{\dfrac{a}{b} \,\middle|\, \dfrac{a}{b}\in \Q, \dfrac{a}{b}\leq x\right\}\right)$$
+    Folgt: Notwendigerweise gilt für $x \in \R$:
+    $$\Phi(x) = \sup\left(\left\{\dfrac{a}{b} \,\middle|\, \dfrac{a}{b}\in \Q \subseteq \mathbb{S}, \dfrac{a}{b}\leq x\right\}\right) \in \mathbb{S}$$
+    Die Menge, deren Supremum wir betrachten ist $\subseteq \mathbb{S}$.\\
+    Definiere $\Phi: \R \to \mathbb{S}$ durch obige Vorschrift.\\
+    Zu zeigen:\begin{itemize}
+      \item Die Abbildung erfüllt (1),(2),(3).\\
+      Übung oder siehe Skript.
+      \item $\Phi$ ist bijektiv:\\
+      Wir tauschen die Rollen von $\R, \mathbb{S} \Rightarrow \E$eine eindeutige Abbildung $\Psi:\mathbb{S} \to \R$ mit (1),(2),(3).
+      Betrachte $\Psi \circ \Phi: \R \to \R$. Diese Abbildung erfüllt (1),(2),(3):
+      \begin{Bemerkung}
+        Einfach zu zeigen.
+      \end{Bemerkung}
+      Wir wissen, dass $id: \R \to \R$ ebenfalls (1),(2),(3) erfüllt.\\
+      Aus der eben bewiesenen Eindeutigkeit folgt $\Psi \circ \Phi = id_\R$ und $\Phi \circ \Psi = id_\mathbb{S}$.\\
+      Hierraus folgt, dass es eine Bijektion zwichen $\R$ und $\mathbb{S}$ existiert.
+    \end{itemize}
+  \end{itemize}
+\end{Beweis}
+
+\subsection{Modelle}
+
+Mögliche Konstruktionen von $\R$:
+\begin{enumerate}
+  \item Dezimalbrüche. (umständlich, Sonderfälle)
+  \item Mengenlehre + Axiomatische Geometrie
+  \item ...
+  \item Dedekindschnitte (R. Dedekind, 1858, @ETH)
+  \begin{Definition}
+    Ein Dedekind-Schnitt ist eine Teilmenge $C \in \Q$ mit der Eigenschaft:
+    $\E n \in \Z$ mit $x \leq n \A x \in C$\\
+    und $x\in C$ und $y \in \Q$: $y \leq x \Rightarrow y \in C$\\
+    und $C$ hat kein maximales Element (aber ein Supremum)
+  \end{Definition}
+  \begin{Beispiel}
+    $$C = \left\{x \in \Q \mid x < \dfrac{3}{4}\right\}$$
+    $$C = \{x \in \Q \mid x^2 < 2 \}$$
+  \end{Beispiel}
+   Wir denken uns $C$ als die `reelle Zahl $\sup(C)$' (existiert eigentlich noch nicht.)\\
+   Wir definieren $(0,1,+,\cdot)$ auf der Menge aller Dedekindschnitte $\mathbb{D}$:\\
+   (Der Körper, den wir erhalten ist, eindeutig, da eine Bijektion zwischen allen möglichen Darstellungen existiert.)
+   \begin{itemize}
+     \item $0 \in \mathbb{D}$ ist $\{x \in \Q \mid x < 0 \}$
+     \item $1 \in \mathbb{D}$ ist $\{x \in \Q \mid x < 1 \}$
+     \item $C,D \in \mathbb{D}: C+D = \{x+y \mid x \in C, y \in D \}$
+     \item $C \cdot D$ ähnlich.
+     \item $C \leq D \Leftrightarrow C \subseteq D$
+   \end{itemize}
+\end{enumerate}
+
+\end{document}

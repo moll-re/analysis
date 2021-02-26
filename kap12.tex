@@ -1,0 +1,881 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+
+
+\chapter{Mehrdimensionale Integration}
+
+\begin{Beispiel}[Grundproblem]
+  Definiere $vol(X) \in \R^+$ für $x \subseteq \R^n$ beschränkt.
+
+  Wir setzen folgende Eigenschaften voraus:
+  $$vol(\emptyset) = 0 \quad X \subseteq Y \Rightarrow vol(X)\leq vol(Y)$$
+  Folgt:
+  \begin{itemize}
+    \item $X$ und $Y$ disjunkt $\Rightarrow vol(X \cup Y) = vol(X) + vol(Y)$
+    \item $vol([0,1]^3) = 1$
+    \item Ist $\varphi: \R^3 \to \R^3$ eine Translation oder Rotation oder Isometrie, so gilt: $vol(X) = vol(\varphi(X))$
+  \end{itemize}
+\end{Beispiel}
+
+\begin{Theorem}[Banach-Tarski]
+  Setze $B = \overline{B(0,1)} \subseteq \R^3$ ($vol(B) > 1$).
+
+  Es existieren disjunkte Teilmengen $X_1,...,X_5$ von $B$ mit $X_1 \cup ... \cup X_5 = B$ mit
+  $$\begin{aligned}
+    \varphi_1 X_1 \cup \varphi_2 X_2 \cup \varphi_3 X_3 = B & \, \text{ für Isometrien } \varphi_1,\varphi_2,\varphi_3 \\
+    \varphi_4 X_4 \cup \varphi_5 X_5 = B & \, \text{ für Isometrien } \varphi_4,\varphi_5
+  \end{aligned}$$
+\end{Theorem}
+
+
+\begin{Bemerkung}
+  Naive Idee:
+  $$\int_a^b \int_c^d f(x,y)dxdy = \int_a^b\left(\int_c^df(x,y)dx \right)dy$$
+  $$\downarrow$$
+  Riemann-Integration (Analysis II)
+  $$\downarrow$$
+  Lebesgue-Integration (Maß und Integral, später)
+\end{Bemerkung}
+
+Um unser Integral über mehrere Dimensionen zu definieren, konstruieren wir uns Bausteine, die wir dann Verfeinern. Wir fangen wie im 1-dimensionalen Fall mit Rechtecken an:
+
+
+\section{Das Riemnann-Integral für Quader}
+
+\begin{Definition}[Quader]
+  Wir nennen ein mehrdimensionales Produkt von Intervallen ein \textbf{Quader}.
+
+  Mit Intervallen $I_k \subseteq \R$ gilt
+  $$Q = I_1 \times I_2 \times ... \times I_n \subseteq \R^n$$
+  Üblicherweise setzen wir voraus, dass alle $I_k$ beschränkt sind, und $\neq 0$. Wir setzen aber nichts voraus für die Offenheit der Intervalle.
+\end{Definition}
+
+\begin{Definition}[Zerlegung]
+  Eine Zerlegung des abgeschlossenen Quaders
+  $$Q = [a_1,b_1] \times ... \times [a_n,b_n]$$
+  ist die Vorgabe einer Zerlegung von $[a_k,b_k] \A k \leq n$
+  $$a_k = x_{k,0} < x_{k,1} < ... x_{k,l(k)} = b_k$$
+\end{Definition}
+
+\begin{Definition}[Adresse]
+  Unser Quader ist nun zerlegt und wir schreiben für die Teilquader
+  $$Q_\alpha = \prod_{k=1}^n [x_{\alpha_k - 1},x_{\alpha_k}]$$
+  Wir nennen $\alpha$ die Adresse des Teilquaders, sie ist eindeutig.
+
+  Unser Anfangsqauder ist nun die Vereinigung über alle Adressen
+  $$Q = \bigcup_\alpha Q_\alpha$$
+\end{Definition}
+
+\begin{Definition}[Volumen]
+  Sei $Q \subseteq \R^n$ ein beschränkter Quader mit $Q = I_1 \times ... \times I_n$.
+  $$vol(Q) = (b_1 - a_1)(b_2 - a_2) ... (b_n - a_n)$$
+  mit $a_k := \inf I_k$ und $b_k := \sup I_k$
+\end{Definition}
+
+\begin{Bemerkung}
+  Ist $Q_\alpha$ eine Zerlegung von $Q$, so gilt:
+  $$vol(Q) = \sum \limits_\alpha vol(Q_\alpha)$$
+\end{Bemerkung}
+
+\begin{Definition}
+  Sei $Q \subseteq \R^n$ ein Quader eine Treppenfunktion auf $Q$ ist eine beschränkte Funktion $Q \to \R$ so, dass eine Zerlegung $(Q_\alpha)_\alpha$ von $Q$ existiert, mit
+  $$f |_{\mathring{Q_\alpha}} \text{ ist konstant } \A \alpha$$
+  Wir schreiben $TF(Q)$ für die Menge der Treppenfunktionen auf $Q$.
+\end{Definition}
+
+\begin{Definition}
+  Sei $Q \subseteq \R^n$ ein abgeschlossener und beschränkter Quader. Das Integral ist definiert als die Funktion
+  $$\begin{aligned}
+    \int_Q dx : TF(Q) & \to \R \\
+    f & \mapsto \sum \limits_\alpha c_\alpha \cdot vol(Q_\alpha) = \int_Q f dx = \int_Q f dx_1 dx_2 ... dx_n
+  \end{aligned}$$
+  für eine Zerlegung $(Q_{\alpha})_{\alpha}$ von $Q$ so, dass $F |_{\mathring{Q_\alpha}}$ konstant ist, mit Wert $c_\alpha$.
+\end{Definition}
+
+\begin{Bemerkung}
+  $TF(Q)$ ist ein $\R$-Vektorraum und $\int_Q dx$ ist eine lineare Abbildung.
+
+  Sind $f,g$ Treppenfunktionen mit $f \leq g$, so gilt
+  $$\int_Q f dx \leq \int_Q g dx$$
+  und
+  $$\left|\int_Q f dx\right| \leq \int_Q |f| dx$$
+\end{Bemerkung}
+
+\begin{Definition}[Riemann-Integrierbarkeit (mehrdimensional)]
+  Sei $f: Q \to \R$ beschränkt, $Q \subseteq \R^n$ abgeschlossen. Wir definieren
+  $$\mathcal{U}(f) = \left\{\int_Q u dx {\Big |} u \in TF(Q), u \leq f \right \} \subseteq \R$$
+  $$\mathcal{O}(f) = \left\{\int_Q o dx {\Big |} u \in TF(Q), f \leq o \right \} \subseteq \R$$
+  Es gilt $\sup \mathcal{U}(f) \leq \mathcal{O}(f)$.
+
+  Wir sagen $f$ sei \textbf{Riemann-integrierbar}, falls $\sup \mathcal{U}(f) = \mathcal{O}(f)$. Wir schreiben dann
+  $$\int_Q f(dx) := \sup \mathcal{U}(f) = \mathcal{O}(f)$$
+  Wir schreiben $\mathcal{R}(Q)$ für die Menge aller Riemann-integrierbaren Funktionen $f: Q \to \R$.
+\end{Definition}
+
+\begin{Theorem}
+  $\mathcal{R}(Q)$ ist ein $\R$-Vektorraum, $TF(Q) \subseteq \mathcal{R}(Q)$.
+  $$\int_Q dx : \mathcal{R}(Q) \to \R$$
+  ist linear, monoton.
+  \begin{itemize}
+    \item $f \leq g \Rightarrow \int_Q fdx \leq \int_Q g dx$
+    \item $\left|\int_Q f dx\right| \leq \int_Q |f| dx$
+  \end{itemize}
+\end{Theorem}
+
+\begin{Beweis}
+  Wie für Integrale in einer einzigen Variable.
+\end{Beweis}
+
+\begin{Theorem}
+  Eine beschränkte Funktion $f: Q \to \R$ ist Riemann-integrierbar genau dann, wenn für alle $\varepsilon > 0$ Treppenfunktionen $u \leq f \leq o$ existieren, mit
+  $$\int_Q (o - u)dx < \varepsilon$$
+\end{Theorem}
+
+\begin{Bemerkung}
+  Ist $f: Q \to \R$ Riemann-integrierbar, und $(Q_\alpha)_\alpha$ eine Zerlegung von $Q$, so ist $f|_{Q_\alpha}$ integrierbar und es gilt
+  $$\int_Q f dx = \sum \limits_\alpha \int_{Q_\alpha} f|_{Q_\alpha} dx$$
+  was der Intervalladditivität in einer Variable entspricht.
+\end{Bemerkung}
+
+\begin{Definition}[Nullmengen]
+  Eine Teilmenge $N \subseteq \R^n$ heißt \textbf{Lebesgue-Nullmenge}, falls
+  $$\A \varepsilon > 0 \E (Q_k)_{k = 1,2,...} \text{ (abzählbar) } : \left\{\begin{aligned}
+    1) & N \subseteq \bigcup_{k=1}^\infty Q_k \\
+    2) & \sum \limits_{k=1}^\infty vol(Q_k) < \varepsilon
+  \end{aligned}\right.$$
+
+  Wir sagen, dass eine Aussage $A$ über Punkte des $\R^n$ \textbf{fast überall} wahr ist, falls
+  $$\{x \in \R^n \mid \lnot A(x)\}$$
+  eine Nullmenge ist.
+\end{Definition}
+
+\begin{Lemma}
+  Teilmengen von Lebesgue-Nullmengen sind Lebesgue-Nullmengen.
+
+  Abzählbare Vereinigungen von Lebesgue-Nullmengen sind Lebesgue-Nullmengen.
+\end{Lemma}
+
+\begin{Beweis}
+  Die Aussage für Teilmengen ist klar.
+
+  $N = \bigcup_{l=1}^\infty N_l$ mit $N_l$ eine Lebesgue-Nullmenge.
+  Sei $\varepsilon > 0$. Wähle Quader $(Q_{l,k})_{k=1}^\infty$, offene Quader mit $N_L \subseteq \bigcup_{k=0}^\infty Q_{l,k}$ und
+  $\sum \limits_{k=1}^\infty vol(Q_{l,k}) < w^{-l}\cdot \varepsilon$.
+
+  Dann ist $(Q_{l,k})_{l,k}$ eine abzählbare Familie offener Quader,
+  $$N \subseteq \bigcup_{l,k} Q_{l,k}$$
+  und es gilt
+  $$\sum \limits_{l,k = 1}^\infty vol(Q_{l,k}) \leq \sum \limits_{l=1}^\infty 2^{-l} \cdot \varepsilon \leq \varepsilon$$
+\end{Beweis}
+
+\begin{Theorem}
+  Sei $X \subseteq \R^n$ mit $\mathring{X} \neq \emptyset$. Dann ist $X$ keine Lebesgue-Nullmenge.
+\end{Theorem}
+
+\begin{Beweis}
+  Ist $\mathring{X} \neq \emptyset$, so können wir einen abgeschlossenen (und beschränkten) Quader $Q \subseteq \mathring{X} \subseteq X$ konstruieren mit $vol(Q) > 0$. OBdA gilt: $X = Q$.
+
+  \adabs: Angenommen $Q$ sei eine Lebesgue-Nullmenge. Dann existieren offene Quader $(Q_k)_{k=1,2,...}$ mit $Q \subseteq \bigcup_{k=1}^\infty Q_k$ und $\sum \limits_{k=1}^\infty vol(q_k) < \frac{vol(Q)}{2}$.
+
+  Es gilt (weil $Q$ kompakt), dass
+  $$Q \subseteq \bigcup_{k = 1}^N Q_k$$
+  $Q \cap Q_k$ ist ein Teilquader von $Q$:
+
+  Für eine genügend feine Zerlegung von $Q$ gilt:
+  $$\overline{Q \cap Q_k} = \text{ endliche Vereinigung von Teilquadern } Q_\alpha$$
+  $$\begin{aligned}
+    vol(Q) & = \sum \limits_\alpha vol(q_\alpha) \\
+    & \leq \sum \limits_{k=1}^n \overbrace{\sum \limits_{\substack{\alpha \text{ mit}\\ Q_\alpha \subseteq Q \cap Q_k}} vol(Q_\alpha)}^{\leq vol(Q_k)} \\
+    & \leq \sum \limits_{k=1}^n vol(Q_k) \\
+    & < \dfrac{vol(Q)}{2}
+  \end{aligned}$$
+  $\Rightarrow \lightning$ da $vol(Q) > 0$.
+\end{Beweis}
+
+\begin{Theorem}
+  Sei $Q \subseteq \R^{n-1}$ ein abgeschlossener und beschränkter Quader, $f: Q \to \R$ Riemann-integrierbar. Dann ist
+  $$Graph(f) = \{(x,f(x)) \mid x \in Q\}\subseteq \R^{n-1} \times \R = \R^n$$
+  eine Nullmenge.
+\end{Theorem}
+
+\begin{Beweis}
+  Da $Q$ beschränkt ist, gilt:
+  $$-M \leq f(x) \leq M \quad M \in \R \A x \in Q$$
+  Sei $\varepsilon > 0$. Nach Hypothese existieren $u,o \in TF(Q)$ mit $u \leq f \leq o$ und $\int_Q (o - u)dx < \varepsilon$.
+
+  Sei $(Q_\alpha)_\alpha$ eine Zerlegung von $Q$ mit $u$ und $o$ konstant auf $\mathring{Q}_\alpha$ mit Wert jeweils $c_\alpha$ und $d_\alpha$.
+  $$\sum \limits_\alpha (d_\alpha - c_\alpha) \cdot vol(Q_\alpha) < \varepsilon$$
+  Definiere $P_\alpha : = \mathring{Q}_\alpha \times (c_\alpha,d_\alpha) \subseteq \R^n$. Es gilt
+  $$Graph(f) \subseteq \overbrace{\bigcup_\alpha P_\alpha}^{\sum \limits_\alpha vol(P_\alpha) < \varepsilon} \cup \underbrace{\bigcup_\alpha \partial Q_\alpha \times [-M,M]}_{Nullmenge}$$
+\end{Beweis}
+
+\begin{Theorem}[Lebesgue-Kriterium]
+  Sei $Q \subseteq \R^n$ ein abgeschlossener und beschränkter Quader. Eine beschränkte Funktion $f: Q \to \R$ ist Riemann-integrierbar genau dann, wenn sie fast überall stetig ist.
+  $$N = \{x \in Q \mid f \text{ nicht stetig bei } x\} \text{ ist eine Nullmenge}$$
+\end{Theorem}
+
+\begin{Korollar}
+  Stetige Funktionen sind Riemann-integrierbar.
+\end{Korollar}
+
+\begin{Beweis}
+  Technisches Hilfsmittel:
+  \begin{Definition}[Oszillationsmaß]
+    Sei $f: Q \to \R$ beschränkt. Für $x \in Q$, $\delta > 0$ schreibe
+    $$\omega(f, x, \delta) := \sup\{f(y) \mid y \in B_\infty(x,\delta)\} - \inf\{f(y) \mid y \in B_\infty(x,\delta)\}$$
+    $B_\infty$: Ball bezügllich $||.||_\infty$, also ein Würfel mit Zentrum $x$, achsenparallel, offen, mit Kantenlänge = $2 \delta$.
+
+    Für $\delta' < \delta$ gilt: $\omega(f, x, \delta') \leq \omega(f, x, \delta)$.
+
+    Wir bezeichnen
+    $$\omega(f,x) := \lim \limits_{\delta \to \infty} \omega(f,x,\delta)$$
+    als das \textbf{Oszillationsmaß} von $f$ bei $x$.
+  \end{Definition}
+  \begin{Bemerkung}
+    $\omega(f,x) = 0 \Leftrightarrow f$ stetig bei $x$
+  \end{Bemerkung}
+  \begin{Lemma}
+    Sei $\eta > 0$. Die Menge
+    $$N_\eta = \{x \in Q \mid \omega(f,x) \geq \eta \} \subseteq Q$$
+    ist abgeschlossen.
+  \end{Lemma}
+  \begin{Beweis}[Folgenkriterium]
+    Sei $(x_n)_{n=0}^\infty$ eine Folge in $N_\eta$ mit Grenzwert $x \in Q$. Zu zeigen: $x \in N_\eta$.
+
+    Sei $\delta > 0$, dann existiert $k$ groß genug und $\delta'$ genügend klein so, dass $x_k \in B(x,\delta)$ und $B(x_k,\delta') \subseteq B(x, \delta)$.
+    \incfig{folgenkriterium}
+    $$\begin{aligned}
+      \eta \leq \omega(f,x_k) & \leq \omega(f, x_k, \delta') \\
+      & = \sup\{f(y) \mid y \in B_\infty(x_k,\delta')\} - \inf\{f(y) \mid y \in B_\infty(x_k,\delta')\} \\
+      & \leq \sup\{f(y) \mid y \in B_\infty(x,\delta)\} - \inf\{f(y) \mid y \in B_\infty(x,\delta)\} \\
+      & \leq \omega(f,x,\delta)
+    \end{aligned}$$
+    Folgt: $\omega(f,x) = \lim \limits_{\delta \to 0} \omega(f,x,\delta) \geq \eta$.
+
+    $\Rightarrow x \in N_\eta$
+  \end{Beweis}
+  \begin{Lemma}
+    Sei $K \subseteq Q$ kompakt, $\eta > 0$ mit $\omega(f,x) \leq \eta \A x \in K$. Dann existiert $\A \varepsilon > 0$ ein $\delta > 0$ mit $\omega(f,x,\delta) < \eta + \varepsilon$ für alle $x \in K$.
+  \end{Lemma}
+  \begin{Beweis}
+    $\adabs$: Angenommen, die Aussage sei falsch, also $\E \varepsilon > 0$ so, dass für alle $\delta > 0$ ein $x \in K$ existiert mit $\omega(f,x,\delta) > \eta + \varepsilon$. Insbesondere
+    $$\A n \in \N \E x_n \in K : \omega(f,x_n,2^{-n}) > \eta + \varepsilon$$
+    Es existieren $x_n^-$ und $x_n^+ \in B(x_n,2^{-n})$ mit $f(x_n^+) - f(x_n^-) > \eta + \frac{\varepsilon}{2}$. Die Folge $(x_n)_{n=0}^\infty$ mit Grenzwert $x$. Auch $(x_n^-)_{n=0}^\infty$ und $(x_n^+)_{n=0}^\infty$ konvergieren gegen $x$.
+
+    Also $\A \delta > 0 \E n \in \N : x_n^-, x_n^+ \in B(x_n,2^{-n})$. Folgt
+    $$\begin{aligned}
+      \omega(f,x,\delta) & = \sup\{f(y) \mid y \in B_\infty(x,\delta)\} - \inf\{f(y) \mid y \in B_\infty(x,\delta)\} \\
+      & \geq f(x_n^+) - f(x_n^-) \\
+      & > \eta + \frac{\varepsilon}{3}
+    \end{aligned}$$
+    Folgt $\omega(f,x) > \eta \lightning$
+  \end{Beweis}
+  Nun zum eigentlichen Beweis:
+  \begin{itemize}
+    \item $\Rightarrow$: $f$ ist Riemann-integrierbar $\Rightarrow N = \{x \in Q \mid \omega(f,x) > 0\}$ ist Nullmenge.
+
+    Seien $\varepsilon,\eta > 0$.
+    \[\E u \leq f \leq o \in TF(Q) : \int_Q (o-u)dx < \varepsilon \cdot \eta \tag{1}\]
+    Sei $(Q_\alpha)_\alpha$ eine Zerlegung von $Q$ mit $u$ und $o$ konstant mit Wert jeweils $c_\alpha$ und $d_\alpha$ auf $\mathring{Q}_\alpha$
+    $$(1) \Leftrightarrow \sum \limits_{\alpha} (d_\alpha - c_\alpha) \cdot vol(Q_\alpha) < \varepsilon \cdot \eta $$
+
+    NR: $A(\eta) = \{\alpha \mid d_\alpha - c_\alpha \geq \eta\}$. Folgt:
+    $$\begin{aligned}
+      \sum \limits_{\alpha \in A(\eta)} vol(Q_n) & \leq \sum \limits_{\alpha_\in A(\eta)} \eta^{-1}(d_\alpha - c_\alpha) \cdot vol(Q_\alpha) \\
+      & \leq \varepsilon
+    \end{aligned}$$
+    Betrachte die Menge $N_\eta = \{x \in Q \mid \omega(f,x) \geq \eta\}$ aus dem ersten Lemma. Sie ist abgeschlossen. Für $\alpha \notin A(\eta)$ und $x \in \mathring{Q}_\alpha$ existiert $\delta > 0$ mit $B(x,\delta) \subseteq \mathring{Q}_\alpha$, und dann gilt
+    \[ \omega(f,x) \leq \omega(f,x,\delta) \leq \sup(f(\mathring{Q}_\alpha)) - \inf(f(\mathring{Q}_\alpha)) \leq d_\alpha - c_\alpha < \eta \]
+    Für $x \in N_\eta$ gilt
+    $$\left\{\begin{aligned}
+      x \in \mathring{Q}_\alpha & \text{ für ein } \alpha \in A(\eta) \\
+      x \in \partial Q_\alpha & \text{ für irgendein } \alpha
+    \end{aligned}\right.$$
+
+    Bedeutet: $N_\eta \subseteq \bigcup_{\alpha \in A(\eta)} \mathring{Q}_\alpha \cup \bigcup_\alpha \partial Q_\alpha$
+    $$\Rightarrow N_\eta \text{ ist eine Nullmenge } \A \eta > 0$$
+    Also
+    $$N = \{x \in Q \mid \omega(f,x) > 0\} = \bigcup_{j = 1}^\infty \{x \in Q \mid \omega(f,x) > 2^{-j}\} = \bigcup_{j=1}^\infty N_{2^{-j}}$$
+
+    \item $\Leftarrow$: $N$ ist Nullmenge $\Rightarrow f$ ist integrierbar.
+
+    Im Skript.
+  \end{itemize}
+\end{Beweis}
+
+Unser Ziel ist nun, die Integration auf einen allgemeineren Definitionsbereich auszuweiten.
+
+
+\section{Riemann-Integration über Jordan-messbaren Mengen}
+
+\begin{Definition}[Jordan-Messbarkeit]
+  Eine beschränkte Teilmenge $B \subseteq \R^n$ heißt \textbf{Jordan-messbar} falls für einen (jeden) Quader $Q \subseteq \R^n$ mit $B \subseteq Q$ die charakteristische Funktion $1\!\!1_B :Q \to \R$ Riemann-integrierbar ist.
+
+  Dann schreiben wir
+  $$vol(B) = \int_Q 1\!\!1_B dx$$
+  für das Volumen, oder Jordan-Maß von $B$.
+\end{Definition}
+
+\begin{Bemerkung}
+  Diese Definition ist Unabhängig von der Wahl von $Q$.
+  \incfig{jordan-messbar}
+\end{Bemerkung}
+
+\begin{Bemerkung}
+  Achtung: Jordan-Messbarkeit $\neq$ Lebesgue-Messbarkeit
+\end{Bemerkung}
+
+\begin{Korollar}
+  Seien $B, B_1, B_2 \subseteq \R^n$ beschränkt. Dann gilt
+  \begin{enumerate}
+    \item $B$ ist Jordan-messbar $\Leftrightarrow \partial B$ ist eine Lebesgue-Nullmenge.
+    \item Sind $B_1,B_2$ Jordan-messbar, dann auch $B_1 \cup B_2$ und $B_1 \cap B_2$ und es gilt:
+    \[vol(B_1) + vol(B_2) = vol(B_1 \cup B_2) - vol(B_1 \cap B_2)\]
+  \end{enumerate}
+\end{Korollar}
+
+\begin{Beweis}
+  \begin{enumerate}
+    \item Folgt aus dem Lebesgue-Kriterium, da $1\!\!1_B$ genau bei $\partial B$ unstetig ist.
+    \item Folgt aus $\partial(B_1 \cup B_2) \subseteq \partial B_1 \cup \partial B_2$ und $\partial(B_1 \cap B_2) \subseteq \partial B_1 \cup \partial B_2$ und der Tatsache, dass
+    $$1\!\!1_{B_1} + 1\!\!1_{B_2} = 1\!\!1_{B_1 \cup B_2} + 1\!\!1_{B_1 \cap B_2}$$
+    und aus der Linearität des Integrals.
+  \end{enumerate}
+\end{Beweis}
+
+\begin{Definition}
+  Sei $B \subseteq \R^n$ Jordan-messbar und $f: B \to \R$ beschränkt. Wir sagen, dass $f$ Riemann-integrierbar ist auf $B$, falls für einen (jeden) Quader $Q$ mit $B \subseteq Q$ die Funktion
+  $$f_!: Q \to \R \quad f_!(x) = \left\{\begin{aligned}
+    f(x) & & x \in B \\ 0 & & x \notin B
+  \end{aligned}\right.$$
+  integrierbar ist.
+
+  Wir schreiben
+  $$\int_B f dx := \int_Q f_! dx$$
+\end{Definition}
+
+\begin{Bemerkung}
+  Dieses Integral ist unabhängig von der Wahl von $Q$.
+\end{Bemerkung}
+
+\begin{Theorem}
+  Für das eben definierte Integral $\int_B - dx$ gilt offensichtlich
+  \begin{itemize}
+    \item Linearität
+    \item Monotonie
+    \item Dreiecksungleichung
+  \end{itemize}
+  Sie gelten weil wir eine Funktion auf Quadern betrachten, die für Punkte $\notin B$ den Wert $0$ annimmt. Für Qauader haben wir die obigen Eigenschaften schon gezeigt.
+\end{Theorem}
+
+\begin{Theorem}
+  Sind $B_1, B_2 \subseteq \R^n$ Jordan-messbar und $f: B_1 \cup B_2 \to \R$ Riemann-integrierbar. Dann sind $f|_{B_1},f|_{B_2}$ ebenfalls Riemann-integrierbar und es gilt
+  $$\int_{B_1 \cup B_2} f dx = \int_{B_1} f|_{B_1} dx + \int_{B_2} f|_{B_2} dx - \int_{B_1 \cap B_2} f dx$$
+\end{Theorem}
+
+\begin{Theorem}
+  Sei $D \subseteq \R^{n-1}$ Jordan-messbar und $f_-,f_+ : D \to \R$ Riemann-integrierbar.
+  $$B := \{(x,y) \in \R^{n-1} \times \R \mid x \in D \land f_-(x) \leq y \leq f_+(x)\}$$
+  ist Jordan-messbar.
+  \incfig{fplus-fminus}
+  $B$ ist somit die Fläche zwischen $f_-$ und $f_+$.
+
+  Des Weiteren
+  $$\partial B \subseteq (\underbrace{\partial D}_{Nullmenge} \times \R) \cup (\underbrace{N}_{Nullmenge} \times \R) \cup \underbrace{Graph \, f_+}_{Nullmenge} \cup \underbrace{Graph \, f_-}_{Nullmenge}$$
+  mit $N := \{x \in D \mid f_+ \text{ oder }f_- \text{ nicht stetig bei } x\}$
+\end{Theorem}
+
+\begin{Theorem}[Satz von Fubini]
+  Seien $P \subseteq \R^n$ und $Q \subseteq \R^m$ beschränkte und abgeschlossene Quader. Sei $f: P \times Q \to \R$ Riemann-integrierbar. Für $x \in P$ setze $f_x(y) = f(x,y)$ (also $f_x: Q \to \R$).
+  \begin{Bemerkung}[Warnung]
+    $f_x$ ist im Allgemeinen \textbf{nicht} Riemann-integrierbar!
+  \end{Bemerkung}
+  Wir setzen weiter $F_-(x) = \sup \mathcal{U}(f_x)$ und $F_+(x) = \inf \mathcal{O}(f_x)$. (Es gilt, dass $\inf \leq \sup$ und bei Gleichheit haben wir Riemann-Integrierbarkeit.)
+
+  Nun sind die Aussagen des Satzes:
+  \begin{enumerate}
+    \item Es existiert eine Nullmenge $N \subseteq P$ mit $x \notin N \Rightarrow F_-(x) = F_+(x)$, also $f_x$ Riemann-integrierbar.
+    \item Die Funktionen $F_-$ und $F_+$ sind beide Riemann-integrierbar auf $Q$ und es gilt:
+      $$\int_{B\times Q} f d(x,y) = \int_P F_-(x)dx = \int_Q F_+(x) dx$$
+      Wir schreiben
+      $$\int_{P \times Q} f d(x,y) = \int_P \underbrace{\left(\int_Q f(x,y) dy \right)}_{\text{existiert für fast alle }x}\, dx$$
+  \end{enumerate}
+\end{Theorem}
+
+\begin{Beweis}
+  Dieser Beweis wird später behandelt.
+\end{Beweis}
+
+\begin{Beispiel}
+  Betrachten wir $P = [0,1] = Q$ und
+  $$\begin{aligned}
+    f: P \times Q & \to \R \\
+    (x,y) & \mapsto \left\{\begin{array}{c c c}
+      1 & \text{falls} & x = \frac{1}{2}, y\in \Q \\ 0 & & \text{sonst}
+    \end{array}\right.
+  \end{aligned}$$
+  Also haben wir $f_x : [0,1] \to \R$ und speziell gilt: $f_{1/2} = 1\!\!1_\Q$ (nicht integrierbar).
+
+  Allerdings gilt
+  $$0 = \int_{[0,1]^2} f(x,y)d(x,y) = \int_0^1 \underbrace{\int_0^1 f(x,y) dy}_{F(x)} \, dx$$
+  Wieder ist $F(1/2) = \int_0^1 f(1/2,y)dy$ nicht Riemann-integrierbar.
+
+  Dank dem Satz von Fubini ist das aber kein Problem.
+\end{Beispiel}
+
+\begin{Korollar}
+  Sei $Q = [a_1,b_1] \times ... \times [a_n,b_n] \subseteq \R^n$ und $f : Q \to \R$ Riemann-integrierbar. Dann gilt
+  $$\int_Q fdx = \int_{a_1}^{b_1} ... \int_{a_n}^{b_n} f(x,1,...,x_n) dx_n ... dx_1$$
+  falls alle Parameterintegrale existieren. Ansonsten kann man Ober- oder Untersummen betrachten, wie im Satz von Fubini.
+\end{Korollar}
+
+\begin{Beweis}
+  Man wende den Satz von Fubini $n$-Mal an.
+\end{Beweis}
+
+\begin{Korollar}[Prinzip von Cavalieri]
+  Sei $B \subseteq \R^n \times \R$ Jordan-messbar. Für $t \in \R$ setze $B_t = \{(x,t) \mid x \in B\}$ und
+  $$vol(B) = \int_{-M}^{+M} vol(B_t) dt$$
+  \incfig{cavalieri}
+\end{Korollar}
+
+\begin{Beweis}
+  \textbf{Vorbereitung 1)}
+
+  Eine Zerlegung von $P \times Q$ ist einfach eine Zerlegung von jeweils $P$ und $Q$.
+  $$(P_\alpha)_\alpha , (Q_\beta)_\beta \leftrightarrow (P_\alpha \times Q_\beta)_{(\alpha,\beta)}$$
+  Es gilt dann
+  $$vol(P_\alpha) \cdot vol(Q_\beta) = vol(P_\alpha \times Q_\beta)$$
+  \incfig{doppel-zerlegung}
+  \textbf{Vorbereitung 2)}
+
+  Sei $h: P \times Q \to \R$ eine (beliebige) Treppenfunktion bezüglich $(P_\alpha \times Q_\beta)_{(\alpha,\beta)}$ mit Konstanzwert $c_{(\alpha,\beta)}$ auf $\mathring{(P_\alpha \times Q_\beta)}$.
+
+  Für $\alpha$ und $x \in \mathring{P_\alpha}$ ist die Funktion $h_x:Q \to \R$ mit $h_x(y)=h(x,y)$ eine Treppenfunktion bezüglich $(Q_\beta)_\beta$.
+
+  Es gilt
+  $$C_\alpha := \int_Q h_x(y)dy = \sum \limits_\beta c_{(\alpha,\beta)} \cdot vol(Q_\beta) \text{ für } x \in \mathring{P_\alpha}$$
+  Wir bekommen zwei Treppenfunktionen auf $P$ gegeben durch
+  $$H_+(x) = \inf(\mathcal{O})(h_x) \quad H_-(x) = \sup(\mathcal{U})(h_x)$$
+  die beide Treppenfunktionen (auf $P$ bezüglich $(P_\alpha)_\alpha)$) sind mit Konstanzwerten $C_\alpha$.
+  $$\begin{aligned}
+    \int_{P \times Q} h(x,y)d(x,y) & = \sum \limits_{(\alpha,\beta)}c_{(\alpha,\beta)} \cdot vol(P_\alpha \times Q_\beta) \\
+    & = \sum \limits_\alpha \sum \limits_\beta c_{(\alpha,\beta)} \cdot vol(Q_\alpha)\cdot vol(Q_\beta) \\
+    & = \sum \limits_\alpha C_\alpha \cdot vol(P_\alpha) \\
+    & = \int_P H_+(x)dx
+  \end{aligned}$$
+
+  \begin{Bemerkung}
+    Sind $g \leq h$ Treppenfunktionen auf $P\times Q$, dann gilt:
+    $$G_- \leq H_- \qquad G_+ \leq H_+$$
+  \end{Bemerkung}
+
+  Wir haben also bis jetzt gezeigt, dass der Satz von Fubini wahr ist für Treppenfunktionen. Nun müssen wir ihn noch verallgemeinern:
+
+  Sei $F: P \to \R$ mit $F_- \leq F \leq F_+$. Sei $\varepsilon > 0$ und $o,u : P \times Q \to \R$ Treppenfunktionen mit
+  $$u \leq f \leq o \text{ und } \int_{P \times Q} (o-u)d(x,y) < \varepsilon$$
+  Nach Vorbereitung 2) gilt: $U_- \leq F_- \leq F \leq F_+ \leq O_+$.
+
+  $U_-$ und $O_+$ sind Treppenfunktionen auf $P$:
+  $$\begin{aligned}
+    \int_P (O_+ - U_-) dx & = \int_P O_+ dx - \int_P U_- dx \\
+    & = \int_{P \times Q} o dx - \int_{P \times Q} u dx \\
+    & = \int_{P \times Q} (o-u)d(x,y) < \varepsilon
+  \end{aligned}$$
+  Es folgt, dass $F$ Riemann-integrierbar ist und es gilt
+  $$\int_P F dx = \int_{P \times Q} f d(x,y)$$
+  Das entspricht der Aussage 2) des Satzes.
+
+  Zu 1): Betrachte $g(x) = F_+(x) - F_-(x) \geq 0$ (also Riemann-integrierbar). Es gilt
+  $$\int_P g(dx)dx = 0$$
+  Nach dem Lebesgue-Kriterium ist
+  $$N = \{x \in P \mid g \text{ nicht stetig bei } x\}$$
+  eine Nullmenge.
+
+  Ist $g$ stetig bei $x_0$, so gilt $g(x_0) = 0$, andernfalls wäre $g(x_0) > 0$ und es existiert $\delta > 0$ mit $g(x) > \frac{1}{2}g(x_0) \A x \in P$ mit $||x-x_0||< \delta$. Dann ist aber das Integral von $g$ nicht null.
+  $$\begin{aligned}
+    F_+(x) \neq F_-(x) & \Leftrightarrow g(x) > 0 \\
+    & \Rightarrow g \text{ nicht stetig bei }x \\
+    & \Leftrightarrow x \in N
+  \end{aligned}$$
+  Für alle Punkte $x \in P \backslash N$ kann man folgern
+  $$\int_P g d(x) = 0 \Leftrightarrow g(x) = F_+(x) - F_-(x) = 0 \Leftrightarrow F_+(x) = F_-(x)$$
+\end{Beweis}
+
+In der Praxis gilt $F_+(x) = F_-(x)$ für \textbf{alle} $x \in P$ und es folgt:
+$$\int_P \int_Q f(x,y)dydx$$
+
+\begin{Beispiel}[$B(0,1) = B = \{(x,y) \in \R^2 \mid x^2 + y^2 \leq 1\}$]
+  Warum gilt nun $\pi = vol(B)$?
+
+  Es gilt erst einmal
+  $$vol(B) = \int_B 1 d(x,y) = \int_Q 1\!\!1_B d(x,y)$$
+  Die Unstetigkeitsstellen von $1\!\!1_B$ ist gerade $\partial B = \{(x,y)\mid x^2 + y^2 = 1\}$ und ist eine Nullmenge. Also ist das Integral wohldefiniert.
+
+  Für $Q = [-1,1]^2$ haben wir
+  $$\int_Q 1\!\!1_B d(x,y) = \int_{-^1}^1 \int_{-^1}^1 1\!\!1_B dy dx \text{ (Satz von Fubini)}$$
+  Für ein fixes $x \in [-1,1]$ gilt
+  $$1\!\!1_B(x,y) = \left\{\begin{aligned}
+    1 & \text{ falls } |y| \leq \sqrt{1-x^2} \\
+    0 & \text{ sonst}
+  \end{aligned}\right.$$
+  Also
+  $$\begin{aligned}
+    \int_{-^1}^1 \int_{-^1}^1 1\!\!1_B dy dx & = \int_{-^1}^1 \int_{-\sqrt{1 - x^2}}^{\sqrt{1 - x^2}} 1 dy dx \\
+    & = \int_{-^1}^1 2 \sqrt{1 - x^2} dx \\
+    & = 4 \int_0^1 \sqrt{1 - x^2} dx \\
+    & \text{Substitution: } x = \sin(t) \quad dx = \cos(t) dt \\
+    & = 4 \int_0^{\pi/2} \cos^2(t) dt \\
+    & = 4 \cdot \left[\dfrac{t + \cos(t)\sin(t)}{2}\right]_0^{\pi/2} \\
+    & = \pi
+  \end{aligned}$$
+\end{Beispiel}
+
+\begin{Beispiel}[$B_n = \{x \in \R^n \mid ||x||\leq 1\}$]
+  Hier gilt auch $\partial B_n$ ist die Einheitsspäre und also eine Nullmenge. Also ist $B_n$ Jordan-messbar.
+
+  Bemerke: Ist $C \subseteq \R^n$ eine Jordan-messbare Teilmenge und $\lambda \in \R$, dann ist $\lambda C = \{\lambda x \mid x \in C\}$ auch Jordan-messbar und es gilt: $vol(\lambda C) = |\lambda|^n\cdot vol(c)$.
+
+  $$\begin{aligned}
+    vol(B_n) = \int_{[-1,1]^n} 1\!\!1_{B_n} dx & = \int_{-^1}^1 \int_{[-1,1]^{n-1}} 1\!\!1_B (t,y)dy dt \\
+    & = \int_{-^1}^1 vol(B(0,\sqrt{1 -t^2})) dt \\
+    & = \int_{-^1}^1 vol(B_{n-1}) \cdot (\sqrt{1 -t^2})^{n-1} \text{ Streckungsformel} \\
+    & = vol(B_{n-1}) \cdot 2 \int_0^1 \sqrt{1-t^2}^{n-1} dt \\
+    & \text{Substitution: } t = \sin(x) \Rightarrow dt = \cos(x)dx \\
+    & = vol(B_{n-1}) \cdot 2 \underbrace{\int_0^{\pi/2} \cos^n(t) dt}_{I_n} \\
+    & \vdots \\
+    \Leftrightarrow vol(B_n) & = \left\{\begin{array}{c c c}
+      \dfrac{\pi^k}{k!} & n = 2k & (gerade) \\
+      \dfrac{2k! (4\pi)^k}{(2k+1)!} & n = 2k +1 & (ungerade)
+    \end{array}\right.
+  \end{aligned}$$
+  Also haben wir
+  $$\begin{array}{c | c}
+    n & vol(B_n) \\ \hline
+    1 & 2 \\
+    2 & \pi \\
+    3 & \frac{4}{3} \pi \\
+    4 & \frac{1}{2} \pi^2 \\
+    \vdots & \vdots \\
+    30 & \frac{\pi^15}{15!} \simeq 0
+  \end{array}$$
+  Nach einem anfänglichen Wachstum geht das Volumen exponentiell gegen $0$.
+\end{Beispiel}
+
+
+\section{Mehrdimensionale Substitution}
+
+\begin{Definition}[Kompakter Träger]
+  Sei $U \subseteq \R^n$ offen und $f: U \to \R$.
+
+  Träger von $f$ sind
+  $$supp \, (f) = \overline{\{x \in U \mid f(x) \neq 0\}} \subseteq U$$
+  (im Allgemeinen nicht das gleiche wie der Abschluss von $f$ in $\R^n$).
+
+  Wir sagen $f$ hat \textbf{kompakten Träger}, falls $supp \, (f)$ kompakt ist.
+
+  Hat $f$ kompakten Träger, so ist $supp \, (f)$ beschränkt und damit ist $f(x) = 0 \A x \in U \backslash Q$ für $Q$ einen genügend großen Quader.
+  $$\int_U fdx = \int_{Q \cap U} f|_{Q \cap U} dx$$
+  falls $U \cap Q$ Jordan-messbar ist, und $f|_{Q \cap U}$ integrierbar ist.
+\end{Definition}
+
+Skript 13.55:
+
+Für uneigentliche Integrale können wir auch die Substitutionsregel formulieren, diese ändert sich dadurch nur geringfügig:
+
+\begin{Theorem}[Substitutionsregel]
+  Seien $X,Y \subseteq \R^n$ offen, $\Phi : X \to Y$ ein $\mathcal{C}^1$-Diffeomorphismus. Sei $f:Y \to \R$ mit kompaktem Träger und integrierbar.
+
+  Dann ist die Funktion
+  $$\begin{aligned}
+    \Phi^* f : X & \to \R \\
+    x & \mapsto f(\Phi(x)) \cdot |\det D\Phi (x)|
+  \end{aligned}$$
+  auf $X$ integrierbar, hat kompakten Träger und es gilt:
+  $$\int_X \Phi^* f(x) dx = \int_Y f(y)dy$$
+\end{Theorem}
+
+\begin{Beweis}
+  In 2 Schritten:
+  \begin{enumerate}
+    \item Seien $X,Y = \R^n$ und $\Phi: \R^n \to \R^n$ linear. Dank linearer Algebra und Fubini gilt:
+      Jede Matrix kann also Produkt $P \cdot S \cdot T$ mit einer unteren und einer oberen Dreiecksmatrix und einer Permutationsmatrix. Die Integrale können dann mit dem Satz von Fubini einzeln ausgewertet werden.
+
+      Also sind Volumen invariant unter Rotation oder Translation. (diese Transformationen haben nämlich Determinante = $1$).
+    \item Im allgemeinen Fall machen wir viele Abschätzunge, insbesondere:
+      $$\Phi \simeq D \Phi(x_0) \text{ (in einer kleinen Umgebung von $x_0$)}$$
+      Der Beweis ist allerdings lang, und wir sparen ihn uns.
+  \end{enumerate}
+\end{Beweis}
+
+\begin{Beispiel}[as seen in Physik]
+  $$0 < R_0 < R_1 \text{ fix} \quad B =\{(x,y) \in \R^2 \mid x \geq 0, R_0 \leq \sqrt{x^2 +y^2} \leq R_1\}$$
+  \incfig{schwerpunkt}
+  Nun wollen wir den Schwerpunkt $s$ von $B$ finden, ausgehend von einer homogenen Dichte $\rho$.
+
+  Offensichtlich muss für $s$ gelten: $y_s = 0$.
+  $$s = \dfrac{1}{vol(B)} \int_B x d(x,y)$$
+  Es bietet sich ein Wechsel zu Polarkoordinaten an:
+  $$\begin{aligned}
+    \Phi : X & \to Y \\
+    (r,\varphi) & \mapsto (r \cos(\varphi),r\sin(\varphi))
+  \end{aligned}$$
+  Nun schränken wir ein $X = (0, \infty) \times (-\pi,\pi) \Rightarrow Y = \R^2 \backslash \{(x,0) | x \leq 0\}$
+  $$D \Phi (r,\varphi) = \begin{pmatrix}
+    \cos(\varphi) & \sin(\varphi) \\
+    -r \sin(\varphi) & r \cos(\varphi)
+  \end{pmatrix}$$
+  Definiere
+  $$\begin{aligned}
+    f: Y & \to \R \\
+    (x,y) & \mapsto \left\{ \begin{array}{c c c}
+      x & \text{falls} & (x,y) \in B \\
+      0 & & \text{sonst}
+    \end{array}\right.
+  \end{aligned}$$
+  Nun können wir schreiben
+  $$\int_B x d(x,y) = \int_Y f(x,y) d (x,y)$$
+  $f$ erfüllt die Bedingungen des Satzes: $supp(f) = B$ - kompakt. Also ist
+  $$s = \int_B x d(x,y) = \int_Y f d(x,y) = \int_X \Phi^* f (r, \varphi) d(r, \varphi)$$
+  Wir haben:
+  $$\begin{aligned}
+    \Phi^* f (r,\varphi) & = f(\Phi(r,\varphi)) \cdot |\det D\Phi(r, \varphi)| \\
+    & = f(r\cos(\varphi),r \sin(\varphi)) \cdot |r| \\
+    & = \left\{\begin{array}{c c}
+      r^2 \cos(\varphi) & R_0 \leq r \leq R_1 \\
+      0 & \text{sonst}
+    \end{array}\right.
+  \end{aligned}$$
+  Zurück zu $s$:
+  $$\begin{aligned}
+    vol(B) \cdot s = ... & = \int_{(R_0,R_1) \times (-\pi , \pi)} r^2 \cos(\varphi) d(r,\varphi) \\
+    & = \int_{R_0}^{R_1} \int_{-\pi}^\pi r^2 \cdot \cos(\varphi) d \varphi dr \\
+    & = 2 \cdot \dfrac{1}{3}(R_1^3 - R_0^3) \\
+    & vol(b) = \dfrac{\pi}{2} (R_1^2 - R_0^2) \\
+    & \Rightarrow s = \dfrac{4}{3 \pi} \dfrac{R_1^3 - R_1^3}{R_1^2 - R_0^2}
+  \end{aligned}$$
+\end{Beispiel}
+
+\begin{Beispiel}[Wahrscheinlichkeitstheorie]
+  Wir nehmen einen zufällig ausgewählten Punkt $p \in S^3 = \{p \in \R^3 \mid ||p|| \leq 1 \}$. Gilt
+  $$P(||p||\leq 0.5) \leq 0.6 \cdot P(0.5 < ||p|| \leq 1)$$
+  Wir übersetzen:
+  $$E := \dfrac{1}{vol(B)}\int_B ||x||dx$$
+  ist der erwartete Abstand eines zufälligen Punktes $x \in S^3$ zum Ursprung.
+
+  Kugelkoordinaten:
+  $$\begin{aligned}
+    \Phi: X & \to Y \\
+    (r,\vartheta,\varphi) & \mapsto (r \sin(\vartheta)\cos(\varphi),r\sin(\vartheta)\sin(\varphi),r\cos(\vartheta))
+  \end{aligned}$$
+  $$X = (0,\infty) \times (0, \pi) \times (-\pi,\pi) \Rightarrow Y = \R^3 \backslash ((-\infty,0] \times \{ 0 \} \times \R)$$
+  $$\det D\Phi(r,\vartheta,\varphi) = |...| = r^2\sin(\vartheta) > 0$$
+  Wir setzen
+  $$f(x) = \left\{\begin{aligned}
+    ||x|| & x \in B \\
+    0 & \text{ sonst}
+  \end{aligned}\right.$$
+  $$\Phi^* f(r, \vartheta,\varphi) = f(\Phi(r,\vartheta,\varphi)) \cdot |\det D\Phi(r, \vartheta,\varphi)| = r \cdot r^2 \cdot \sin(\vartheta)$$
+  Dann können wir berechnen
+  $$\begin{aligned}
+    \int_B||x||dx & = \int_Y f(x)dx \\
+    & \stackrel{\scriptscriptstyle Satz}{=} \int_X \phi^* f d(r,\vartheta,\varphi) \\
+    & \stackrel{\scriptscriptstyle Fubini}{=} \int_0^1 \int_0^\pi \int_{-\pi}^\pi r^3 \sin(\vartheta) d \varphi d \vartheta d r \\
+    & = 2 \pi \cdot 2 \cdot 2 \cdot \dfrac{1}{4} = \pi
+  \end{aligned}$$
+  $$\Rightarrow E = \dfrac{\pi}{\frac{4}{3} \pi} = \dfrac{3}{4}$$
+
+  Problem: $supp(f)$ ist auf $Y$ nicht kompakt.
+
+  Die Lösung wäre, $f$ in einer (kleinen) Umgebung um die Unstetigkeitsstelle(n) auf null zu setzen. Dann bekämen wir einen kompakten Träger und könnten den Grenzwert der Größe der Umgebung bilden und letzten Endes das selbe Ergebnis bekommen. Das ist dann auch die Motivation der folgenden Definition.
+\end{Beispiel}
+
+\begin{Definition}[Ausschöpfung]
+  Sei $B \subseteq \R^n$ (beliebig). Eine \textbf{Ausschöpfung} von $B$ ist eine Folge von Jordan-messbaren Mengen $B_0 \subseteq B_1 \subseteq B_2 \subseteq ...$ mit
+  $$B = \bigcup_{k = 0}^\infty B_k$$
+\end{Definition}
+
+\begin{Beispiel}
+  $$B = \{(x,y) \in \R^2 \mid R_0^2 \leq x^2 +y^2 \leq R_1^2 \land y = 0 \Rightarrow x > 0\}$$
+  ist nicht kompakt.
+
+  Und dann können wir graphisch $B_k$ bilden:
+
+  \incfig{ausschoepfung}
+\end{Beispiel}
+
+\begin{Beispiel}
+  $\R^n$ ist ausschöpfbar: $B_k = [-k,k]^n$. (aber nicht Jordan-messbar.)
+\end{Beispiel}
+
+\begin{Theorem}
+  Jede offene Teilmenge von $\R^n$ hat eine Ausschöpfung.
+\end{Theorem}
+
+\begin{Beweis}
+  Übung.
+\end{Beweis}
+
+
+\section{Uneigentliche Integrale}
+
+\begin{Definition}[Uneigentliche Riemann-Integrierbarkeit]
+  Sei $B \subseteq \R^n$ ausschöpfbar, $f: B \to \R$. Wir sagen $f$ sei \textbf{uneigentlich Riemann-integrierbar}, mit Integral $I \in \R$:
+  $$\int_B f dx = I$$
+  falls für \textbf{jede} Ausschöpfung $B_0 \subseteq B_1 \subseteq ...$ von $B$
+  $$I = \lim \limits_{k \to \infty} \int_{B_k} f|_{B_k} dx \text{ und } f|_{B_k} \text{ integrierbar} \A k$$
+\end{Definition}
+
+\begin{Bemerkung}
+  Wir haben hier also ein schönes Kriterium, welches wir aber konkret nie anwenden können. Wir werden also noch weitere Hilfsmittel finden.
+\end{Bemerkung}
+
+\begin{Theorem}
+  Sei $B \subseteq \R^n$ Jordan-messbar und $f: B \to \R$ eine Riemann-integrierbare Funktion. Sei $B_0 \subseteq B_1 \subseteq B_2 \subseteq ...$ eine Ausschöpfung von $B$. Dann gilt
+  \begin{enumerate}
+    \item $\lim \limits_{k \to \infty} vol(B_k) = vol(B)$
+    \item $\lim \limits_{k \to \infty} \int_{B_k} f dx = \int_B f dx$
+  \end{enumerate}
+\end{Theorem}
+
+\begin{Beweis}
+  \begin{enumerate}
+    \item Die Folge $(vol(B_k))_{k = 0}^\infty$ ist monoton steigend und beschränkt durch $vol(B)$, also existiert
+      $$\lim \limits_{k \to \infty} vol(B_k) \leq vol(B)$$
+      Bemerke: $\partial B_k$ und $\partial B$ sind Lebesgue-Nullmengen und abgeschlossen in $\R^n$ und beschränkt, also auch kompakt. $\partial B_k$ und $\partial B$ sind also Jordan-messbar mit Volumen $= 0$.
+
+      $$vol(B) = vol(\mathring{B}) = vol(\overline{B})$$
+      $$vol(B_k) = vol(\mathring{B_k}) = vol(\overline{B_k})$$
+      Die Menge
+      $$N := \partial B \cup \bigcup_{k = 0}^\infty \partial B_k$$
+      ist eine Lebesgue-Nullmenge.
+
+      Sei $\varepsilon > 0$. Es existieren also offene Quader $(Q_m)_{m = 0}^\infty$ mit
+      $$N \subseteq \bigcup_{m = 0}^\infty Q_m \quad \text{und} \quad \sum \limits_{m = 0}^\infty vol(Q_m) < \varepsilon$$
+      Die Menge $\overline{B}$ ist kompakt nach Heine-Borel.
+      $$\begin{aligned}
+        \overline{B} = \partial B \cup B & = \underbrace{\partial B \cup \bigcup_{k = 0}^\infty \partial B_k}_{N} \cup \bigcup_{k = 0}^\infty \mathring{B_k}\\
+        & \subseteq \bigcup_{m = 0}^\infty Q_m \cup \bigcup_{k = 0}^\infty \mathring{B_k}
+      \end{aligned}$$
+      Also haben wir eine offene Überdeckung von $B$, und da $B$ kompakt ist, existieren also $M,K \in \N$ mit
+      $$\overline{B} =  \bigcup_{m = 0}^M Q_m \cup \mathring{B_K}$$
+      Jetzt gilt
+      $$\begin{aligned}
+        vol(B) = vol(\overline{B}) & \leq \sum \limits_{m=0}^M vol(Q_m) + vol(\mathring{B_K}) \\
+        & \leq \varepsilon + vol(B_K)
+      \end{aligned}$$
+      Also folgt $1)$.
+    \item Wir verwenden $\varepsilon$ und $K$ weiter und es gilt
+      $$ \left|\int_B fdx - \int_{B_K}fdx \right| = \left|\int_{B \backslash B_K} fdx\right| \leq \int_{B \backslash B_k} |f| dx \leq ||f||_\infty \cdot vol(B \backslash B_K) \leq ||f||_\infty \cdot \varepsilon$$
+  \end{enumerate}
+\end{Beweis}
+
+\begin{Theorem}
+  Sei $B \subseteq \R^n$ ausschöpfbar und $f: B \to \R_{\geq 0}$. Falls für \textbf{eine} Ausschöpfung $(B_k)_{k=0}^\infty$ von $B$ der Grenzwert
+  $$I = \lim \limits_{k \to \infty} \int_{B_k} f dx$$
+  existiert, so ist $f$ uneigentlich Riemann-integrierbar mit Integral $I$.
+\end{Theorem}
+\begin{Beweis}
+  Sei $(A_l)_{l = 0}^\infty$ eine weitere Ausschöpfung von $B$. Zu zeigen
+  $$\lim \limits_{l \to \infty} \int_{A_l} f dx = \lim \limits_{k \to \infty} \int_{B_k} f dx$$
+  Auf jeden Fall ist $(A_l \cap B_k)_{k = 0}^\infty$ ist eine Ausschöpfung von $A_l$ und Jordan-messbar. Das heißt:
+  $$\int_{A_l} f dx \stackrel{\scriptscriptstyle Theorem}{=} \lim \limits_{k \to \infty} \int_{A_l \cap B_k} fdx \leq \lim \limits_{k \to \infty} \int_{B_k} fdx = I$$
+  Es folgt
+  $$\lim \limits_{l \to \infty} \int_{A_l} fx \leq  \lim \limits_{k \to \infty} \int_{B_k} fdx$$
+  Durch Vertauschung von $A$ und $B$ erhält man die umgekehrte Ordnungsrelation, und die sich ergebende Gleichheit entspricht der Aussage des Satzes.
+\end{Beweis}
+
+\begin{Bemerkung}
+  Ist $B$ ausschöpfbar und $f: B \to \R$, so ist $f$ uneigentlich Riemann-integrierbar, falls
+  $$f_+(x) = \max(\{f(x),0\}) \quad f_+(x) = \max(\{-f(x),0\})$$
+  Riemann-integrierbar sind.
+
+  Es gilt dann
+  $$f = f_+ - f_-$$
+\end{Bemerkung}
+\begin{Bemerkung}[Warnung]
+  Das uneigentliche Riemann-Integral ist \textbf{nicht} mit dem uneigentlichen Integral in einer Variable kompatibel.
+  \begin{Beispiel}
+    $$\int_{-\infty}^\infty \dfrac{\sin(x)}{x} dx = \lim \limits_{R \to \infty} \left( \int_0^R  \dfrac{\sin(x)}{x} dx - \int_0^{-R}  \dfrac{\sin(x)}{x} dx\right)$$
+    existiert.
+
+    Aber:
+    $$f_+(x) = \left\{\begin{array}{c c c}
+      \dfrac{\sin(x)}{x} & \text{falls} & \dfrac{\sin(x)}{x} \geq 0 \\
+      0 & \text{sonst} &
+    \end{array}\right.$$
+    ist nicht uneigentlich Riemann-integrierbar.
+  \end{Beispiel}
+\end{Bemerkung}
+
+Für uneigentliche Integrale können wir auch die Substitutionsregel formulieren, diese ändert sich dadurch nur geringfügig:
+
+\begin{Theorem}[Substitutionsregel]
+  Seien $X,Y \subseteq \R^n$ offen, $\Phi: X \to Y$ ein Diffeomorphismus und $f: Y \to \R$ uneigentlich Riemann-integrierbar.
+
+  Dann ist
+  $$\begin{aligned}
+    \Phi^* f : X & \to \R \\
+    x & \mapsto f(\Phi(x)) \cdot |\det(D\Phi(x))|
+  \end{aligned}$$
+  uneigentlich Riemann-integrierbar und es gilt
+  $$\int_X \Phi^* f dx = \int_Y f dy$$
+\end{Theorem}
+
+\begin{Beweis}
+  OBdA nehmen wir an $f \geq 0$ (also $f = f_+ - f_-$). Sei $(B_k)_{k=0}^\infty$ eine Ausschöpfung von $Y$ durch kompakte Jordan-messbare Mengen. Dann ist $\Phi^{-1}(B_k)$ eine Ausschöpfung von $X$.
+
+  Wir haben dann
+  $$\begin{aligned}
+    \int_Y f dy & = \lim \limits_{k \to \infty} \int_{B_k} f|_{B_k} dx \\
+    & = \int_Y 1\!\!1_{B_k} f dy \qquad 1\!\!1_B f  \text{ hat kompakten Träger in }Y\\
+    & = \lim \limits_{k \to \infty} \int_X \Phi^* ( 1\!\!1_B f)dx \\
+    & = \lim \limits_{k \to \infty} \int_X 1\!\!1_{\Phi^{-1}(B_k)} \Phi^* f dx \\
+    & = \lim \limits_{k \to \infty} \int_{\Phi^{-1}(B_k)} \Phi^* f dx \\
+    & = \int_X \Phi^* f dx
+  \end{aligned}$$
+\end{Beweis}
+
+\begin{Beispiel}[einer Ausschöpfung]
+  Sei $Y \subseteq \R^n$ offen und $y \in Y$. Also existiert immer eine offene Kreisscheibe mit Radius $r$ um $y$:
+
+  \incfig{beispiel-substitution}
+  Wir sertzen außerdem
+  \begin{itemize}
+    \item $p \in \Q^n \cap Y$ mit $||p-y|| < \frac{r}{3}$
+    \item die Kreisscheibe um $p$ mit Radius $q \in \Q_{> 0}$ und $||p-q|| < q < \frac{r}{3}$, also $y \in B(p,q) \subseteq Y$
+  \end{itemize}
+  Die Menge aller Bälle
+  $$\{B(p,q) \mid p \in \Q^n \land q \in \Q \land \overline{B(p,q)} \subseteq Y\}$$
+  ist abzählbar.
+
+  Wir zählen ab: $K_0,K_1,...K_n = \overline{B(p_n,q_n)}$ und setzen:
+  $$\begin{array}{c c c c c c c c c}
+    B_0 & \subseteq & B_1 & \subseteq & B_2 & \subseteq & ... & \subseteq & B_n \\
+    = & & = & & = & & & & = \\
+    K_0 & & K_0 \cap K_1 & & K_0 \cap K_1 \cap K_2 & & ... & & K_= \cap ... \cap K_n
+  \end{array}$$
+  $B_n$ ist Jordan-messbar und kompakt und es gilt
+  $$\bigcup_{n=0}^\infty B_n = Y$$
+\end{Beispiel}
+
+\begin{Beispiel}[Anwendung]
+  Wir wollen Folgendes berechnen:
+  $$I = \int_{- \infty}^\infty e ^{-t^2}dt = \lim \limits_{R \to \infty} \int_{-R}^R e ^{-t^2}dt$$
+  Es existiert (und ist notwendigerweise positiv?)
+
+  Statdessen berechnen wir 'einfach' $I^2$:
+  $$\begin{aligned}
+    I^2 = \int_{- \infty}^\infty e ^{-x^2}dx \cdot \int_{- \infty}^\infty e ^{-y^2}dy & = \int_{- \infty}^\infty \int_{- \infty}^\infty e ^{(-x^2 + y^2)}dy \, dx \\
+    & \stackrel{\scriptscriptstyle Fubini}{=} \int_{\R^2} e ^{(-x^2 + y^2)}dy \, dx \\
+    & x = r \cdot \cos(\varphi) , y = r \cdot \in(\varphi) \quad \Rightarrow r \cdot d \varphi \, dr \\
+    & = \int_0^\infty \int_{-\pi}^\pi e^{-r^2} \cdot r \, d\varphi \, d r \\
+    & \stackrel{\scriptscriptstyle Fubini}{=} 2 \pi \int_0^\infty r \cdot e^{-r^2} dr \\
+    & //\left(e^{-r^2}\right)' = -2r\cdot e^{-r^2} \\
+    & \stackrel{\scriptscriptstyle Fundamentalsatz}{=} \pi \cdot \left[e^{-r^2} \right]_0^\infty \\
+    & = \pi \cdot (1-0) = \pi
+  \end{aligned}$$
+  $$\Rightarrow \int_{- \infty}^\infty e ^{-x^2}dx = \sqrt{\pi}$$
+\end{Beispiel}
+
+\end{document}
