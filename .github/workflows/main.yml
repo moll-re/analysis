@@ -14,7 +14,7 @@ jobs:
         with:
           run: |
             latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf main.tex
-            makeidx main.tex
+            makeindex main.tex
             latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf main.tex
       - name: Commit files
         run: |
