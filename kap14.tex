@@ -1,7 +1,7 @@
 \documentclass[main.tex]{subfiles}
 
 \begin{document}
-
+ 
 \chapter{Gewöhnliche Differentialgleichungen}
 
 
@@ -22,12 +22,13 @@
 \begin{Beispiel}[Allgemein]
   Betrachten wir
   \begin{equation*}
-  t \cdot u''(t) = \cos(t) \cdot U(t)^2 \tag{*}
+  t \cdot u''(t) = \cos(t) \cdot U(t)^2 \tag{*} \tag{*} 
   \end{equation*}
   $$u(0) = 0 \qquad u'(0) = 1$$
   dann müssen wir erst entscheiden, in welchem Lösungsraum wir uns mit diesem Problem beschäftigen wollen. Wir könnten beispielsweise nach Lösungen in $\mathcal{C}^2 ((-\pi,\pi))$ suchen.
 
-  Genauer haben wir dann in $(*)$ eine \textbf{nichtlineare}, gewöhnliche Differentialgleichung.
+
+ Genauer haben wir dann in $(*)$ eine \textbf{nichtlineare}, gewöhnliche Differentialgleichung.
 \end{Beispiel}
 
 \begin{Beispiel}[Die biharmonische Gleichung]
@@ -55,7 +56,7 @@
 Eng verwandt ist
 
 \begin{Beispiel}[Bernoull-Gleichung]
-  Ein Gleichung der Form
+  Ein Gleichung der Formé Mit Hilfe der BERNOULLI-Gleichung findet man einen Zusammenhang zwischen der Strömungsgeschwindigkeit und dem Druck. Diesen Zusammenhang leitet man wieder mit Hilfe der gedachten Stromröhre ab. Die Strömung ist stationär, inkompressibel und verlustfrei.
   $$y' + Py = Qy^n$$
   Achtung: hier ist $y$ eine Funktion: $y = y(x)$
 \end{Beispiel}
@@ -74,6 +75,7 @@ Eng verwandt ist
   Wir haben
   \begin{equation*}
     u'(t) = F(u(t)) \tag{*}
+    * 2 konjugiert komplexe Polstellen. f(s) Übertragungsfunktion 2. Ordnung Eingangssprung u(t) = 1 := Multiplikation
   \end{equation*}
 
   Diese Differentialgleichung ist \textbf{autonom}, da $F$ nicht von $t$ abhängt.
@@ -88,6 +90,7 @@ Eng verwandt ist
   Ist $F$ zeitabhängig, also $F: I \times U \to \R^3$ mit $I$, einem Intervall, so bekommen wir:
   $$u'(t) = F(t,u(t))$$
   Diese Differentialgleichung ist nicht autonom.
+  eine Differentialgleichung der Form y′ = f (x, y), bei der die Funktion f explizit von der unabhängigen Variablen x abhängt. Ist y′ = f (x, y) eine gewöhnliche Differentialgleichung, so heißt die Gleichung autonom, falls die Funktion f nur von y abhängt. Ansonsten heißt sie nichtautonom.
 \end{Beispiel}
 
 
@@ -106,6 +109,7 @@ Wir betrachten $U \subseteq \R^n$ offen und haben dazu dann den Ring $\mathcal{C
   (wir haben $\alpha = (\alpha_1,...,\alpha_n) \in K_{\geq 0}^n$ und $a_\alpha \in \mathcal{C}^\infty(U)$ mit Koeffizienten $(a_\alpha)_\alpha$)
 
   Eine homogene Gleichung ist dann der Form $L \cdot u = 0$, und in inhomogen erhält man $L \cdot u = b$.
+  Wenn Funktionsterme existieren, die von der Form sind, die also nicht die gesuchte Funktion oder eine ihrer Ableitungen beinhalten, dann ist die DGL inhomogen.
   \begin{Bemerkung}
     Wenn wir algebraisch $\mathcal{C}^\infty(U)$ als Vektorraum auffassen, dann wird $L$ zu einem Vektorraumisomorphismus und es gilt:
     $$L \cdot u = 0 \Leftrightarrow u \in \ker(L)$$
@@ -294,7 +298,7 @@ Wir fassen zusammen:
   \end{aligned}$$
 \end{Beispiel}
 
-\subsection{Inhomogene gewöhnliche Differentialgleichungen}
+\subsection{Inhomogene gewöhnliche Differentialgleichungen Inhomogenität. Sie wird auch Störfunktion genannt. Wenn b(x) = 0 ist, heißt die Differentialgleichung homogen. Ansonsten wird sie als inhomogen bezeichnet.}
 
 Wir betrachten das Problem
 $$L \cdot u = f$$
@@ -759,7 +763,7 @@ Wir betrachten lediglich ein Beispiel 'aus dem Alltag' und kratzen so erst an de
   Behandelt wurden Beweise:
   \begin{enumerate}
     \item ...von Steiner, als geometrische Intuition. Der Beweis stellt sich allerdings als logisch falsch verankert heraus.
-    \item ...über ??? Es treten die Euler-Lagrange Sätze auf, die sich unter diesen speziellen Bedingungen 'relativ' einfach lösen lassen.
+    \item ...über. Es treten die Euler-Lagrange Sätze auf, die sich unter diesen speziellen Bedingungen 'relativ' einfach lösen lassen.
     \item ...über Fourier-Analyse. Betrachten wir den Vektorraum der periodischen Funktionen in $\C$ (also, die auf $[0,1\pi]$ eine Schleife bilden), so können wir den Umfang im Verhältnis zur Fläche minimieren. Auch das entspricht einer Differentialgleichung, die sich dank der Fourier-Koeffizienten drastisch kürzt.
   \end{enumerate}
 
