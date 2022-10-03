@@ -1,0 +1,32 @@
+kind: pipeline
+type: kubernetes
+
+
+steps:
+- name: build-latex  
+  image: ubuntu:latest
+  commands:
+    - apt-get update && apt-get install -y texlive-full
+    - pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build main.tex
+
+- name: upload-pdf
+  image: plugins/gitea
+  settings:
+    username:
+      from_secret: gitea_username
+    password:
+      from_secret: gitea_password
+    server: https://gitea.example.com
+    owner: remoll
+    repo: analysis-mitschrieb-latex
+    files:
+      - build/main.pdf
+    message: "CI build of PDF"
+    branch: master
+    force: true
+    
+trigger:
+  branch:
+  - main
+  event:
+  - push
