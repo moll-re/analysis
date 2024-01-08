@@ -6,7 +6,7 @@ FInd it here: [Analysis](./main.pdf). The current status of compilation is:
 
 [![Compile main document](https://github.com/L0rd0fB0red0m/analysis/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/L0rd0fB0red0m/analysis/actions/workflows/main.yml)
 
-You can always compiel it youself by cloning the repo. In order to get working indexes, you'll have to compile twice and populate the index file:
+You can always compile it youself by cloning the repo. In order to get working indexes, you'll have to compile twice and populate the index file:
 ```
 texlive ... # do your stuff
 makeindex main.idx
